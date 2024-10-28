@@ -1,3 +1,5 @@
+-- SERVES AS AN ALTERNATIVE OR BASIS
+
 -- Create the database
 CREATE DATABASE IF NOT EXISTS esports;
 

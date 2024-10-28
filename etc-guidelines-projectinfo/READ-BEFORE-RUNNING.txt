@@ -1,0 +1,43 @@
+Good day to all please read before running the project.
+
+1. Make sure to download the extensions from - vscjava.vscode-java-pack
+    Can be copy pasted in the extensions tab in the search bar in the extensions tab in the visual studio code.
+
+2. Always open the folder from the folder esports-database-jdbc. When in the folders tab sa right, it should show
+    > .vscode
+    > etc-guidelines-projectinfo
+    > src
+    >target
+    > pom.xml
+
+    as the subroot folders.
+
+    Our main files should be in "src\main\java\ccinfom\group5\esports_app"
+
+2. When running the file, always opt to run the file thru the Driver class (Above the main method, 
+    there should be a 'Run | Debug' option, click on the Run option to run the file).
+    Para hindi makalat yung classes sa mga folders.
+
+    DON'T USE THE ONE ON THE TOP RIGHT
+
+3. IMPORTANT - MAKE SURE TO GO TO model/sql AND IMPORT 'esports.sql' THAT IN THE MYSQL WORKBENCH. WITHOUT IT, YOU WOULD HAVE FAILED CONNECTION. 
+    OK lang kahit hindi nakadouble click o highlight yung schema, basta nandun yung schema sa workbench.
+
+4. Make sure the port of your MySQL is 3306.
+    If not set to 3306, go to "C:\ProgramData\MySQL\MySQL Server 8.0" and find the my.ini file.
+    Copy file outside the folder,
+    edit the two port lines to 3306,
+    copy back to MySQL Server 8.0 folder.
+
+    There are two lines there that have the port number, change it to 3306.
+
+5. Change your password in MySQL. Copy paste the code from below in a query.
+    
+    ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+    FLUSH PRIVILEGES;  
+
+    If you have a different username, change it into 'root'. Copy tge below code and paste it in a query.
+
+    UPDATE mysql.user SET user='root' WHERE User = 'current_user_name';
+
+    Restart MySQL to verify the changes.

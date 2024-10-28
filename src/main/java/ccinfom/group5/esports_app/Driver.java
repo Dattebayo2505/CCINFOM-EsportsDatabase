@@ -11,6 +11,8 @@ public class Driver {
         System.out.println("GROUP 5 - Esports Database Application");
         
         JavaSQLConnection.initializeConnection();
+
+        
         
     }
 }

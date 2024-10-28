@@ -1,0 +1,26 @@
+# Compiled class files
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# IDE files
+.idea/
+.vscode/
+
+# Build output
+target/
+build/
+
+# Dependency directories
+lib/
+libs/
+
+# Log files
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db

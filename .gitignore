@@ -22,5 +22,11 @@ libs/
 *.log
 
 # OS-specific files
+### VS Code ###
+.vscode/
+
+### Mac OS ###
 .DS_Store
+
+### Thumbnails ###
 Thumbs.db

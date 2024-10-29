@@ -20,10 +20,7 @@ Good day to all please read before running the project.
 
     DON'T USE THE ONE ON THE TOP RIGHT
 
-3. IMPORTANT - MAKE SURE TO GO TO model/sql AND IMPORT 'esports.sql' THAT IN THE MYSQL WORKBENCH. WITHOUT IT, YOU WOULD HAVE FAILED CONNECTION. 
-    OK lang kahit hindi nakadouble click o highlight yung schema, basta nandun yung schema sa workbench.
-
-4. Make sure the port of your MySQL is 3306.
+3. Make sure the port of your MySQL is 3306.
     If not set to 3306, go to "C:\ProgramData\MySQL\MySQL Server 8.0" and find the my.ini file.
     Copy file outside the folder,
     edit the two port lines to 3306,
@@ -31,7 +28,7 @@ Good day to all please read before running the project.
 
     There are two lines there that have the port number, change it to 3306.
 
-5. Change your password in MySQL. Copy paste the code from below in a query.
+4. Change your password in MySQL. Copy paste the code from below in a query.
     
     ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
     FLUSH PRIVILEGES;  

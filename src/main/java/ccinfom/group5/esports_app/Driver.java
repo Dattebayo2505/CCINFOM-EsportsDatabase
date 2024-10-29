@@ -4,7 +4,6 @@ import ccinfom.group5.esports_app.model.*; // Refer here for Database.java
 import ccinfom.group5.esports_app.view.*;
 import ccinfom.group5.esports_app.controller.*;
 
-
 public class Driver {
     public static void main(String[] args) {
         System.out.println("GROUP 5 - Esports Database Application");

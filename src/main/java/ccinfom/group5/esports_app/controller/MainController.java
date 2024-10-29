@@ -6,7 +6,10 @@ import ccinfom.group5.esports_app.view.*;
 public class MainController {
     
     public MainController(Database database, GUI gui) {
-        System.out.println("Main Controller initialized");
+        
+        
+        
+        gui.setVisible(true);
     }
 
 }

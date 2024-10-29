@@ -14,13 +14,13 @@ Good day to all please read before running the project.
 
     Our main files should be in "src\main\java\ccinfom\group5\esports_app"
 
-2. When running the file, always opt to run the file thru the Driver class (Above the main method, 
+3. When running the file, always opt to run the file thru the Driver class (Above the main method, 
     there should be a 'Run | Debug' option, click on the Run option to run the file).
     Para hindi makalat yung classes sa mga folders.
 
     DON'T USE THE ONE ON THE TOP RIGHT
 
-3. Make sure the port of your MySQL is 3306.
+4. Make sure the port of your MySQL is 3306.
     If not set to 3306, go to "C:\ProgramData\MySQL\MySQL Server 8.0" and find the my.ini file.
     Copy file outside the folder,
     edit the two port lines to 3306,
@@ -28,12 +28,13 @@ Good day to all please read before running the project.
 
     There are two lines there that have the port number, change it to 3306.
 
-4. Change your password in MySQL. Copy paste the code from below in a query.
+5. Change your password in MySQL. Copy paste the code from below in a query.
     
     ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
     FLUSH PRIVILEGES;  
 
-    If you have a different username, change it into 'root'. Copy tge below code and paste it in a query.
+    If you have a different username (apart from 'root'), change it first before applying the code at the top. 
+    Copy the below code and paste it in a query.
 
     UPDATE mysql.user SET user='root' WHERE User = 'current_user_name';
 

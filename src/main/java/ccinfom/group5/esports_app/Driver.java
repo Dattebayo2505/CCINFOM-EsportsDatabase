@@ -8,15 +8,14 @@ import ccinfom.group5.esports_app.controller.*;
 public class Driver {
     public static void main(String[] args) {
         System.out.println("GROUP 5 - Esports Database Application");
-
-        new MainController();
-        new GUI();
-
+        
         Database database = new Database();
-        if (database.initialStatus() == false) return;
-
-        database.createDatabase(); // END PROGRAM IF NO CONNECTION
-         
+        if (database.initialStatus() == false) return; // END PROGRAM IF CONNECTION FAILS
+        database.createDatabase();
+        
+        GUI gui = new GUI();
+        
+        new MainController(database, gui);         
 
         // database.removeDatabase(); 
     }

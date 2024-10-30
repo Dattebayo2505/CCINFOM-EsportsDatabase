@@ -8,5 +8,4 @@ public class DBCHelper { // Database Connection Helper
     public static final String dbName = "esports";
     public static final String serverAndPort = "localhost:3310"; // Might change to 3310 if @GOKS
 
-
 }

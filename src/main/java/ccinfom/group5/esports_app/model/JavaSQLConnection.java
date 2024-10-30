@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import ccinfom.group5.esports_app.helper.*;
+import ccinfom.group5.esports_app.utils.*;
 
 class JavaSQLConnection {
 
@@ -13,7 +14,7 @@ class JavaSQLConnection {
         if (con != null) {
             return true;
         }
-        GeneralHelper.debugPrint("Connection failed");
+        GeneralUtil.debugPrint("Connection failed");
         return false;
     }
 
@@ -22,12 +23,12 @@ class JavaSQLConnection {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://" + DBCHelper.serverAndPort,
                                                                 DBCHelper.username, DBCHelper.password);
-            GeneralHelper.debugPrint("Connection established");
+            GeneralUtil.debugPrint("Connection established");
 
             return connection;
         }
         catch (ClassNotFoundException e) {
-            GeneralHelper.debugPrint("Class not Found");
+            GeneralUtil.debugPrint("Class not Found");
             e.printStackTrace();
             return null;
         }

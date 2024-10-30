@@ -1,6 +1,7 @@
 package ccinfom.group5.esports_app;
 
 import ccinfom.group5.esports_app.model.*; // Refer here for Database.java
+import ccinfom.group5.esports_app.utils.FileReaderUtil;
 import ccinfom.group5.esports_app.view.*;
 import ccinfom.group5.esports_app.controller.*;
 
@@ -17,6 +18,11 @@ public class Driver {
         GUI gui = new GUI();
         
         new MainController(database, gui);         
+
+        FileReaderUtil.loadPlayers("src/main/java/ccinfom/group5/esports_app/csv/Players.csv", database);
+        // FileReaderUtil.loadPlayerEquipment("src/main/java/ccinfom/group5/esports_app/csv/PlayerEquipment.csv");
+        // FileReaderUtil.loadTeams("src/main/java/ccinfom/group5/esports_app/csv/Teams.csv");
+        // FileReaderUtil.loadMaps("src/main/java/ccinfom/group5/esports_app/csv/Maps.csv");
 
 
 

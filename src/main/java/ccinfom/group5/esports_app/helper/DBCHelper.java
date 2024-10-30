@@ -6,7 +6,7 @@ public class DBCHelper { // Database Connection Helper
     public static final String password = "password";
     public static final String username = "root";
     public static final String dbName = "esports";
-    public static final String serverAndPort = "localhost:3306"; // Might change to 3310 if @GOKS
+    public static final String serverAndPort = "localhost:3310"; // Might change to 3310 if @GOKS
 
 
 }

@@ -1,4 +1,17 @@
-player_id, last_name, first_name, age, nationality, team_name
-1, "Smith", "John", 25, "USA", "Team1"
-2, "Johnson", "Mike", 22, "USA", "Team2"
-3, "Williams", "David", 23, "USA", "Team3"
+player_id, last_name, first_name, age, country, team_name
+whyzy, Wang, Haozhe, 21, China, Bilibili Gaming
+Knight, Liu, Yuxiang, 20, China, Bilibili Gaming
+yosemite, Wang, Lei, 22, China, Bilibili Gaming
+nephh, Tan, Marcus, 21, Singapore, Bilibili Gaming
+Flex1n, Luo, Rui, 22, China, Bilibili Gaming
+BuZz, Yu, Byung-chul, 21, South Korea, DRX
+MaKo, Kim, Myeong-kwan, 22, South Korea, DRX
+Foxy9, Jung, Jae-sung, 19, South Korea, DRX
+BeYn, Kang, Ha-bin, 20, South Korea, DRX
+Flashback, Cho, Min-hyuk, 18, South Korea, DRX
+CHICHOO, Wan, Shunzhi, 20, China, EDWard Gaming
+nobody, Wang, Senxu, 21, China, EDWard Gaming
+ZmjjKK, Zheng, Yongkang, 20, China, EDWard Gaming
+Smoggy, Zhang, Zhao, 22, China, EDWard Gaming
+S1Mon, Hsieh, Meng-hsun, 20, Taiwan, EDWard Gaming 
+MrFaliN, Yeğen, Furkan, 23, Turkey, FUT Esports

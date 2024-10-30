@@ -9,5 +9,4 @@ public class DBCHelper { // Database Connection Helper
     public static final String serverAndPort = "localhost:3306"; // Might change to 3310 if @GOKS
 
 
-    
 }

@@ -30,6 +30,11 @@ Good day to all please read before running the project.
 
 5. Change your password in MySQL. Copy paste the code from below in a query.
     
+    ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
+    FLUSH PRIVILEGES;  
+
+    IF ABOVE CODE DIDN'T WORK, TRY THIS ONE
+    
     ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
     FLUSH PRIVILEGES;  
 

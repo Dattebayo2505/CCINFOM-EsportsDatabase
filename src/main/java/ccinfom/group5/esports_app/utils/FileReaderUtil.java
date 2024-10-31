@@ -34,12 +34,12 @@ public class FileReaderUtil {
                 String country;
                 String teamName;
 
-                playerID = columns[0];
-                lastName = columns[1];
-                firstName = columns[2];
-                age = Integer.parseInt(columns[3]);
-                country = columns[4];
-                teamName = columns[5];
+                playerID = columns[0].trim();
+                lastName = columns[1].trim();
+                firstName = columns[2].trim();
+                age = Integer.parseInt(columns[3].trim());
+                country = columns[4].trim();
+                teamName = columns[5].trim();
                 
                 Player player = new Player(playerID, lastName, firstName, age, country, teamName);
 

@@ -20,6 +20,7 @@ public class Driver {
         new MainController(database, gui);         
 
         FileReaderUtil.loadPlayers("src/main/java/ccinfom/group5/esports_app/csv/Players.csv", database);
+        FileReaderUtil.printPlayerTable(database);
         // FileReaderUtil.loadPlayerEquipment("src/main/java/ccinfom/group5/esports_app/csv/PlayerEquipment.csv");
         // FileReaderUtil.loadTeams("src/main/java/ccinfom/group5/esports_app/csv/Teams.csv");
         // FileReaderUtil.loadMaps("src/main/java/ccinfom/group5/esports_app/csv/Maps.csv");

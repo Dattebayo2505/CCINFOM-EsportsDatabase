@@ -150,6 +150,25 @@ public class Database {
         }
     }
 
+
+    public void insertInto(String tableName) {
+        int i;
+    
+        String initial = "INSERT INTO " + tableName + "(";
+    
+        for (i=0; i<getPlayerColumnNames().size(); i++) {
+            if (i == getPlayerColumnNames().size() - 1)
+                initial += getPlayerColumnNames().get(i);
+
+            initial += getPlayerColumnNames().get(i) + ", ";
+        }
+
+        initial += ") VALUES (";
+
+        
+    
+    }
+
     public ArrayList<Player> getAllPlayers() {
         return allPlayers;
     }

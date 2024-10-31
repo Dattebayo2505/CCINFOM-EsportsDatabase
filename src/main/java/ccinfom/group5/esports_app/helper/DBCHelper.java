@@ -1,5 +1,6 @@
 package ccinfom.group5.esports_app.helper;
 
+// TODO: Remove and just put details in a .txt file, and access from FileReaderUtil.java
 public class DBCHelper { // Database Connection Helper
     
     public static final String driver = "com.mysql.cj.jdbc.Driver";

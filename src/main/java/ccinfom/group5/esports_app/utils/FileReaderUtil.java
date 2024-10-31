@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import ccinfom.group5.esports_app.Driver;
 import ccinfom.group5.esports_app.model.*;
 import ccinfom.group5.esports_app.model.tables.*;
 
@@ -47,7 +48,7 @@ public class FileReaderUtil {
 
                 ++count;
             }
-            GeneralUtil.debugPrint(count + "players created successfully"); // DEBUGGING
+            GeneralUtil.debugPrint(count + " players created successfully"); // DEBUGGING
         } 
         catch (FileNotFoundException e) {
             GeneralUtil.debugPrint("File not found: " + filepath);
@@ -56,8 +57,11 @@ public class FileReaderUtil {
     }
 
     public static void printPlayerTable(Database database) {
-        for (Player player : database.getAllPlayers()) {
-            System.out.println(player.getPlayer_id() + " " + player.getLast_name() + " " + player.getFirst_name() + " " + player.getAge() + " " + player.getCountry() + " " + player.getTeam_name());
+        if (Driver.terminalLogsEnabled) {
+            for (Player player : database.getAllPlayers()) {
+                System.out.println(player.getPlayerID() + " " + player.getLastName() + " " + player.getFirstName() 
+                                + " " + player.getAge() + " " + player.getCountry() + " " + player.getTeamName());
+            }
         }
     }
 

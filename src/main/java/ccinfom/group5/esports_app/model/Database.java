@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import ccinfom.group5.esports_app.model.tables.*;
-
+import ccinfom.group5.esports_app.utils.GeneralUtil;
 import ccinfom.group5.esports_app.helper.DBCHelper; // Refer here for username, password, etc.
 
 public class Database {
@@ -39,10 +39,46 @@ public class Database {
         this.mapColumnNames = new ArrayList<String>();
     }
 
-    public void initializeTables() {
+    public void createPlayerTable(String tableName) {
+        StringBuilder stringQuery;
+        String columnName;
         
-    }
+        this.statement = null;
+        try {
+            statement = con.createStatement();
+            stringQuery = new StringBuilder("CREATE TABLE IF NOT EXISTS " 
+                                                          + tableName + " (");
 
+            for (int i = 0; i < playerColumnNames.size(); i++) {
+                columnName = playerColumnNames.get(i);
+                if (columnName.equals("age")) {
+                    stringQuery.append(columnName).append(" INT, ");
+                } 
+                else {
+                    stringQuery.append(columnName).append(" VARCHAR(50), ");
+                }
+            }
+
+            stringQuery.setLength(stringQuery.length() - 2); // Remove the last comma and space
+
+            // Add primary key and foreign key constraints
+            stringQuery.append(", PRIMARY KEY (player_id)"); // TODO: REMOVE ONCE ALL TABLES ARE IMPLEMENTED
+            // stringQuery.append(", PRIMARY KEY (player_id), FOREIGN KEY (team_name) REFERENCES teams(team_name))"); // TODO: Uncomment once teams table is implemented
+            stringQuery.append(");");
+
+            statement.executeUpdate(stringQuery.toString());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     /**
      * Adds a column to the specified table with the given column name and type.
@@ -150,23 +186,82 @@ public class Database {
         }
     }
 
-
-    public void insertInto(String tableName) {
-        int i;
-    
-        String initial = "INSERT INTO " + tableName + "(";
-    
-        for (i=0; i<getPlayerColumnNames().size(); i++) {
-            if (i == getPlayerColumnNames().size() - 1)
-                initial += getPlayerColumnNames().get(i);
-
-            initial += getPlayerColumnNames().get(i) + ", ";
+    public void useDatabase() {
+        this.statement = null;
+        try {
+            statement = con.createStatement();
+            statement.executeUpdate("USE " + DBCHelper.dbName);
+        } 
+        catch (SQLException e) {
+            e.printStackTrace();
         }
+        finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
-        initial += ") VALUES (";
-
-        
+    public void insertInto(String tableName, ArrayList<?> record) {
+        int i, j;
+        StringBuilder stringQuery, finalStringQuery;
+        Object value;
     
+        this.statement = null;
+
+        try {
+            statement = con.createStatement();
+
+            stringQuery = new StringBuilder("INSERT INTO " + tableName + "(");
+            
+            for (j = 0; j < getPlayerColumnNames().size(); j++) {
+                if (j == getPlayerColumnNames().size() - 1) {
+                    stringQuery.append(getPlayerColumnNames().get(j));
+                } else {
+                    stringQuery.append(getPlayerColumnNames().get(j)).append(", ");
+                }
+            }
+
+            stringQuery.append(") VALUES (");
+
+            for (i = 0; i < record.size(); i++) {
+                value = record.get(i);
+            
+                finalStringQuery = new StringBuilder(stringQuery);
+            
+                if (value instanceof Player) {
+                    finalStringQuery.append(((Player) value).getAllDetails());
+                }
+                // TODO: Add from other tables/classes here
+                // else if (value instanceof PlayerEquipment) {
+                //     stringQuery.append(((PlayerEquipment) value).getAllDetails());
+                // }
+                // else if (value instanceof Team) {
+                //     stringQuery.append(((Team) value).getAllDetails());
+                // }
+                // else if (value instanceof Map) {
+                //     stringQuery.append(((Map) value).getAllDetails());
+                // }
+                
+                finalStringQuery.append(");");
+                
+                statement.executeUpdate(finalStringQuery.toString()); // Execute each statement individually to avoid large string
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public ArrayList<Player> getAllPlayers() {

@@ -8,8 +8,9 @@ import ccinfom.group5.esports_app.utils.*;
 public class Driver {
 
     public static final boolean terminalLogsEnabled = true; // true = ON, false = OFF (for debugging purposes)
+
     public static void main(String[] args) {
-        System.out.println("GROUP 5 - Esports Database Application");
+        System.out.println("GROUP 5 - Esports Database Application\n");
         
         Database database = new Database();
         if (database.initialStatus() == false) return; // END PROGRAM IF CONNECTION FAILS
@@ -21,15 +22,25 @@ public class Driver {
 
         FileReaderUtil.loadPlayers("src/main/java/ccinfom/group5/esports_app/csv/Players.csv", database);
         FileReaderUtil.printPlayerTable(database);
+        // TODO: Uncomment below lines after implementing the respective methods in FileReaderUtil.java
         // FileReaderUtil.loadPlayerEquipment("src/main/java/ccinfom/group5/esports_app/csv/PlayerEquipment.csv");
         // FileReaderUtil.loadTeams("src/main/java/ccinfom/group5/esports_app/csv/Teams.csv");
         // FileReaderUtil.loadMaps("src/main/java/ccinfom/group5/esports_app/csv/Maps.csv");
 
+        database.useDatabase();
+
+        database.createPlayerTable("players");
+
+        database.insertInto("players", database.getAllPlayers());
+        // TODO: Uncomment below lines after implementing the respective methods in Database.java
+        // database.insertInto("player_equipment", database.getAllPlayerEquipment());
+        // database.insertInto("teams", database.getAllTeams());
+        // database.insertInto("maps", database.getAllMaps());
 
 
 
 
-        database.removeDatabase(); // Optional??
+        // database.removeDatabase(); // Optional??
     }
 }
 

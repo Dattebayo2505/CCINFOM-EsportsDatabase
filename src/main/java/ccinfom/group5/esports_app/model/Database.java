@@ -32,6 +32,11 @@ public class Database {
         this.allPlayerEquipment = new ArrayList<PlayerEquipment>();
         this.allTeams = new ArrayList<Team>();
         this.allMaps = new ArrayList<Map>();
+
+        this.playerColumnNames = new ArrayList<String>();
+        this.playerEquipmentColumnNames = new ArrayList<String>();
+        this.teamColumnNames = new ArrayList<String>();
+        this.mapColumnNames = new ArrayList<String>();
     }
 
     public void initializeTables() {

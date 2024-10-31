@@ -14,25 +14,34 @@ public class FileReaderUtil {
         int count = 0;
 
         try (Scanner scanner = new Scanner(new File(filepath))) {   
+            boolean isFirstLine = true;
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] columns = line.split(",");
+        
+                if (isFirstLine) {
+                    for (String columnName : columns) { // Store column names
+                        database.getPlayerColumnNames().add(columnName.trim()); 
+                    }
+                    isFirstLine = false;
+                    continue; // Skip below code for first line of csv
+                }
 
-                int player_id;
-                String last_name;
-                String first_name;
+                String playerID;
+                String lastName;
+                String firstName;
                 int age;
-                String nationality;
-                String team_name;
+                String country;
+                String teamName;
 
-                player_id = Integer.parseInt(columns[0]);
-                last_name = columns[1];
-                first_name = columns[2];
+                playerID = columns[0];
+                lastName = columns[1];
+                firstName = columns[2];
                 age = Integer.parseInt(columns[3]);
-                nationality = columns[4];
-                team_name = columns[5];
+                country = columns[4];
+                teamName = columns[5];
                 
-                Player player = new Player(player_id, last_name, first_name, age, nationality, team_name);
+                Player player = new Player(playerID, lastName, firstName, age, country, teamName);
 
                 database.getAllPlayers().add(player);
 
@@ -43,6 +52,12 @@ public class FileReaderUtil {
         catch (FileNotFoundException e) {
             GeneralUtil.debugPrint("File not found: " + filepath);
             e.printStackTrace();
+        }
+    }
+
+    public static void printPlayerTable(Database database) {
+        for (Player player : database.getAllPlayers()) {
+            System.out.println(player.getPlayer_id() + " " + player.getLast_name() + " " + player.getFirst_name() + " " + player.getAge() + " " + player.getCountry() + " " + player.getTeam_name());
         }
     }
 

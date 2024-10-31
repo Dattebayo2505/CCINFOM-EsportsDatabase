@@ -1,4 +1,4 @@
-player_id, last_name, first_name, age, nationality, team_name
+player_id, last_name, first_name, age, country, team_name
 1, "Smith", "John", 25, "USA", "Team1"
 2, "Johnson", "Mike", 22, "USA", "Team2"
 3, "Williams", "David", 23, "USA", "Team3"

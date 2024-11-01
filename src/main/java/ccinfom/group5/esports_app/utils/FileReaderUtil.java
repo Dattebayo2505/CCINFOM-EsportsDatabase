@@ -1,13 +1,15 @@
 package ccinfom.group5.esports_app.utils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import ccinfom.group5.esports_app.Driver;
 import ccinfom.group5.esports_app.model.*;
 import ccinfom.group5.esports_app.model.tables.*;
-
 
 public class FileReaderUtil {
     
@@ -65,4 +67,45 @@ public class FileReaderUtil {
         }
     }
 
+    public static void readConfigAndSetConnection(String filepath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.startsWith("#") || line.trim().isEmpty()) {
+                    continue; // Skip comments and empty lines
+                }
+                String[] parts = line.split(" ", 2);
+                if (parts.length < 2) {
+                    continue; // Skip malformed lines
+                }
+                String key = parts[0].trim();
+                String value = parts[1].trim();
+
+                switch (key) {
+                    case "password":
+                        JavaSQLConnection.setPassword(value);
+                        break;
+                    case "username":
+                        JavaSQLConnection.setUsername(value);
+                        break;
+                    case "dbName":
+                        JavaSQLConnection.setDbName(value);
+                        break;
+                    case "server":
+                        JavaSQLConnection.setServer(value);
+                        break;
+                    case "port":
+                        JavaSQLConnection.setPort(value);
+                        break;
+                    default:
+                        // Unknown key, skip it
+                        break;
+                }
+            }
+            GeneralUtil.debugPrint("Configuration loaded successfullyn\n");
+        } catch (IOException e) {
+            GeneralUtil.debugPrint("Error reading configuration file: " + filepath + "\n");
+            e.printStackTrace();
+        }
+    }
 }

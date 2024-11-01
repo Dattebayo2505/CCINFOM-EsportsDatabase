@@ -7,8 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import ccinfom.group5.esports_app.model.tables.*;
-import ccinfom.group5.esports_app.utils.GeneralUtil;
-import ccinfom.group5.esports_app.helper.DBCHelper; // Refer here for username, password, etc.
+import ccinfom.group5.esports_app.utils.*;
 
 public class Database {
     
@@ -24,6 +23,8 @@ public class Database {
     private ArrayList<String> playerEquipmentColumnNames;
     private ArrayList<String> teamColumnNames;
     private ArrayList<String> mapColumnNames;
+
+    private String dbName;
 
     public Database() {
         this.con = null;
@@ -143,6 +144,7 @@ public class Database {
 
     public boolean initialStatus() {
         this.con = JavaSQLConnection.tryMakeConnection();
+        this.dbName = JavaSQLConnection.getDbName();
         return this.con != null;        
     }
 
@@ -150,7 +152,7 @@ public class Database {
         this.statement = null;
         try {
             statement = this.con.createStatement();
-            statement.executeUpdate("CREATE DATABASE IF NOT EXISTS " + DBCHelper.dbName);
+            statement.executeUpdate("CREATE DATABASE IF NOT EXISTS " + dbName);
         } 
         catch (SQLException e) {
             e.printStackTrace();
@@ -170,7 +172,7 @@ public class Database {
         this.statement = null;
         try {
             statement = con.createStatement();
-            statement.executeUpdate("DROP DATABASE IF EXISTS " + DBCHelper.dbName);
+            statement.executeUpdate("DROP DATABASE IF EXISTS " + dbName);
         } 
         catch (SQLException e) {
             e.printStackTrace();
@@ -190,7 +192,7 @@ public class Database {
         this.statement = null;
         try {
             statement = con.createStatement();
-            statement.executeUpdate("USE " + DBCHelper.dbName);
+            statement.executeUpdate("USE " + dbName);
         } 
         catch (SQLException e) {
             e.printStackTrace();

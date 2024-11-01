@@ -1,0 +1,14 @@
+# password - Change if needed
+password
+
+# username - Change if needed
+root
+
+# dbName
+esports
+
+# server - Change if needed
+localhost
+
+# port - Change if needed
+3306

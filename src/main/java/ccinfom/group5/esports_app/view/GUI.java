@@ -1,10 +1,11 @@
 package ccinfom.group5.esports_app.view;
 
 import javax.swing.*;
+
+import ccinfom.group5.esports_app.utils.GUIUtil;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
-
-import ccinfom.group5.esports_app.helper.GUIHelper;
 
 public class GUI extends JFrame {
     
@@ -33,13 +34,13 @@ public class GUI extends JFrame {
 
         // MAIN PAGE
         mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBackground(GUIHelper.cDarkGreen);
+        mainPanel.setBackground(GUIUtil.cDarkGreen);
 
         // BANNER IN MAIN PAGE
         titleLbl = new JLabel();
         bannerPanel = new JPanel();
 
-        GUIHelper.textConfig(titleLbl, "ESports Tracker - Valorant", "Arial", Font.BOLD, 40, Color.WHITE);
+        GUIUtil.textConfig(titleLbl, "ESports Tracker - Valorant", "Arial", Font.BOLD, 40, Color.WHITE);
         bannerPanel.setOpaque(false);
 
         // LOWER PANEL
@@ -50,15 +51,15 @@ public class GUI extends JFrame {
         // LEFT LOWER PANEL
         menuLbl = new JLabel();
         leftLowerPanel = new JPanel();
-        GUIHelper.gridBagLayoutConfig(lowerPanel, leftLowerPanel, 0, 0, 0.5, 1.0);
+        GUIUtil.gridBagLayoutConfig(lowerPanel, leftLowerPanel, 0, 0, 0.5, 1.0);
 
-        GUIHelper.textConfig(menuLbl, "MENU", "Arial", Font.BOLD, 20, Color.BLACK);
+        GUIUtil.textConfig(menuLbl, "MENU", "Arial", Font.BOLD, 20, Color.BLACK);
 
 
 
         // RIGHT LOWER PANEL
         rightLowerPanel = new JPanel();
-        GUIHelper.gridBagLayoutConfig(lowerPanel, rightLowerPanel, 1, 0, 0.5, 1.0);
+        GUIUtil.gridBagLayoutConfig(lowerPanel, rightLowerPanel, 1, 0, 0.5, 1.0);
 
 
         // MAIN PAGE END

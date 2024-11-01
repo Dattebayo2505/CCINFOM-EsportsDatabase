@@ -5,6 +5,13 @@ import ccinfom.group5.esports_app.view.*;
 import ccinfom.group5.esports_app.controller.*;
 import ccinfom.group5.esports_app.utils.*;
 
+/*
+ * Before starting the program, go to must-edit.txt and edit the following as necessary:
+ * - username
+ * - password
+ * - server
+ * - port
+ */
 public class Driver {
 
     public static final boolean terminalLogsEnabled = true; // true = ON, false = OFF (for debugging purposes)
@@ -27,9 +34,9 @@ public class Driver {
         // FileReaderUtil.loadTeams("src/main/java/ccinfom/group5/esports_app/csv/Teams.csv");
         // FileReaderUtil.loadMaps("src/main/java/ccinfom/group5/esports_app/csv/Maps.csv");
 
-        database.useDatabase();
+        database.useDatabase(); // USE esports;
 
-        database.createPlayerTable("players");
+        database.createPlayerTable("players"); // CREATE TABLE players (...)
 
         database.insertInto("players", database.getAllPlayers());
         // TODO: Uncomment below lines after implementing the respective methods in Database.java

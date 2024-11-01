@@ -1,9 +1,9 @@
-package ccinfom.group5.esports_app.helper;
+package ccinfom.group5.esports_app.utils;
 
 import java.awt.*;
 import javax.swing.*;
 
-public class GUIHelper {
+public class GUIUtil {
 
     public static final Color cDarkGreen = new Color(0, 102, 0);
 

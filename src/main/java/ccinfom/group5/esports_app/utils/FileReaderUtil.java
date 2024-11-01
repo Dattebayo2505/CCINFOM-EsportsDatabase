@@ -1,12 +1,15 @@
 package ccinfom.group5.esports_app.utils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
+import ccinfom.group5.esports_app.Driver;
 import ccinfom.group5.esports_app.model.*;
 import ccinfom.group5.esports_app.model.tables.*;
-
 
 public class FileReaderUtil {
     
@@ -34,12 +37,12 @@ public class FileReaderUtil {
                 String country;
                 String teamName;
 
-                playerID = columns[0];
-                lastName = columns[1];
-                firstName = columns[2];
-                age = Integer.parseInt(columns[3]);
-                country = columns[4];
-                teamName = columns[5];
+                playerID = columns[0].trim();
+                lastName = columns[1].trim();
+                firstName = columns[2].trim();
+                age = Integer.parseInt(columns[3].trim());
+                country = columns[4].trim();
+                teamName = columns[5].trim();
                 
                 Player player = new Player(playerID, lastName, firstName, age, country, teamName);
 
@@ -47,7 +50,7 @@ public class FileReaderUtil {
 
                 ++count;
             }
-            GeneralUtil.debugPrint(count + "players created successfully"); // DEBUGGING
+            GeneralUtil.debugPrint(count + " players created successfully"); // DEBUGGING
         } 
         catch (FileNotFoundException e) {
             GeneralUtil.debugPrint("File not found: " + filepath);
@@ -56,9 +59,55 @@ public class FileReaderUtil {
     }
 
     public static void printPlayerTable(Database database) {
-        for (Player player : database.getAllPlayers()) {
-            System.out.println(player.getPlayer_id() + " " + player.getLast_name() + " " + player.getFirst_name() + " " + player.getAge() + " " + player.getCountry() + " " + player.getTeam_name());
+        if (Driver.terminalLogsEnabled) {
+            for (Player player : database.getAllPlayers()) {
+                System.out.println(player.getPlayerID() + " " + player.getLastName() + " " + player.getFirstName() 
+                                + " " + player.getAge() + " " + player.getCountry() + " " + player.getTeamName());
+            }
         }
     }
 
+    public static void readConfigAndSetConnection(String filepath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
+            String line, key, value;
+
+            key = null;
+            while ((line = br.readLine()) != null) {
+                if (line.isEmpty())
+                    continue;
+                    
+                if (line.charAt(0) == '#') 
+                    key = line.substring(2);   
+
+                
+                value = br.readLine().trim();
+    
+                switch (key) {
+                    case "password":
+                        JavaSQLConnection.setPassword(value);
+                        break;
+                    case "username":
+                        JavaSQLConnection.setUsername(value);
+                        break;
+                    case "dbName":
+                        JavaSQLConnection.setDbName(value);
+                        break;
+                    case "server":
+                        JavaSQLConnection.setServer(value);
+                        break;
+                    case "port":
+                        JavaSQLConnection.setPort(value);
+                        break;
+                    default:
+                        GeneralUtil.debugPrint("No such key: " + key);
+                        
+                        break;
+                }
+            }
+            GeneralUtil.debugPrint("Configuration loaded successfully\n");
+        } catch (IOException e) {
+            GeneralUtil.debugPrint("Error reading configuration file: " + filepath + "\n");
+            e.printStackTrace();
+        }
+    }
 }

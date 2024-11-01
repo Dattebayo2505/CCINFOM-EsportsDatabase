@@ -2,42 +2,51 @@ package ccinfom.group5.esports_app.model.tables;
 
 public class Player {
 
-    private String player_id;
-    private String last_name;
-    private String first_name;
+    private String playerID;
+    private String lastName;
+    private String firstName;
     private int age;
     private String country;
-    private String team_name;
+    private String teamName;
 
 
-    public Player(String player_id, String last_name, String first_name, int age, String country, String team_name) {
-        this.player_id = player_id;
-        this.last_name = last_name;
-        this.first_name = first_name;
+    public Player(String playerID, String lastName, String firstName, int age, String country, String teamName) {
+        this.playerID = playerID;
+        this.lastName = lastName;
+        this.firstName = firstName;
         this.age = age;
         this.country = country;
-        this.team_name = team_name;
+        this.teamName = teamName;
     }
 
-    public String getPlayer_id() {
-        return player_id;
-    }
-    public void setPlayer_id(String player_id) {
-        this.player_id = player_id;
+    public String getAllDetails() {
+        String details;
+
+        details = "\'"+playerID+"\'"+", "+"\'"+lastName+"\'"+", "+"\'"+firstName+"\'"+", "+age+", "+
+                  "\'"+country+"\'"+", "+"\'"+teamName+"\'";
+
+        return details;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getPlayerID() {
+        return playerID;
     }
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setPlayerID(String playerID) {
+        this.playerID = playerID;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getLastName() {
+        return lastName;
     }
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public int getAge() {
@@ -54,11 +63,11 @@ public class Player {
         this.country = country;
     }
 
-    public String getTeam_name() {
-        return team_name;
+    public String getTeamName() {
+        return teamName;
     }
-    public void setTeam_name(String team_name) {
-        this.team_name = team_name;
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
 }

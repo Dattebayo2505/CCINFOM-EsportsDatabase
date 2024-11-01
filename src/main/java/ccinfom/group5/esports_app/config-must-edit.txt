@@ -1,0 +1,14 @@
+# password
+password
+
+# username
+root
+
+# dbName
+esports
+
+# server
+localhost
+
+# port
+3310

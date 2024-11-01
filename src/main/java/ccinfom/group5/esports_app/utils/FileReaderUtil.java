@@ -69,18 +69,19 @@ public class FileReaderUtil {
 
     public static void readConfigAndSetConnection(String filepath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.startsWith("#") || line.trim().isEmpty()) {
-                    continue; // Skip comments and empty lines
-                }
-                String[] parts = line.split(" ", 2);
-                if (parts.length < 2) {
-                    continue; // Skip malformed lines
-                }
-                String key = parts[0].trim();
-                String value = parts[1].trim();
+            String line, key, value;
 
+            key = null;
+            while ((line = br.readLine()) != null) {
+                if (line.isEmpty())
+                    continue;
+                    
+                if (line.charAt(0) == '#') 
+                    key = line.substring(2);   
+
+                
+                value = br.readLine().trim();
+    
                 switch (key) {
                     case "password":
                         JavaSQLConnection.setPassword(value);
@@ -98,11 +99,12 @@ public class FileReaderUtil {
                         JavaSQLConnection.setPort(value);
                         break;
                     default:
-                        // Unknown key, skip it
+                        GeneralUtil.debugPrint("No such key: " + key);
+                        
                         break;
                 }
             }
-            GeneralUtil.debugPrint("Configuration loaded successfullyn\n");
+            GeneralUtil.debugPrint("Configuration loaded successfully\n");
         } catch (IOException e) {
             GeneralUtil.debugPrint("Error reading configuration file: " + filepath + "\n");
             e.printStackTrace();

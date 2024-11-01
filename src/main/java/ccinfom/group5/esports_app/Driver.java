@@ -19,9 +19,11 @@ public class Driver {
     public static void main(String[] args) {
         System.out.println("GROUP 5 - Esports Database Application\n");
         
+        FileReaderUtil.readConfigAndSetConnection("src/main/java/ccinfom/group5/esports_app/config-must-edit.txt");
+
         Database database = new Database();
         if (database.initialStatus() == false) return; // END PROGRAM IF CONNECTION FAILS
-        database.createDatabase();
+        database.createDatabase(); // CREATE DATABASE IF NOT EXISTS esports;
         
         GUI gui = new GUI();
         

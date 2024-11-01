@@ -9,7 +9,6 @@ public class MainController {
         
         
         
-        gui.setVisible(true);
     }
 
 }

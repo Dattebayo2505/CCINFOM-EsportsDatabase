@@ -2,6 +2,7 @@ package ccinfom.group5.esports_app.utils;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.Border;
 
 public class GUIUtil {
 
@@ -36,5 +37,17 @@ public class GUIUtil {
         else {
             throw new IllegalArgumentException("Unsupported component type");
         }
+    }
+
+    public static Border emptyBorderConfig(int top, int left, int bottom, int right) {
+        Border border = BorderFactory.createEmptyBorder(top, left, bottom, right);
+        
+        return border;
+    }
+
+    public static Dimension dimensionConfig(int width, int height) {
+        Dimension dimension = new Dimension(width, height);
+        
+        return dimension;
     }
 }

@@ -30,7 +30,7 @@ public class Driver {
         // TODO: Uncomment below lines after implementing the respective methods in FileReaderUtil.java
         // FileReaderUtil.loadPlayerEquipment("src/main/java/ccinfom/group5/esports_app/csv/PlayerEquipment.csv");
         // FileReaderUtil.loadTeams("src/main/java/ccinfom/group5/esports_app/csv/Teams.csv");
-        // FileReaderUtil.loadMaps("src/main/java/ccinfom/group5/esports_app/csv/Maps.csv");
+        // FileReaderUtil.loadMaps("src/main/java/ccinfom/group5/esports_app/csv/Match.csv");
         
         database.useDatabase(); // USE esports;
         

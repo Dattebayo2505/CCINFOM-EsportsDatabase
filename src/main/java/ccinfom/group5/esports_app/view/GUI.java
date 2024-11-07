@@ -23,7 +23,7 @@ public class GUI {
                     mainMenuBtn;
 
 
-    public GUI()  {
+    public GUI() {
 
         this.mainFrame = new JFrame();
 
@@ -41,15 +41,13 @@ public class GUI {
 
         System.out.println("Main Panel: " + mainPanel.getPreferredSize());
         System.out.println("Banner Panel: " + bannerPanel.getPreferredSize());
+        System.out.println("Lower Panel: " + lowerPanel.getPreferredSize());
     }
 
     private void initComponents() {
         // MAIN PAGE
         mainPanel = new JPanel(new BorderLayout());
-        // mainPanel.setPreferredSize(GUIUtil.dimensionConfig(mainFrame.getWidth(), mainFrame.getHeight()));
-        mainPanel.setSize(GUIUtil.dimensionConfig(mainFrame.getWidth(), mainFrame.getHeight()));
-        // mainPanel.setMaximumSize(GUIUtil.dimensionConfig(mainFrame.getWidth(), mainFrame.getHeight()));
-        // mainPanel.setMinimumSize(GUIUtil.dimensionConfig(mainFrame.getWidth(), mainFrame.getHeight()));
+        mainPanel.setPreferredSize(GUIUtil.dimensionConfig(mainFrame.getWidth(), mainFrame.getHeight()));
         mainPanel.setBackground(GUIUtil.cDarkGreen);
 
         // BANNER IN MAIN PAGE
@@ -57,15 +55,14 @@ public class GUI {
         
         titleLbl = new JLabel();
         GUIUtil.textConfig(titleLbl, "ESports Tracker - Valorant", "Arial", Font.BOLD, 40, Color.WHITE);
-        bannerPanel.setPreferredSize(GUIUtil.dimensionConfig(mainPanel.getWidth(), 60));
+        bannerPanel.setPreferredSize(GUIUtil.dimensionConfig((int)mainPanel.getPreferredSize().getWidth(), 60));
         bannerPanel.setOpaque(false);
         
         // LOWER PANEL
         lowerPanel = new JPanel();
         lowerPanel.setLayout(new GridBagLayout());
-        // lowerPanel.setPreferredSize(GUIUtil.dimensionConfig(getContentPane().getWidth(), getContentPane().getHeight()));
-        lowerPanel.setPreferredSize(GUIUtil.dimensionConfig(mainPanel.getWidth()-bannerPanel.getWidth(), 
-                                                            mainPanel.getHeight()-bannerPanel.getHeight()));
+        lowerPanel.setPreferredSize(GUIUtil.dimensionConfig((int)mainPanel.getPreferredSize().getWidth()-(int)bannerPanel.getPreferredSize().getWidth(), 
+                                                            (int)mainPanel.getPreferredSize().getHeight()-(int)bannerPanel.getPreferredSize().getHeight()));
         lowerPanel.setOpaque(mainPanel.isOpaque());
 
         // LEFT LOWER PANEL
@@ -73,7 +70,6 @@ public class GUI {
         leftLowerPanel.setLayout(new BoxLayout(leftLowerPanel, BoxLayout.Y_AXIS));
         GUIUtil.gridBagLayoutConfig(lowerPanel, leftLowerPanel, 0, 0, 0.2, 1.0);
         leftLowerPanel.setBorder(GUIUtil.emptyBorderConfig(200, 200, 200, 200));
-        // leftLowerPanel.setOpaque(getContentPane().isOpaque()); TODO: Uncomment in the end
         leftLowerPanel.setBackground(Color.YELLOW);
 
         menuLbl = new JLabel();

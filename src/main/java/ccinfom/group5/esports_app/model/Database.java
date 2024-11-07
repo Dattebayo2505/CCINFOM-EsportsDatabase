@@ -17,7 +17,7 @@ public class Database {
     private ArrayList<Player> allPlayers;
     private ArrayList<PlayerEquipment> allPlayerEquipment;
     private ArrayList<Team> allTeams;
-    private ArrayList<Map> allMaps;
+    private ArrayList<Match> allMaps;
     
     private ArrayList<String> playerColumnNames;
     private ArrayList<String> playerEquipmentColumnNames;
@@ -32,7 +32,7 @@ public class Database {
         this.allPlayers = new ArrayList<Player>();
         this.allPlayerEquipment = new ArrayList<PlayerEquipment>();
         this.allTeams = new ArrayList<Team>();
-        this.allMaps = new ArrayList<Map>();
+        this.allMaps = new ArrayList<Match>();
 
         this.playerColumnNames = new ArrayList<String>();
         this.playerEquipmentColumnNames = new ArrayList<String>();
@@ -53,10 +53,10 @@ public class Database {
             for (int i = 0; i < playerColumnNames.size(); i++) {
                 columnName = playerColumnNames.get(i);
                 if (columnName.equals("age")) {
-                    stringQuery.append(columnName).append(" INT, ");
+                    stringQuery.append(columnName).append(" INT NOT NULL, "); // CONSTRAINT
                 } 
                 else {
-                    stringQuery.append(columnName).append(" VARCHAR(50), ");
+                    stringQuery.append(columnName).append(" VARCHAR(50), "); // CONSTRAINT
                 }
             }
 
@@ -278,7 +278,7 @@ public class Database {
         return allTeams;
     }
 
-    public ArrayList<Map> getAllMaps() {
+    public ArrayList<Match> getAllMaps() {
         return allMaps;
     }
 

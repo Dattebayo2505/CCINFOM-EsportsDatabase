@@ -6,31 +6,32 @@ import ccinfom.group5.esports_app.controller.*;
 import ccinfom.group5.esports_app.utils.*;
 
 /*
- * Before starting the program, go to must-edit.txt and edit the following as necessary:
+ * Before starting the program, go to config-must-edit.txt and edit the following as necessary 
+ * (Refering to your MySQL account):
  * - username
  * - password
  * - server
  * - port
  */
 public class Driver {
-
     public static final boolean terminalLogsEnabled = true; // true = ON, false = OFF (for debugging purposes)
 
     public static void main(String[] args) {
         System.out.println("GROUP 5 - Esports Database Application\n");
         
-        FileReaderUtil.readConfigAndSetConnection("src/main/java/ccinfom/group5/esports_app/config-must-edit.txt");
+        FileReaderUtil.readConfigAndSetConnection(GeneralUtil.mainDirectory + "config-must-edit.txt");
 
         Database database = new Database();
         if (database.initialStatus() == false) return; // END PROGRAM IF CONNECTION FAILS
+        database.removeDatabase(); // Clear any current database
         database.createDatabase(); // CREATE DATABASE IF NOT EXISTS esports;
         
-        FileReaderUtil.loadPlayers("src/main/java/ccinfom/group5/esports_app/csv/Players.csv", database);
+        FileReaderUtil.loadPlayers(GeneralUtil.mainDirectory + "csv/Players.csv", database);
         // FileReaderUtil.printPlayerTable(database);
         // TODO: Uncomment below lines after implementing the respective methods in FileReaderUtil.java
-        // FileReaderUtil.loadPlayerEquipment("src/main/java/ccinfom/group5/esports_app/csv/PlayerEquipment.csv");
-        // FileReaderUtil.loadTeams("src/main/java/ccinfom/group5/esports_app/csv/Teams.csv");
-        // FileReaderUtil.loadMaps("src/main/java/ccinfom/group5/esports_app/csv/Match.csv");
+        // FileReaderUtil.loadPlayerEquipment(GeneralUtil.mainDirectory + "csv/PlayerEquipment.csv");
+        // FileReaderUtil.loadTeams(GeneralUtil.mainDirectory + "csv/Teams.csv");
+        // FileReaderUtil.loadMaps(GeneralUtil.mainDirectory + "csv/Match.csv");
         
         database.useDatabase(); // USE esports;
         
@@ -47,8 +48,6 @@ public class Driver {
         
         new MainController(database, gui);         
         
-        
-        database.removeDatabase(); // Optional??
     }
 }
 

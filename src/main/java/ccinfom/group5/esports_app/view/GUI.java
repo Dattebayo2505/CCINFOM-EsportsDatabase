@@ -22,6 +22,9 @@ public class GUI {
     private JButton mainViewBtn, makeTransacBtn, genReportsBtn, exitBtn,
                     mainMenuBtn;
 
+    private JTextArea sampleTextArea;
+
+    private String sampleText = "Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. " ;
 
     public GUI() {
 
@@ -114,6 +117,12 @@ public class GUI {
         //                                                     getContentPane().getHeight(), getContentPane().getWidth()));
         rightLowerPanel.setBackground(Color.BLUE);
 
+        sampleTextArea = new JTextArea(sampleText);
+        sampleTextArea.setLineWrap(true);
+        sampleTextArea.setWrapStyleWord(true);
+        sampleTextArea.setPreferredSize(buttonSize);
+
+
         // MAIN PAGE END
 
 
@@ -137,7 +146,8 @@ public class GUI {
         leftLowerPanel.add(exitBtn);
 
 
-        
+        rightLowerPanel.add(sampleTextArea);
+
         lowerPanel.add(rightLowerPanel);
 
         mainFrame.add(mainPanel);

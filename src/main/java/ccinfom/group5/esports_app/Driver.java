@@ -29,9 +29,14 @@ public class Driver {
         FileReaderUtil.loadPlayers(GeneralUtil.mainDirectory + "csv/Players.csv", database);
         // FileReaderUtil.printPlayerTable(database);
         // TODO: Uncomment below lines after implementing the respective methods in FileReaderUtil.java
-        // FileReaderUtil.loadPlayerEquipment(GeneralUtil.mainDirectory + "csv/PlayerEquipment.csv");
-        // FileReaderUtil.loadTeams(GeneralUtil.mainDirectory + "csv/Teams.csv");
-        // FileReaderUtil.loadMaps(GeneralUtil.mainDirectory + "csv/Match.csv");
+        // FileReaderUtil.loadPlayerEquipment(GeneralUtil.mainDirectory + "csv/Company.csv");
+        // FileReaderUtil.loadTeams(GeneralUtil.mainDirectory + "csv/PlayerHistory.csv");
+        // FileReaderUtil.loadMaps(GeneralUtil.mainDirectory + "csv/SponsorHistory.csv");
+        // FileReaderUtil.loadMaps(GeneralUtil.mainDirectory + "csv/TeamHistory.csv");
+        // FileReaderUtil.loadMaps(GeneralUtil.mainDirectory + "csv/TeamPerformanceHistory.csv");
+        // FileReaderUtil.loadMaps(GeneralUtil.mainDirectory + "csv/Teams.csv");
+        // FileReaderUtil.loadMaps(GeneralUtil.mainDirectory + "csv/TeamSponsor.csv");
+        // FileReaderUtil.loadMaps(GeneralUtil.mainDirectory + "csv/TeamStats.csv");
         
         database.useDatabase(); // USE esports;
         

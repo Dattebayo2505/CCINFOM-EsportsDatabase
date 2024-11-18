@@ -1,35 +1,46 @@
 package ccinfom.group5.esports_app.model.tables;
 /* Team, Region, Country, Win Rate */
 public class Team {
-    private String teamName;
+    private String team;
+    private String captain;
     private String region;
     private String country;
-    private float winRate;
+    private String status;
 
-    public Team(String teamName, String region, String country, float winRate) {
-        this.teamName = teamName;
+    public Team(String team, String captain, String region, String country, String status) {
+        this.team = team;
+        this.captain = captain;
         this.region = region;
         this.country = country;
-        this.winRate = winRate;
+        this.status = status;
     }
 
     public String getAllDetails() {
         String details;
 
-        details = "\'" + teamName + "\'" + ", " + 
+        details = "\'" + team + "\'" + ", " +
+                "\'" + captain + "\'" + ", " + 
               "\'" + region + "\'" + ", " + 
               "\'" + country + "\'" + ", " + 
-              winRate;
+              "\'" + status + "\'";
 
         return details;
     }
 
     public String getTeamName() {
-        return teamName;
+        return team;
     }
 
-    public void setTeamName(String teamName){
-        this.teamName = teamName;
+    public void setTeamName(String team){
+        this.team = team;
+    }
+
+    public String getCaptain() {
+        return captain;
+    }
+
+    public void setCaptain(String captain){
+        this.captain = captain;
     }
 
     public String getRegion() {
@@ -48,11 +59,11 @@ public class Team {
         this.country = country;
     }
 
-    public float getWinRate() {
-        return winRate;
+    public String getStatus() {
+        return status;
     }
 
-    public void setWinRate (float winRate){
-        this.winRate = winRate;
+    public void setStatus (String status){
+        this.status = status;
     }
 }

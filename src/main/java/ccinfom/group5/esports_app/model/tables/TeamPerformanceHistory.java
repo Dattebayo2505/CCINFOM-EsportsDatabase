@@ -1,63 +1,63 @@
 package ccinfom.group5.esports_app.model.tables;
 
 public class TeamPerformanceHistory {
-    private int historyID;
-    private String teamName;
-    private String matchDate;
-    private String matchResult;
+    private int history_id;
+    private String team_name;
+    private String match_date;
+    private String result;
     private double winnings;
 
 
-    public TeamPerformanceHistory(int historyID, String teamName, String matchDate, String matchResult, double winnings){
-        this.historyID = historyID;
-        this.teamName = teamName;
-        this.matchDate = matchDate;
-        this.matchResult = matchResult;
+    public TeamPerformanceHistory(int history_id, String team_name, String match_date, String result, double winnings){
+        this.history_id = history_id;
+        this.team_name = team_name;
+        this.match_date = match_date;
+        this.result = result;
         this.winnings = winnings;
     }
 
     public String getAllDetails() {
         String details;
 
-        details = historyID + ", " + 
-              "\'" + teamName + "\'" + ", " + 
-              "\'" + matchDate + "\'" + ", " +
-              "\'" + matchResult + "\'" + ", " +
+        details = history_id + ", " + 
+              "\'" + team_name + "\'" + ", " + 
+              "\'" + match_date + "\'" + ", " +
+              "\'" + result + "\'" + ", " +
               winnings;
 
         return details;
     }
 
     public int getHistoryID() {
-        return historyID;
+        return history_id;
     }
 
-    public void setHistoryID(int historyID){
-        this.historyID = historyID;
+    public void setHistoryID(int history_id){
+        this.history_id = history_id;
     }
 
     public String getTeamName(){
-        return teamName;
+        return team_name;
     }
 
-    public void setTeamName(String teamName){
-        this.teamName = teamName;
+    public void setTeamName(String team_name){
+        this.team_name = team_name;
     }
 
     public String getMatchDate(){
-        return matchDate;
+        return match_date;
     }
 
-    public void setMatchDate(String matchDate){
-        this.matchDate = matchDate;
+    public void setMatchDate(String match_date){
+        this.match_date = match_date;
     }
 
-    public String getMatchResult(){
-        return matchResult;
+    public String getResult(){
+        return result;
     }
 
-    public void setMatchResult(String matchResult){
-        this.matchResult = matchResult;
+    public void setResult(String result){
+        this.result = result;
     }
 
     public double getWinnings(){

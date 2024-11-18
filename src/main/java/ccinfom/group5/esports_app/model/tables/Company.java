@@ -1,36 +1,36 @@
 package ccinfom.group5.esports_app.model.tables;
 
 public class Company {
-    private int companyID;
-    private String companyName;
+    private int company_id;
+    private String company;
 
-    public Company(int companyID, String companyName){
-        this.companyID = companyID;
-        this.companyName = companyName;
+    public Company(int company_id, String company){
+        this.company_id = company_id;
+        this.company = company;
     }
 
     public String getAllDetails() {
         String details;
 
-        details = companyID + ", " + 
-              "\'" + companyName + "\'";
+        details = company_id + ", " + 
+              "\'" + company + "\'";
 
         return details;
     }
 
     public int getCompanyID() {
-        return companyID;
+        return company_id;
     }
 
-    public void setCompanyID(int companyID) {
-        this.companyID = companyID;
+    public void setCompanyID(int company_id) {
+        this.company_id = company_id;
     }
 
     public String getCompanyName(){
-        return companyName;
+        return company;
     }
 
-    public void setCompanyName(String companyName){
-        this.companyName = companyName;
+    public void setCompanyName(String company){
+        this.company = company;
     }
 }

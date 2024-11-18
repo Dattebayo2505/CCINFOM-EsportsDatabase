@@ -1,69 +1,69 @@
 package ccinfom.group5.esports_app.model.tables;
 
 public class TeamStatistics {
-    private String teamName;
-    private double totalWinnings;
-    private String favoredMap;
-    private int numWins;
-    private int numLosses;
+    private String team_name;
+    private double total_winnings;
+    private String favored_map;
+    private int wins;
+    private int losses;
 
-    public TeamStatistics(String teamName, double totalWinnings, String favoredMap, int numWins, int numLosses){
-        this.teamName = teamName;
-        this.totalWinnings = totalWinnings;
-        this.favoredMap = favoredMap;
-        this.numWins = numWins;
-        this.numLosses = numLosses;
+    public TeamStatistics(String team_name, double total_winnings, String favored_map, int wins, int losses){
+        this.team_name = team_name;
+        this.total_winnings = total_winnings;
+        this.favored_map = favored_map;
+        this.wins = wins;
+        this.losses = losses;
     }
 
     public String getAllDetails() {
         String details;
 
-        details = "\'" + teamName + "\'" + ", " 
-                + totalWinnings + ", " + 
-                "\'" + favoredMap + "\'" + ", "
-                + numWins + ", " +   
-                numLosses;
+        details = "\'" + team_name + "\'" + ", " 
+                + total_winnings + ", " + 
+                "\'" + favored_map + "\'" + ", "
+                + wins + ", " +   
+                losses;
 
         return details;
     }
 
     public String getTeamName() {
-        return teamName;
+        return team_name;
     }
 
-    public void setTeamName(String teamName){
-        this.teamName = teamName;
+    public void setTeamName(String team_name){
+        this.team_name = team_name;
     }
 
     public double getTotalWinnings() {
-        return totalWinnings;
+        return total_winnings;
     }
 
-    public void setTotalWinnings(double totalWinnings){
-        this.totalWinnings = totalWinnings;
+    public void setTotalWinnings(double total_winnings){
+        this.total_winnings = total_winnings;
     }
 
     public String getFavoredMap() {
-        return favoredMap;
+        return favored_map;
     }
 
-    public void setFavoredMap(String favoredMap) {
-        this.favoredMap = favoredMap;
+    public void setFavoredMap(String favored_map) {
+        this.favored_map = favored_map;
     }
 
-    public int getNumWins(){
-        return numWins;
+    public int getWins(){
+        return wins;
     }
 
-    public void setNumWins(int numWins){
-        this.numWins = numWins;
+    public void setWins(int wins){
+        this.wins = wins;
     }
 
-    public int getNumLosses(){
-        return numWins;
+    public int getLosses(){
+        return losses;
     }
 
-    public void setNumLosses(int numLosses){
-        this.numLosses = numLosses;
+    public void setLosses(int losses){
+        this.losses = losses;
     }
 }

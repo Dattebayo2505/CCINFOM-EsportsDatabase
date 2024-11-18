@@ -1,11 +1,11 @@
-team_name, region, country, win_rate 
-DRX, Pacific, South Korea, 73
-EDward Gaming, China, China, 89
-FUT Esports, Europe Middle Easte and Africa, Turkey, 63
-Fnatic, Europe Middle Easte and Africa, United Kingdom, 62
-G2 Esports, Americas, United States, 84
-Paper Rex, Pacific, Singapore, 75
-Sentinels, Americas, United States, 73
-Cloud9, Americas, United States, 92
-Dattebayo, Pacific, Philippines, 68
-CCS Nation, Europe Middle Easte and Africa, Spain, 71
+team, captain, country, region, status
+DRX, MaKo, South Korea, Pacific, active
+EDward Gaming, CHICHOO, China, China, Active
+FUT Esports, ATA KAPTAN, Turkey, Europe Middle East and Africa, active
+Fnatic, Boaster, United Kingdom, Europe Middle East and Africa, active
+G2 Esports, valyne, United States, Americas, active
+Paper Rex, d4v41, Singapore, Pacitic, active
+Sentinels, Sacy, United Stated, Americas, active
+Cloud9, xeta, United States, Americas, active
+Dattebayo, nTony, Philippines, Pacific, active
+CCS Nation, lakambiini, France, Europe Middle East and Africa, active

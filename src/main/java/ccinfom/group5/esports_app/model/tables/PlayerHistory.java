@@ -1,82 +1,80 @@
 package ccinfom.group5.esports_app.model.tables;
 
-import java.lang.management.ThreadInfo;
-
 public class PlayerHistory {
-    private int historyID;
-    private int playerID;
-    private String oldTeamName;
-    private String leftOldTeamDate;
-    private String newTeamName;
-    private String joinedNewTeamDate;
+    private int history_id;
+    private int player_id;
+    private String old_team;
+    private String left_old_team;
+    private String new_team;
+    private String join_new_team;
 
-    public PlayerHistory(int historyID, int playerID, String oldTeamName, String leftOldTeamDate, String newTeamName, String joinedNewTeamDate){
-        this.historyID = historyID;
-        this.playerID = playerID;
-        this.oldTeamName = oldTeamName;
-        this.leftOldTeamDate = leftOldTeamDate;
-        this.newTeamName = newTeamName;
-        this.joinedNewTeamDate = joinedNewTeamDate;
+    public PlayerHistory(int history_id, int player_id, String old_team, String left_old_team, String new_team, String join_new_team){
+        this.history_id = history_id;
+        this.player_id = player_id;
+        this.old_team = old_team;
+        this.left_old_team = left_old_team;
+        this.new_team = new_team;
+        this.join_new_team = join_new_team;
     }
 
     public String getAllDetails() {
         String details;
 
-        details = historyID + ", " + 
-              playerID + ", " + 
-              "\'" + oldTeamName + "\'" + ", " +
-              "\'" + leftOldTeamDate + "\'" + ", " +   
-              "\'" + newTeamName + "\'" + "," +
-              "\'" + joinedNewTeamDate + "\'";
+        details = history_id + ", " + 
+        player_id + ", " + 
+              "\'" + old_team + "\'" + ", " +
+              "\'" + left_old_team + "\'" + ", " +   
+              "\'" + new_team + "\'" + "," +
+              "\'" + join_new_team + "\'";
 
         return details;
     }
 
     public int getHistoryID(){
-        return historyID;
+        return history_id;
     }
 
-    public void setHistoryID(int historyID){
-        this.historyID = historyID;
+    public void setHistoryID(int history_id){
+        this.history_id = history_id;
     }
 
     public int getPlayerID(){
-        return playerID;
+        return player_id;
     }
 
-    public void setPlayerID(int playerID){
-        this.playerID = playerID;
+    public void setPlayerID(int player_id){
+        this.player_id = player_id;
     }
 
-    public String getsetOldTeamName(){
-        return oldTeamName;
+    public String getOldTeam(){
+        return old_team;
     }
 
-    public void setOldTeamName(String oldTeamName){
-        this.oldTeamName = oldTeamName;
+    public void setOldTeam(String old_team){
+        this.old_team = old_team;
     }
 
     public String getLeftOldTeamDate(){
-        return leftOldTeamDate;
+        return left_old_team;
     }
 
-    public void setLeftOldTeamDate(String leftOldTeamDate){
-        this.leftOldTeamDate = leftOldTeamDate;
+    public void setLeftOldTeamDate(String left_old_team){
+        this.left_old_team = left_old_team;
     }
 
-    public String getNewTeamName(){
-        return newTeamName;
+    public String getNewTeam(){
+        return new_team;
     }
 
-    public void setNewTeamName(String newTeamName){
-        this.newTeamName = newTeamName;
+    public void setNewTeam(String new_team){
+        this.new_team = new_team;
     }
 
     public String getJoinedNewTeamDate(){
-        return joinedNewTeamDate;
+        return join_new_team;
     }
 
-    public void setJoinedNewTeamDate(String joinedNewTeamDate){
-        this.joinedNewTeamDate = joinedNewTeamDate;
+    public void setJoinedNewTeamDate(String join_new_team){
+        this.join_new_team = join_new_team;
     }
 }

@@ -1,80 +1,80 @@
 package ccinfom.group5.esports_app.model.tables;
 
 public class SponsorHistory {
-    private int historyID;
-    private int sponsorID;
-    private String teamName;
-    private double contractAmount;
-    private String contractStart;
-    private String contractEnd;
+    private int history_id;
+    private int sponsor_id;
+    private String team_name;
+    private double contract_amount;
+    private String contract_start;
+    private String contract_end;
 
-    public SponsorHistory(int historyID, int sponsorID, String teamName, double contractAmount, String contractStart, String contractEnd){
-        this.historyID = historyID;
-        this.sponsorID = sponsorID;
-        this.teamName = teamName;
-        this.contractAmount = contractAmount;
-        this.contractStart = contractStart;
-        this.contractEnd = contractEnd;
+    public SponsorHistory(int history_id, int sponsor_id, String team_name, double contract_amount, String contract_start, String contract_end){
+        this.history_id = history_id;
+        this.sponsor_id = sponsor_id;
+        this.team_name = team_name;
+        this.contract_amount = contract_amount;
+        this.contract_start = contract_start;
+        this.contract_end = contract_end;
     }
 
     public String getAllDetails() {
         String details;
 
-        details = historyID + ", " + 
-              sponsorID + ", " + 
-              "\'" + teamName + "\'" + ", " +
-              + contractAmount + ", " +
-              "\'" + contractStart + "\'" + ", " +   
-              "\'" + contractEnd + "\'";
+        details = history_id + ", " + 
+        sponsor_id + ", " + 
+              "\'" + team_name + "\'" + ", " +
+              + contract_amount + ", " +
+              "\'" + contract_start + "\'" + ", " +   
+              "\'" + contract_end + "\'";
 
         return details;
     }
 
     public int getHistoryID() {
-        return historyID;
+        return history_id;
     }
 
-    public void setHistoryID(int historyID){
-        this.historyID = historyID;
+    public void setHistoryID(int history_id){
+        this.history_id = history_id;
     }
 
     public int getSponsorID(){
-        return sponsorID;
+        return sponsor_id;
     }
 
-    public void setSponsorID(int sponsorID){
-        this.sponsorID = sponsorID;
+    public void setSponsorID(int sponsor_id){
+        this.sponsor_id = sponsor_id;
     }
 
     public String getTeamName(){
-        return teamName;
+        return team_name;
     }
 
-    public void setTeamName(String teamName){
-        this.teamName = teamName;
+    public void setTeamName(String team_name){
+        this.team_name = team_name;
     }
 
     public double getContractAmount(){
-        return contractAmount;
+        return contract_amount;
     }
 
-    public void setContractAmount(double contractAmount){
-        this.contractAmount = contractAmount;
+    public void setContractAmount(double contract_amount){
+        this.contract_amount = contract_amount;
     }
 
     public String getContractStart(){
-        return contractStart;
+        return contract_start;
     }
 
-    public void setContractStart(String contractStart){
-        this.contractStart = contractStart;
+    public void setContractStart(String contract_start){
+        this.contract_start = contract_start;
     }
 
     public String getContractEnd(){
-        return contractEnd;
+        return contract_end;
     }
 
-    public void setContractEnd(String contractEnd){
-        this.contractEnd = contractEnd;
+    public void setContractEnd(String contract_end){
+        this.contract_end = contract_end;
     }
 }

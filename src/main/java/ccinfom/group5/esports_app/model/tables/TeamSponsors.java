@@ -1,69 +1,69 @@
 package ccinfom.group5.esports_app.model.tables;
 /* Sponsor ID, Team, Contract Amount, Contract Start, Contract End */
 public class TeamSponsors {
-    private int sponsorID;
-    private String teamName;
-    private double contractAmount;
-    private String contractStart;
-    private String contractEnd;
+    private int sponsor_id;
+    private String team;
+    private double contract_amount;
+    private String contract_start;
+    private String contract_end;
 
-    public TeamSponsors(int sponsorID, String teamName, double contractAmount, String contractStart, String contractEnd) {
-        this.sponsorID = sponsorID;
-        this.teamName = teamName;
-        this.contractAmount = contractAmount;
-        this.contractStart = contractStart;
-        this.contractEnd = contractEnd;
+    public TeamSponsors(int sponsor_id, String team, double contract_amount, String contract_start, String contract_end) {
+        this.sponsor_id = sponsor_id;
+        this.team = team;
+        this.contract_amount = contract_amount;
+        this.contract_start = contract_start;
+        this.contract_end = contract_end;
     }
 
     public String getAllDetails() {
         String details;
 
-        details = sponsorID + ", " + 
-              "\'" + teamName + "\'" + ", " + 
-              + contractAmount + ", " +
-              "\'" + contractStart + "\'" + ", " +   
-              "\'" + contractEnd + "\'";
+        details = sponsor_id + ", " + 
+              "\'" + team + "\'" + ", " + 
+              + contract_amount + ", " +
+              "\'" + contract_start + "\'" + ", " +   
+              "\'" + contract_end + "\'";
 
         return details;
     }
 
     public int getSponsorID() {
-        return sponsorID;
+        return sponsor_id;
     }
 
-    public void setSponsorID(int sponsorID) {
-        this.sponsorID = sponsorID;
+    public void setSponsorID(int sponsor_id) {
+        this.sponsor_id = sponsor_id;
     }
 
     public String getTeamName() {
-        return teamName;
+        return team;
     }
 
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
+    public void setTeamName(String team) {
+        this.team = team;
     }
 
     public double getContractAmount() {
-        return contractAmount;
+        return contract_amount;
     }
 
-    public void setContractAmount(float contractAmount) {
-        this.contractAmount = contractAmount;
+    public void setContractAmount(double contract_amount) {
+        this.contract_amount = contract_amount;
     }
 
     public String getContractStart (){
-        return contractStart;
+        return contract_start;
     }
 
-    public void setContractStart(String contractStart){
-        this.contractStart = contractStart;
+    public void setContractStart(String contract_start){
+        this.contract_start = contract_start;
     }
 
     public String getContractEnd(){
-        return contractEnd;
+        return contract_end;
     }
 
-    public void setContractEnd(String contractEnd){
-        this.contractEnd = contractEnd;
+    public void setContractEnd(String contract_end){
+        this.contract_end = contract_end;
     }
 }

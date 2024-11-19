@@ -1,51 +1,51 @@
-player_id, last_name, first_name, age, country, team_name
-BuZz, Yu, Byung-chul, 21, South Korea, DRX
-MaKo, Kim, Myeong-kwan, 22, South Korea, DRX
-Foxy9, Jung, Jae-sung, 19, South Korea, DRX
-BeYn, Kang, Ha-bin, 20, South Korea, DRX
-Flashback, Cho, Min-hyuk, 18, South Korea, DRX
-CHICHOO, Wan, Shunzhi, 20, China, EDWard Gaming
-nobody, Wang, Senxu, 21, China, EDWard Gaming
-ZmjjKK, Zheng, Yongkang, 20, China, EDWard Gaming
-Smoggy, Zhang, Zhao, 22, China, EDWard Gaming
-S1Mon, Hsieh, Meng-hsun, 20, Taiwan, EDWard Gaming 
-MrFaliN, Yeğen, Furkan, 23, Turkey, FUT Esports
-qRaxs, Balaban, Doğukan, 24, Turkey, FUT Esports
-ATA KAPTAN, Tan, Ata, 23, Turkey, FUT Esports
-yetujey, Budak, Eray, 18, Turkey, FUT Esports
-cNed, İpek, Mehmet Yağız, 22, Turkey, FUT Esports
-Boaster, Howlett, Jake, 29, United Kingdom, Fnatic
-Derke, Sirmitev, Nikita, 21, Findland, Fnatic
-Alfajer, Beder, Emir Ali, 19, Turkey, Fnatic
-Chronicle, Khromov, Timofey, 21, Russia, Fnatic
-hiro, Kat, Emirhan, 18, Netherlands, Fnatic
-trent, Cairns, Trent, 19, United States, G2 Esports
-valyn, Batio, Jacob, 21, United States, G2 Esports
-leaf, Orf, Nathan, 20, United States, G2 Esports
-icy, Lange, Jacob, 21, United States, G2 Esports
-JonahP, Pulice, Jonah, 24, Canada, G2 Esports
-mindfreak, Leonhart, Aaron, 24, Indonesia, Paper Rex
-f0rsakeN, Susanto, Jason, 20, Indonesia, Paper Rex
-d4v41, Rusyaidee, Khalish, 25, Malaysia, Paper Rex
-something, Petrov, Ilia, 22, Russia, Paper Rex
-Jinggg, Wang, Jing Jie, 21, Singapore, Paper Rex
-zekken, Patrone, Zachary, 19, United States, Sentinels
-Sacy, Rossi, Gustavo, 26, Brazil, Sentinels
-TenZ, Ngo, Tyson, 23, Canada, Sentinels
-johnqt, Ouarid, Amine, 25, Morocco, Sentinels
-Zellsis, Montemurro, Jordan, 26, United States, Sentinels
-Xeppaa, Bach, Erick, 24, United States, Cloud9
-mitch, Semago, Mitch, 28, United States, Cloud9
-xeta, Son, Seon-ho, 27, South Korea, Cloud9
-curry, Nemani, Rahul, 22, United States, Cloud9
-yay, Whiteaker, Jaccob, 26, United States, Cloud9
-Bearshark, Balcita, Vienn, 19, Japan, Dattebayo
-EvilC, Ang, Clive, 18, Singapore, Dattebayo
-Bicu, Uy, Brent, 19, Thailand, Dattebayo
-DisplayHaro, Caliboso, Roemer, 20, Philippines, Dattebayo
-nTony, Baybayon, Anthony, 19, Australia, Dattebayo 
-SkibidiMagnet, Dimaunahan, Sean Kyle, 19, Italy, CCS Nation
-MeganDsalg, Dasal, Megan, 20, Spain, CCS Nation
-Jobulus, Lozada, Job, 19, United Kingdom, CCS Nation
-kishako, Cu, Monica, 19, France, CCS Nation
-lakambiini, Senas, Kellyn, 19, Switzerland, CCS Nation
+player_id, last_name, first_name, age, country, current_team, status
+BuZz, Yu, Byung-chul, 21, South Korea, DRX, active
+MaKo, Kim, Myeong-kwan, 22, South Korea, DRX, active
+Foxy9, Jung, Jae-sung, 19, South Korea, DRX, inactive
+BeYn, Kang, Ha-bin, 20, South Korea, DRX, active
+Flashback, Cho, Min-hyuk, 18, South Korea, DRX, inactive
+CHICHOO, Wan, Shunzhi, 20, China, EDWard Gaming, active
+nobody, Wang, Senxu, 21, China, EDWard Gaming, active
+ZmjjKK, Zheng, Yongkang, 20, China, EDWard Gaming, active
+Smoggy, Zhang, Zhao, 22, China, EDWard Gaming, active
+S1Mon, Hsieh, Meng-hsun, 20, Taiwan, EDWard Gaming, inactive
+MrFaliN, Yeğen, Furkan, 23, Turkey, FUT Esports, active
+qRaxs, Balaban, Doğukan, 24, Turkey, FUT Esports, inactive
+ATA KAPTAN, Tan, Ata, 23, Turkey, FUT Esports, active
+yetujey, Budak, Eray, 18, Turkey, FUT Esports, active
+cNed, İpek, Mehmet Yağız, 22, Turkey, FUT Esports, active
+Boaster, Howlett, Jake, 29, United Kingdom, Fnatic, active
+Derke, Sirmitev, Nikita, 21, Findland, Fnatic, active
+Alfajer, Beder, Emir Ali, 19, Turkey, Fnatic, active
+Chronicle, Khromov, Timofey, 21, Russia, Fnatic, active
+hiro, Kat, Emirhan, 18, Netherlands, Fnatic, inactive
+trent, Cairns, Trent, 19, United States, G2 Esports, active
+valyn, Batio, Jacob, 21, United States, G2 Esports, active
+leaf, Orf, Nathan, 20, United States, G2 Esports, active
+icy, Lange, Jacob, 21, United States, G2 Esports, active
+JonahP, Pulice, Jonah, 24, Canada, G2 Esports, active
+mindfreak, Leonhart, Aaron, 24, Indonesia, Paper Rex, active
+f0rsakeN, Susanto, Jason, 20, Indonesia, Paper Rex, active
+d4v41, Rusyaidee, Khalish, 25, Malaysia, Paper Rex, active
+something, Petrov, Ilia, 22, Russia, Paper Rex, active
+Jinggg, Wang, Jing Jie, 21, Singapore, Paper Rex, active
+zekken, Patrone, Zachary, 19, United States, Sentinels, active
+Sacy, Rossi, Gustavo, 26, Brazil, Sentinels, active
+TenZ, Ngo, Tyson, 23, Canada, Sentinels, retired
+johnqt, Ouarid, Amine, 25, Morocco, Sentinels, active
+Zellsis, Montemurro, Jordan, 26, United States, Sentinels, active
+Xeppaa, Bach, Erick, 24, United States, Cloud9, active
+mitch, Semago, Mitch, 28, United States, Cloud9, inactive
+xeta, Son, Seon-ho, 27, South Korea, Cloud9, retired
+curry, Nemani, Rahul, 22, United States, Cloud9, inactive
+yay, Whiteaker, Jaccob, 26, United States, Cloud9, active
+Bearshark, Balcita, Vienn, 19, Japan, Dattebayo, retired
+EvilC, Ang, Clive, 18, Singapore, Dattebayo, active
+Bicu, Uy, Brent, 19, Thailand, Dattebayo, active
+DisplayHaro, Caliboso, Roemer, 20, Philippines, Dattebayo, active
+nTony, Baybayon, Anthony, 19, Australia, Dattebayo, active
+SkibidiMagnet, Dimaunahan, Sean Kyle, 19, Italy, CCS Nation, active
+MeganDsalg, Dasal, Megan, 20, Spain, CCS Nation, active
+Jobulus, Lozada, Job, 19, United Kingdom, CCS Nation, active
+kishako, Cu, Monica, 19, France, CCS Nation, active
+lakambiini, Senas, Kellyn, 19, Switzerland, CCS Nation, retired

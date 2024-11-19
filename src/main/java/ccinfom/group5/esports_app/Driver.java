@@ -1,7 +1,7 @@
 package ccinfom.group5.esports_app;
 
+import ccinfom.group5.esports_app.view_deprecate.GUI;
 import ccinfom.group5.esports_app.model.*; // Refer here for Database.java
-import ccinfom.group5.esports_app.view.*;
 import ccinfom.group5.esports_app.controller.*;
 import ccinfom.group5.esports_app.utils.*;
 

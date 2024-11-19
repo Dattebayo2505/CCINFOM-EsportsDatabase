@@ -1,5 +1,4 @@
-INSERT INTO player_history (history_id, player_id, old_team, left_old_team, new_team, joined_new_team)
-VALUES 
+INSERT INTO playerhistory (history_id, player_id, old_team, left_old_team, new_team, joined_new_team) VALUES 
 (1, "BuZz", NULL, NULL, "DRX", "2022-01-16"),
 (2, "MaKo", "CCS Nation", "2020-04-10", "DRX", "2021-07-21"),
 (3, "Foxy9", NULL, NULL, "DRX", "2023-10-01"),

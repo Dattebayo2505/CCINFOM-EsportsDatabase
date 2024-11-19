@@ -18,7 +18,7 @@ CREATE TABLE teams(
 );
 
 CREATE TABLE players (
-    player_id INT PRIMARY KEY, 
+    player_id VARCHAR(50) PRIMARY KEY, 
     last_name VARCHAR(50), 
     first_name VARCHAR(50),
     age INTEGER, 
@@ -31,7 +31,7 @@ CREATE TABLE players (
 
 CREATE TABLE playerhistory (
     history_id INT PRIMARY KEY,
-    player_id INT,
+    player_id VARCHAR(50),
     old_team VARCHAR (50),
     left_old_team DATE,
     new_team VARCHAR (50),
@@ -53,29 +53,31 @@ CREATE TABLE sponsorhistory(
 );
 
 CREATE TABLE teamhistory(
-    history_id INT PRIMARY,
+    history_id INT PRIMARY KEY,
     team VARCHAR(50),
-    FOREIGN KEY(team_) REFERENCES teams(team),
     creation_date DATE,
-    disband_date DATE
+    disband_date DATE,
+    FOREIGN KEY(team) REFERENCES teams(team)
 );
 
 CREATE TABLE teamperformancehistory(
     history_id INT PRIMARY KEY,
-    team_name VARCHAR(50),
+    team VARCHAR(50),
     match_date DATE,
     result VARCHAR (10),
     winnings DOUBLE,
-    FOREIGN KEY(team_name) REFERENCES teams(team)
+    FOREIGN KEY(team) REFERENCES teams(team)
 );
 
-CREATE TABLE teamsponsor(
-    sponsor_id INT PRIMARY KEY,
+CREATE TABLE teamsponsor (
+    sponsor_id INT,
     team VARCHAR(50), 
     contract_amount DOUBLE, 
     contract_start DATE, 
     contract_end DATE,
-    FOREIGN KEY(team) REFERENCES teams(team)
+    PRIMARY KEY (sponsor_id, team),
+    FOREIGN KEY (sponsor_id) REFERENCES companies(id),
+    FOREIGN KEY (team) REFERENCES teams(team)
 );
 
 CREATE TABLE teamstats(
@@ -84,5 +86,5 @@ CREATE TABLE teamstats(
     favored_map VARCHAR (20),
     wins INT,
     losses INT,
-    FOREIGN KEY(team) REFERENCES teams(team),
+    FOREIGN KEY(team) REFERENCES teams(team)
 );

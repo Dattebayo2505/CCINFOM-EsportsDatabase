@@ -1,4 +1,4 @@
-INSERT INTO sponsorships (sponsor_id, team, contract_amount, contract_start, contract_end) VALUES
+INSERT INTO teamsponsor (sponsor_id, team, contract_amount, contract_start, contract_end) VALUES
 (1, "DRX", 1000000, "2023-01-01", "2024-12-31"),
 (5, "G2 Esports", 800000, "2023-02-01", "2025-01-31"),
 (6, "Paper Rex", 650000, "2022-05-01", "2025-04-30"),
@@ -13,3 +13,4 @@ INSERT INTO sponsorships (sponsor_id, team, contract_amount, contract_start, con
 (9, "G2 Esports", 950000, "2023-02-01", "2025-01-31"),
 (3, "Sentinels", 1650000, "2023-03-01", "2025-02-28"),
 (2, "Dattebayo", 420000, "2023-01-01", "2024-12-31");
+

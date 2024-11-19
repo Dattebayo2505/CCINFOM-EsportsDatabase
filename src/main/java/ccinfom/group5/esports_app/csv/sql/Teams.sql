@@ -1,4 +1,4 @@
-INSERT INTO teams (team_name, captain, country, region, status) VALUES
+INSERT INTO teams (team, captain, country, region, status) VALUES
 ('DRX', 'MaKo', 'South Korea', 'Pacific', 'active'),
 ('EDward Gaming', 'CHICHOO', 'China', 'China', 'active'),
 ('FUT Esports', 'ATA KAPTAN', 'Turkey', 'Europe Middle East and Africa', 'active'),

@@ -1,4 +1,4 @@
-INSERT INTO match_history (history_id, team_name, match_date, result, winnings) VALUES
+INSERT INTO teamperformancehistory (history_id, team, match_date, result, winnings) VALUES
 (1, "DRX", "2023-01-15", "win", 20000),
 (2, "EDward Gaming", "2023-02-10", "loss", 0),
 (3, "FUT Esports", "2023-03-05", "win", 15000),

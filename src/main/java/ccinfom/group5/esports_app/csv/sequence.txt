@@ -1,0 +1,9 @@
+companies
+teams
+players
+playerhistory
+sponsorhistory
+teamhistory
+teamperformancehistory
+teamsponsor
+teamstats

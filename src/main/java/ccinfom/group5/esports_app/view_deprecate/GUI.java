@@ -1,4 +1,4 @@
-package ccinfom.group5.esports_app.view;
+package ccinfom.group5.esports_app.view_deprecate;
 
 import javax.swing.*;
 import javax.swing.border.Border;

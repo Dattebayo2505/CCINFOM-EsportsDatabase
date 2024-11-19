@@ -1,7 +1,7 @@
 package ccinfom.group5.esports_app.controller;
 
+import ccinfom.group5.esports_app.view_deprecate.GUI;
 import ccinfom.group5.esports_app.model.*;
-import ccinfom.group5.esports_app.view.*;
 
 public class MainController {
     

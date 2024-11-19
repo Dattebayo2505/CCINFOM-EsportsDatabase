@@ -27,6 +27,7 @@ public class GUI extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        mainMainPanel = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
         bannerPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -35,14 +36,20 @@ public class GUI extends javax.swing.JFrame {
         menuLbl = new javax.swing.JLabel();
         mainViewBtn = new javax.swing.JButton();
         makeTransacBtn = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        genReportsBtn = new javax.swing.JButton();
+        exitBtn = new javax.swing.JButton();
         lowerRightPanel = new javax.swing.JPanel();
+        mainViewPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        mainViewTable = new javax.swing.JTable();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ESports Tracker - Valorant");
         setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(null);
+
+        mainMainPanel.setLayout(new java.awt.CardLayout());
 
         mainPanel.setBackground(new java.awt.Color(255, 204, 51));
         mainPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -91,6 +98,7 @@ public class GUI extends javax.swing.JFrame {
         menuLbl.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         menuLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         menuLbl.setText("MENU");
+        menuLbl.setPreferredSize(new java.awt.Dimension(70, 28));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 50;
@@ -118,26 +126,27 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(7, 10, 7, 10);
         lowerLeftPanel.add(makeTransacBtn, gridBagConstraints);
 
-        jButton3.setText("Generate Reports");
-        jButton3.setPreferredSize(mainViewBtn.getPreferredSize());
+        genReportsBtn.setText("Generate Reports");
+        genReportsBtn.setPreferredSize(mainViewBtn.getPreferredSize());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 24;
         gridBagConstraints.insets = new java.awt.Insets(7, 10, 7, 10);
-        lowerLeftPanel.add(jButton3, gridBagConstraints);
+        lowerLeftPanel.add(genReportsBtn, gridBagConstraints);
 
-        jButton4.setText("Exit");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        exitBtn.setText("Exit");
+        exitBtn.setPreferredSize(new java.awt.Dimension(72, 40));
+        exitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                exitBtnActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(75, 10, 75, 10);
-        lowerLeftPanel.add(jButton4, gridBagConstraints);
+        lowerLeftPanel.add(exitBtn, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -176,8 +185,39 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.weighty = 0.9;
         mainPanel.add(lowerPanel, gridBagConstraints);
 
-        getContentPane().add(mainPanel);
-        mainPanel.setBounds(0, 0, 1280, 720);
+        mainMainPanel.add(mainPanel, "card2");
+        mainPanel.getAccessibleContext().setAccessibleParent(mainMainPanel);
+
+        mainViewPanel.setLayout(new java.awt.GridBagLayout());
+
+        mainViewTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3"
+            }
+        ));
+        jScrollPane1.setViewportView(mainViewTable);
+
+        mainViewPanel.add(jScrollPane1, new java.awt.GridBagConstraints());
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        mainViewPanel.add(jComboBox1, new java.awt.GridBagConstraints());
+
+        mainMainPanel.add(mainViewPanel, "card3");
+
+        getContentPane().add(mainMainPanel);
+        mainMainPanel.setBounds(0, 0, 1280, 720);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -186,55 +226,64 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_mainViewBtnActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_exitBtnActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUI().setVisible(true);
-            }
-        });
-    }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new GUI().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bannerPanel;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton exitBtn;
+    private javax.swing.JButton genReportsBtn;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel lowerLeftPanel;
     private javax.swing.JPanel lowerPanel;
     private javax.swing.JPanel lowerRightPanel;
+    private javax.swing.JPanel mainMainPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton mainViewBtn;
+    private javax.swing.JPanel mainViewPanel;
+    private javax.swing.JTable mainViewTable;
     private javax.swing.JButton makeTransacBtn;
     private javax.swing.JLabel menuLbl;
     // End of variables declaration//GEN-END:variables

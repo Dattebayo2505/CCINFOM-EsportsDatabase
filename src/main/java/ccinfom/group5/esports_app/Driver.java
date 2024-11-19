@@ -1,7 +1,11 @@
 package ccinfom.group5.esports_app;
 
-import ccinfom.group5.esports_app.view_deprecate.GUI;
 import ccinfom.group5.esports_app.model.*; // Refer here for Database.java
+import ccinfom.group5.esports_app.view_deprecate.OldGUI;
+import ccinfom.group5.esports_app.view.GUI;
+
+import java.util.ArrayList;
+
 import ccinfom.group5.esports_app.controller.*;
 import ccinfom.group5.esports_app.utils.*;
 
@@ -22,36 +26,27 @@ public class Driver {
         FileReaderUtil.readConfigAndSetConnection(GeneralUtil.mainDirectory + "config-must-edit.txt");
 
         Database database = new Database();
-        if (database.initialStatus() == false) return; // END PROGRAM IF CONNECTION FAILS
-        database.removeDatabase(); // Clear any current database
-        database.createDatabase(); // CREATE DATABASE IF NOT EXISTS esports;
+        if (database.initialStatus() == false) return;
+
+        ArrayList<String> sqlDirectory = new ArrayList<String>();
+        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/esports.sql");
+        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/companies.sql");
+        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/teams.sql");
+        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/players.sql");
+        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/playerhistory.sql");
+        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/sponsorhistory.sql");
+        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/teamhistory.sql");
+        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/teamperformancehistory.sql");
+        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/teamsponsor.sql");
+        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/teamstats.sql");
+
+        database.initializeDatabase(sqlDirectory, database.getCon());        
         
-        FileReaderUtil.loadPlayers(GeneralUtil.mainDirectory + "csv/Players.csv", database);
-        // FileReaderUtil.printPlayerTable(database);
-        // TODO: Uncomment below lines after implementing the respective methods in FileReaderUtil.java
-        // FileReaderUtil.loadPlayerEquipment(GeneralUtil.mainDirectory + "csv/Company.csv");
-        // FileReaderUtil.loadTeams(GeneralUtil.mainDirectory + "csv/PlayerHistory.csv");
-        // FileReaderUtil.loadMaps(GeneralUtil.mainDirectory + "csv/SponsorHistory.csv");
-        // FileReaderUtil.loadMaps(GeneralUtil.mainDirectory + "csv/TeamHistory.csv");
-        // FileReaderUtil.loadMaps(GeneralUtil.mainDirectory + "csv/TeamPerformanceHistory.csv");
-        // FileReaderUtil.loadMaps(GeneralUtil.mainDirectory + "csv/Teams.csv");
-        // FileReaderUtil.loadMaps(GeneralUtil.mainDirectory + "csv/TeamSponsor.csv");
-        // FileReaderUtil.loadMaps(GeneralUtil.mainDirectory + "csv/TeamStats.csv");
-        
-        database.useDatabase(); // USE esports;
-        
-        database.createPlayerTable("players"); // CREATE TABLE players (...)
-        
-        database.insertInto("players", database.getAllPlayers());
-        // TODO: Uncomment below lines after implementing the respective methods in Database.java
-        // database.insertInto("player_equipment", database.getAllPlayerEquipment());
-        // database.insertInto("teams", database.getAllTeams());
-        // database.insertInto("maps", database.getAllMaps());
-        
-        
+        // OldGUI oldGui = new OldGUI();
         GUI gui = new GUI();
+        gui.setVisible(true);
         
-        new MainController(database, gui);         
+        // new MainController(database, oldGui);         
         
     }
 }

@@ -1,18 +1,54 @@
 package ccinfom.group5.esports_app.utils;
 
 import java.io.File;
+import java.util.List;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-import ccinfom.group5.esports_app.Driver;
+// import ccinfom.group5.esports_app.Driver;
 import ccinfom.group5.esports_app.model.*;
 import ccinfom.group5.esports_app.model.tables.*;
 
 public class FileReaderUtil {
     
+    public static void getDatabase(List<String> filepaths, Connection con) {
+        String line, mainQuery = null;
+        StringBuilder query = new StringBuilder();
+
+        for (String filepath : filepaths) {
+            try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
+                Statement statement = con.createStatement();
+                while ((line = br.readLine()) != null) {
+                    if (line.trim().isEmpty() || line.startsWith("-")) {
+                        continue; // Skip empty lines and comments
+                    }
+                    query.append(line);
+                    if (line.endsWith(";")) {
+                        mainQuery = query.toString();
+                        statement.executeUpdate(mainQuery);
+                        query.setLength(0); // Clear the query
+                    }
+                }
+            }
+            catch (SQLException e) {
+                GeneralUtil.debugPrint("Error executing SQL query: " + mainQuery);
+                e.printStackTrace();
+            } catch (IOException e) {
+                GeneralUtil.debugPrint("Error reading database file: " + filepath);
+                e.printStackTrace();
+            }
+        }
+
+    }
+    
+
+/* 
     public static void loadPlayers(String filepath, Database database) {
         int count = 0;
 
@@ -66,7 +102,7 @@ public class FileReaderUtil {
             }
         }
     }
-
+*/
     public static void readConfigAndSetConnection(String filepath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line, key, value;
@@ -100,7 +136,6 @@ public class FileReaderUtil {
                         break;
                     default:
                         GeneralUtil.debugPrint("No such key: " + key);
-                        
                         break;
                 }
             }

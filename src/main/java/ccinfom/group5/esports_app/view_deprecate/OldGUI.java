@@ -8,7 +8,7 @@ import ccinfom.group5.esports_app.utils.GUIUtil;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class GUI {
+public class OldGUI {
     
     private JFrame mainFrame;
 
@@ -26,7 +26,7 @@ public class GUI {
 
     private String sampleText = "Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet Lorem Ipsum dolorum sit amet. " ;
 
-    public GUI() {
+    public OldGUI() {
 
         this.mainFrame = new JFrame();
 

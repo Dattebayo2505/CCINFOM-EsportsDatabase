@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ccinfom.group5.esports_app.model.tables.*;
 import ccinfom.group5.esports_app.utils.*;
@@ -38,6 +39,11 @@ public class Database {
         this.playerEquipmentColumnNames = new ArrayList<String>();
         this.teamColumnNames = new ArrayList<String>();
         this.mapColumnNames = new ArrayList<String>();
+    }
+
+    public void initializeDatabase(List<String> filepaths, Connection con) {
+        FileReaderUtil.getDatabase(filepaths, con);
+
     }
 
     public void createPlayerTable(String tableName) {
@@ -148,46 +154,8 @@ public class Database {
         return this.con != null;        
     }
 
-    public void createDatabase() {
-        this.statement = null;
-        try {
-            statement = this.con.createStatement();
-            statement.executeUpdate("CREATE DATABASE IF NOT EXISTS " + dbName);
-        } 
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public void removeDatabase() {
-        this.statement = null;
-        try {
-            statement = con.createStatement();
-            statement.executeUpdate("DROP DATABASE IF EXISTS " + dbName);
-        } 
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
+    
+    @Deprecated
     public void useDatabase() {
         this.statement = null;
         try {
@@ -264,6 +232,10 @@ public class Database {
                 }
             }
         }
+    }
+
+    public Connection getCon() {
+        return con;
     }
 
     public ArrayList<Player> getAllPlayers() {

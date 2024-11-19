@@ -2,15 +2,15 @@ package ccinfom.group5.esports_app.model.tables;
 
 public class TeamPerformanceHistory {
     private int history_id;
-    private String team_name;
+    private String team;
     private String match_date;
     private String result;
     private double winnings;
 
 
-    public TeamPerformanceHistory(int history_id, String team_name, String match_date, String result, double winnings){
+    public TeamPerformanceHistory(int history_id, String team, String match_date, String result, double winnings){
         this.history_id = history_id;
-        this.team_name = team_name;
+        this.team = team;
         this.match_date = match_date;
         this.result = result;
         this.winnings = winnings;
@@ -20,7 +20,7 @@ public class TeamPerformanceHistory {
         String details;
 
         details = history_id + ", " + 
-              "\'" + team_name + "\'" + ", " + 
+              "\'" + team + "\'" + ", " + 
               "\'" + match_date + "\'" + ", " +
               "\'" + result + "\'" + ", " +
               winnings;
@@ -37,11 +37,11 @@ public class TeamPerformanceHistory {
     }
 
     public String getTeamName(){
-        return team_name;
+        return team;
     }
 
-    public void setTeamName(String team_name){
-        this.team_name = team_name;
+    public void setTeamName(String team){
+        this.team = team;
     }
 
     public String getMatchDate(){

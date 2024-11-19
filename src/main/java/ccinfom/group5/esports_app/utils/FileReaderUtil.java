@@ -1,11 +1,8 @@
 package ccinfom.group5.esports_app.utils;
 
-import java.io.File;
 import java.util.List;
-import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -13,7 +10,6 @@ import java.sql.Statement;
 
 // import ccinfom.group5.esports_app.Driver;
 import ccinfom.group5.esports_app.model.*;
-import ccinfom.group5.esports_app.model.tables.*;
 
 public class FileReaderUtil {
     

@@ -40,7 +40,9 @@ public class Driver {
         sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/teamsponsor.sql");
         sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/teamstats.sql");
 
-        database.initializeDatabase(sqlDirectory, database.getCon());        
+        database.initializeDatabase(sqlDirectory, database.getCon());       
+        
+        
         
         // OldGUI oldGui = new OldGUI();
         GUI gui = new GUI();

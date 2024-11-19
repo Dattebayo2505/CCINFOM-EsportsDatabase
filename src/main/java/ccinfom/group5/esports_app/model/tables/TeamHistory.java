@@ -2,13 +2,13 @@ package ccinfom.group5.esports_app.model.tables;
 
 public class TeamHistory {
     private int history_id;
-    private int team_id;
+    private int team;
     private String creation_date;
     private String disband_date;
 
-    public TeamHistory(int history_id, int team_id, String creation_date, String disband_date){
+    public TeamHistory(int history_id, int team, String creation_date, String disband_date){
         this.history_id = history_id;
-        this.team_id = team_id;
+        this.team = team;
         this.creation_date = creation_date;
         this.disband_date = disband_date;
     }
@@ -17,7 +17,7 @@ public class TeamHistory {
         String details;
 
         details = history_id + ", " + 
-              + team_id + ", " + 
+              + team + ", " + 
               "\'" + creation_date + "\'" + ", " +
               "\'" + disband_date + "\'";
 
@@ -33,11 +33,11 @@ public class TeamHistory {
     }
 
     public int getTeamID(){
-        return team_id;
+        return team;
     }
 
-    public void setTeamID(int team_id){
-        this.team_id = team_id;
+    public void setTeamID(int team){
+        this.team = team;
     }
     
     public String getCreationDate(){

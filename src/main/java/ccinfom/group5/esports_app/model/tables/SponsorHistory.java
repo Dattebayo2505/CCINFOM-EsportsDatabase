@@ -3,15 +3,15 @@ package ccinfom.group5.esports_app.model.tables;
 public class SponsorHistory {
     private int history_id;
     private int sponsor_id;
-    private String team_name;
+    private String team;
     private double contract_amount;
     private String contract_start;
     private String contract_end;
 
-    public SponsorHistory(int history_id, int sponsor_id, String team_name, double contract_amount, String contract_start, String contract_end){
+    public SponsorHistory(int history_id, int sponsor_id, String team, double contract_amount, String contract_start, String contract_end){
         this.history_id = history_id;
         this.sponsor_id = sponsor_id;
-        this.team_name = team_name;
+        this.team = team;
         this.contract_amount = contract_amount;
         this.contract_start = contract_start;
         this.contract_end = contract_end;
@@ -22,7 +22,7 @@ public class SponsorHistory {
 
         details = history_id + ", " + 
         sponsor_id + ", " + 
-              "\'" + team_name + "\'" + ", " +
+              "\'" + team + "\'" + ", " +
               + contract_amount + ", " +
               "\'" + contract_start + "\'" + ", " +   
               "\'" + contract_end + "\'";
@@ -47,11 +47,11 @@ public class SponsorHistory {
     }
 
     public String getTeamName(){
-        return team_name;
+        return team;
     }
 
-    public void setTeamName(String team_name){
-        this.team_name = team_name;
+    public void setTeamName(String team){
+        this.team = team;
     }
 
     public double getContractAmount(){

@@ -16,222 +16,44 @@ public class Database {
     private Statement statement;
 
     private ArrayList<Player> allPlayers;
-    private ArrayList<PlayerEquipment> allPlayerEquipment;
     private ArrayList<Team> allTeams;
-    private ArrayList<Match> allMaps;
-    
-    private ArrayList<String> playerColumnNames;
-    private ArrayList<String> playerEquipmentColumnNames;
-    private ArrayList<String> teamColumnNames;
-    private ArrayList<String> mapColumnNames;
-
-    private String dbName;
+    private ArrayList<Company> allCompanies;
+    private ArrayList<TeamSponsor> allTeamSponsors;
+    private ArrayList<TeamStats> allTeamStats;
+    private ArrayList<PlayerHistory> allPlayerHistories;
+    private ArrayList<TeamHistory> allTeamHistories;
+    private ArrayList<SponsorHistory> allSponsorHistories;
+    private ArrayList<TeamPerformanceHistory> allTeamPerformanceHistories;
 
     public Database() {
         this.con = null;
         this.statement = null;
         this.allPlayers = new ArrayList<Player>();
-        this.allPlayerEquipment = new ArrayList<PlayerEquipment>();
         this.allTeams = new ArrayList<Team>();
-        this.allMaps = new ArrayList<Match>();
-
-        this.playerColumnNames = new ArrayList<String>();
-        this.playerEquipmentColumnNames = new ArrayList<String>();
-        this.teamColumnNames = new ArrayList<String>();
-        this.mapColumnNames = new ArrayList<String>();
+        this.allCompanies = new ArrayList<Company>();
+        this.allTeamSponsors = new ArrayList<TeamSponsor>();
+        this.allTeamStats = new ArrayList<TeamStats>();
+        this.allPlayerHistories = new ArrayList<PlayerHistory>();
+        this.allTeamHistories = new ArrayList<TeamHistory>();
+        this.allSponsorHistories = new ArrayList<SponsorHistory>();
+        this.allTeamPerformanceHistories = new ArrayList<TeamPerformanceHistory>();
     }
 
     public void initializeDatabase(List<String> filepaths, Connection con) {
         FileReaderUtil.getDatabase(filepaths, con);
-
     }
 
-    public void createPlayerTable(String tableName) {
-        StringBuilder stringQuery;
-        String columnName;
-        
-        this.statement = null;
-        try {
-            statement = con.createStatement();
-            stringQuery = new StringBuilder("CREATE TABLE IF NOT EXISTS " 
-                                                          + tableName + " (");
-
-            for (int i = 0; i < playerColumnNames.size(); i++) {
-                columnName = playerColumnNames.get(i);
-                if (columnName.equals("age")) {
-                    stringQuery.append(columnName).append(" INT NOT NULL, "); // CONSTRAINT
-                } 
-                else {
-                    stringQuery.append(columnName).append(" VARCHAR(50), "); // CONSTRAINT
-                }
-            }
-
-            stringQuery.setLength(stringQuery.length() - 2); // Remove the last comma and space
-
-            // Add primary key and foreign key constraints
-            stringQuery.append(", PRIMARY KEY (player_id)"); // TODO: REMOVE ONCE ALL TABLES ARE IMPLEMENTED
-            // stringQuery.append(", PRIMARY KEY (player_id), FOREIGN KEY (team_name) REFERENCES teams(team_name))"); // TODO: Uncomment once teams table is implemented
-            stringQuery.append(");");
-
-            statement.executeUpdate(stringQuery.toString());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    /**
-     * Adds a column to the specified table with the given column name and type.
-     *
-     * @param tableName the name of the table to which the column will be added
-     * @param columnName the name of the column to be added
-     * @param columnType the type of the column to be added (e.g., INT, FLOAT)
-     */
-    public void addColumnsToTable(String tableName, String columnName, String columnType) {
-        this.statement = null;
-        try {
-            statement = con.createStatement();
-            String sql = "ALTER TABLE " + tableName + " ADD " + columnName + " " + columnType;
-            statement.executeUpdate(sql);
-        } 
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    /**
-     * Adds a 'String' type column to the specified table with the given column name and length.
-     *
-     * @param tableName the name of the table to which the column will be added
-     * @param columnName the name of the column to be added
-     * @param length the length of the VARCHAR column to be added
-     */
-    public void addColumnsToTable(String tableName, String columnName, int length) {
-        this.statement = null;
-        try {
-            statement = con.createStatement();
-            String sql = "ALTER TABLE " + tableName + " ADD " + columnName + " VARCHAR(" + length + ")";
-            statement.executeUpdate(sql);
-        } 
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    public void initiateModel(List<String> tables) {
+        ArrayList columnsCompany = new ArrayList<String>();
     }
 
     // TODO: ADD OTHER QUERY/UPDATE METHODS HERE - JOB 
 
 
 
-
     public boolean initialStatus() {
         this.con = JavaSQLConnection.tryMakeConnection();
-        this.dbName = JavaSQLConnection.getDbName();
         return this.con != null;        
-    }
-
-    
-    @Deprecated
-    public void useDatabase() {
-        this.statement = null;
-        try {
-            statement = con.createStatement();
-            statement.executeUpdate("USE " + dbName);
-        } 
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public void insertInto(String tableName, ArrayList<?> record) {
-        int i, j;
-        StringBuilder stringQuery, finalStringQuery;
-        Object value;
-    
-        this.statement = null;
-
-        try {
-            statement = con.createStatement();
-
-            stringQuery = new StringBuilder("INSERT INTO " + tableName + "(");
-            
-            for (j = 0; j < getPlayerColumnNames().size(); j++) {
-                if (j == getPlayerColumnNames().size() - 1) {
-                    stringQuery.append(getPlayerColumnNames().get(j));
-                } else {
-                    stringQuery.append(getPlayerColumnNames().get(j)).append(", ");
-                }
-            }
-
-            stringQuery.append(") VALUES (");
-
-            for (i = 0; i < record.size(); i++) {
-                value = record.get(i);
-            
-                finalStringQuery = new StringBuilder(stringQuery);
-            
-                if (value instanceof Player) {
-                    finalStringQuery.append(((Player) value).getAllDetails());
-                }
-                // TODO: Add from other tables/classes here
-                // else if (value instanceof PlayerEquipment) {
-                //     stringQuery.append(((PlayerEquipment) value).getAllDetails());
-                // }
-                // else if (value instanceof Team) {
-                //     stringQuery.append(((Team) value).getAllDetails());
-                // }
-                // else if (value instanceof Map) {
-                //     stringQuery.append(((Map) value).getAllDetails());
-                // }
-                
-                finalStringQuery.append(");");
-                
-                statement.executeUpdate(finalStringQuery.toString()); // Execute each statement individually to avoid large string
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 
     public Connection getCon() {
@@ -241,33 +63,56 @@ public class Database {
     public ArrayList<Player> getAllPlayers() {
         return allPlayers;
     }
-
-    public ArrayList<PlayerEquipment> getAllPlayerEquipment() {
-        return allPlayerEquipment;
+    public void setAllPlayers(ArrayList<Player> allPlayers) {
+        this.allPlayers = allPlayers;
     }
-
     public ArrayList<Team> getAllTeams() {
         return allTeams;
     }
-
-    public ArrayList<Match> getAllMaps() {
-        return allMaps;
+    public void setAllTeams(ArrayList<Team> allTeams) {
+        this.allTeams = allTeams;
     }
-
-    public ArrayList<String> getPlayerColumnNames() {
-        return playerColumnNames;
+    public ArrayList<Company> getAllCompanies() {
+        return allCompanies;
     }
-
-    public ArrayList<String> getPlayerEquipmentColumnNames() {
-        return playerEquipmentColumnNames;
+    public void setAllCompanies(ArrayList<Company> allCompanies) {
+        this.allCompanies = allCompanies;
     }
-
-    public ArrayList<String> getTeamColumnNames() {
-        return teamColumnNames;
+    public ArrayList<TeamSponsor> getAllTeamSponsors() {
+        return allTeamSponsors;
     }
-
-    public ArrayList<String> getMapColumnNames() {
-        return mapColumnNames;
+    public void setAllTeamSponsors(ArrayList<TeamSponsor> allTeamSponsors) {
+        this.allTeamSponsors = allTeamSponsors;
+    }
+    public ArrayList<TeamStats> getAllTeamStats() {
+        return allTeamStats;
+    }
+    public void setAllTeamStats(ArrayList<TeamStats> allTeamStats) {
+        this.allTeamStats = allTeamStats;
+    }
+    public ArrayList<PlayerHistory> getAllPlayerHistories() {
+        return allPlayerHistories;
+    }
+    public void setAllPlayerHistories(ArrayList<PlayerHistory> allPlayerHistories) {
+        this.allPlayerHistories = allPlayerHistories;
+    }
+    public ArrayList<TeamHistory> getAllTeamHistories() {
+        return allTeamHistories;
+    }
+    public void setAllTeamHistories(ArrayList<TeamHistory> allTeamHistories) {
+        this.allTeamHistories = allTeamHistories;
+    }
+    public ArrayList<SponsorHistory> getAllSponsorHistories() {
+        return allSponsorHistories;
+    }
+    public void setAllSponsorHistories(ArrayList<SponsorHistory> allSponsorHistories) {
+        this.allSponsorHistories = allSponsorHistories;
+    }
+    public ArrayList<TeamPerformanceHistory> getAllTeamPerformanceHistories() {
+        return allTeamPerformanceHistories;
+    }
+    public void setAllTeamPerformanceHistories(ArrayList<TeamPerformanceHistory> allTeamPerformanceHistories) {
+        this.allTeamPerformanceHistories = allTeamPerformanceHistories;
     }
 
 

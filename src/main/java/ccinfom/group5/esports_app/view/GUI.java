@@ -43,6 +43,9 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         mainViewTable = new javax.swing.JTable();
         jComboBox1 = new javax.swing.JComboBox<>();
+        queryTxtField = new javax.swing.JTextField();
+        mainViewMainMenuBtn = new javax.swing.JButton();
+        mainViewMakeTransacBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ESports Tracker - Valorant");
@@ -70,7 +73,7 @@ public class GUI extends javax.swing.JFrame {
             bannerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bannerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1268, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
                 .addContainerGap())
         );
         bannerPanelLayout.setVerticalGroup(
@@ -105,6 +108,7 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.ipady = 50;
         lowerLeftPanel.add(menuLbl, gridBagConstraints);
 
+        mainViewBtn.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         mainViewBtn.setText("Main View");
         mainViewBtn.setPreferredSize(new java.awt.Dimension(135, 60));
         mainViewBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -118,23 +122,36 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(7, 10, 7, 10);
         lowerLeftPanel.add(mainViewBtn, gridBagConstraints);
 
+        makeTransacBtn.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
         makeTransacBtn.setText("Make Transactions");
         makeTransacBtn.setPreferredSize(mainViewBtn.getPreferredSize());
+        makeTransacBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                makeTransacBtnActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(7, 10, 7, 10);
         lowerLeftPanel.add(makeTransacBtn, gridBagConstraints);
 
+        genReportsBtn.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         genReportsBtn.setText("Generate Reports");
         genReportsBtn.setPreferredSize(mainViewBtn.getPreferredSize());
+        genReportsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genReportsBtnActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 24;
+        gridBagConstraints.ipadx = 21;
         gridBagConstraints.insets = new java.awt.Insets(7, 10, 7, 10);
         lowerLeftPanel.add(genReportsBtn, gridBagConstraints);
 
+        exitBtn.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         exitBtn.setText("Exit");
         exitBtn.setPreferredSize(new java.awt.Dimension(72, 40));
         exitBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -162,11 +179,11 @@ public class GUI extends javax.swing.JFrame {
         lowerRightPanel.setLayout(lowerRightPanelLayout);
         lowerRightPanelLayout.setHorizontalGroup(
             lowerRightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1100, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         lowerRightPanelLayout.setVerticalGroup(
             lowerRightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 622, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -181,6 +198,7 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 2;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 0.9;
         mainPanel.add(lowerPanel, gridBagConstraints);
@@ -188,7 +206,10 @@ public class GUI extends javax.swing.JFrame {
         mainMainPanel.add(mainPanel, "card2");
         mainPanel.getAccessibleContext().setAccessibleParent(mainMainPanel);
 
+        mainViewPanel.setPreferredSize(getPreferredSize());
         mainViewPanel.setLayout(new java.awt.GridBagLayout());
+
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(452, 380));
 
         mainViewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -202,17 +223,72 @@ public class GUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3"
             }
         ));
+        mainViewTable.setPreferredSize(new java.awt.Dimension(225, 80));
+        mainViewTable.setRequestFocusEnabled(false);
         jScrollPane1.setViewportView(mainViewTable);
 
-        mainViewPanel.add(jScrollPane1, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 15, 10, 15);
+        mainViewPanel.add(jScrollPane1, gridBagConstraints);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setPreferredSize(new java.awt.Dimension(200, 35));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        mainViewPanel.add(jComboBox1, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 165, 5, 165);
+        mainViewPanel.add(jComboBox1, gridBagConstraints);
+
+        queryTxtField.setText("jTextField1");
+        queryTxtField.setMinimumSize(new java.awt.Dimension(64, 28));
+        queryTxtField.setPreferredSize(new java.awt.Dimension(500, 100));
+        queryTxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                queryTxtFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(15, 5, 15, 5);
+        mainViewPanel.add(queryTxtField, gridBagConstraints);
+
+        mainViewMainMenuBtn.setText("Main Menu");
+        mainViewMainMenuBtn.setPreferredSize(new java.awt.Dimension(89, 30));
+        mainViewMainMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainViewMainMenuBtnActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 45, 15, 45);
+        mainViewPanel.add(mainViewMainMenuBtn, gridBagConstraints);
+
+        mainViewMakeTransacBtn.setText("Make Transactions");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 30, 0, 30);
+        mainViewPanel.add(mainViewMakeTransacBtn, gridBagConstraints);
 
         mainMainPanel.add(mainViewPanel, "card3");
 
@@ -223,7 +299,8 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mainViewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainViewBtnActionPerformed
-        // TODO add your handling code here:
+        java.awt.CardLayout cardLayout = (java.awt.CardLayout) mainMainPanel.getLayout();
+        cardLayout.show(mainMainPanel, "card3");
     }//GEN-LAST:event_mainViewBtnActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
@@ -233,6 +310,22 @@ public class GUI extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void genReportsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genReportsBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_genReportsBtnActionPerformed
+
+    private void makeTransacBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeTransacBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_makeTransacBtnActionPerformed
+
+    private void queryTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queryTxtFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_queryTxtFieldActionPerformed
+
+    private void mainViewMainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainViewMainMenuBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mainViewMainMenuBtnActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -282,9 +375,12 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel mainMainPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton mainViewBtn;
+    private javax.swing.JButton mainViewMainMenuBtn;
+    private javax.swing.JButton mainViewMakeTransacBtn;
     private javax.swing.JPanel mainViewPanel;
     private javax.swing.JTable mainViewTable;
     private javax.swing.JButton makeTransacBtn;
     private javax.swing.JLabel menuLbl;
+    private javax.swing.JTextField queryTxtField;
     // End of variables declaration//GEN-END:variables
 }

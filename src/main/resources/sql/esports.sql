@@ -5,8 +5,8 @@ USE esports;
 
 -- Create tables
 CREATE TABLE companies (
-    id INT PRIMARY KEY,
-    company_name VARCHAR(50)
+    company_id INT PRIMARY KEY,
+    company VARCHAR(50)
 );
 
 CREATE TABLE teams(
@@ -48,7 +48,7 @@ CREATE TABLE sponsorhistory(
     contract_amount DOUBLE,
     contract_start DATE,
     contract_end DATE,
-    FOREIGN KEY (sponsor_id) REFERENCES companies(id),
+    FOREIGN KEY (sponsor_id) REFERENCES companies(company_id),
     FOREIGN KEY (team) REFERENCES teams(team)
 );
 
@@ -76,7 +76,7 @@ CREATE TABLE teamsponsor (
     contract_start DATE, 
     contract_end DATE,
     PRIMARY KEY (sponsor_id, team),
-    FOREIGN KEY (sponsor_id) REFERENCES companies(id),
+    FOREIGN KEY (sponsor_id) REFERENCES companies(company_id),
     FOREIGN KEY (team) REFERENCES teams(team)
 );
 

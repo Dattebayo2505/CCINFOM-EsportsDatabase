@@ -1,4 +1,4 @@
-history_id, sponsor_id, team_name, contract_amount, contract_start, contract_end
+history_id, sponsor_id, team, contract_amount, contract_start, contract_end
 1, 1, DRX, 1000000, 2023-01-01, 2024-12-31
 2, 2, EDward Gaming, 750000, 2022-06-01, 2024-05-31
 3, 3, FUT Esports, 500000, 2022-03-01, 2023-12-31

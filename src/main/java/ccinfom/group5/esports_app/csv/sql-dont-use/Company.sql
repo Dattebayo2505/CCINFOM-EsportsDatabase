@@ -1,4 +1,4 @@
-INSERT INTO companies (`id`, `company_name`)
+INSERT INTO companies (id, company_name)
 VALUES 
 (1, "Intel"),
 (2, "Logitech"),

@@ -1,4 +1,4 @@
-INSERT INTO team_history (history_id, team_id, creation_date, disband_date) VALUES
+INSERT INTO team_history (history_id, team, creation_date, disband_date) VALUES
 (1, 'DRX', '2007-04-10', NULL),
 (2, 'EDward Gaming', '2016-08-27', NULL),
 (3, 'FUT Esports', '2014-01-20', NULL),

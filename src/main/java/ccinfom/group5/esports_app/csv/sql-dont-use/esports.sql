@@ -1,22 +1,16 @@
--- SERVES AS AN ALTERNATIVE OR BASIS
+DROP DATABASE IF EXISTS esports;
+CREATE DATABASE esports;
 
--- Drop the table if it exists
-DROP TABLE IF EXISTS players;
-
--- Create the database
-CREATE DATABASE IF NOT EXISTS esports;
-
--- Use the database
 USE esports;
 
--- Create the table
+-- Create tables
 CREATE TABLE companies (
     id INT PRIMARY KEY,
     company_name VARCHAR(50)
 );
 
 CREATE TABLE teams(
-    team INT PRIMARY KEY,
+    team VARCHAR(50) PRIMARY KEY,
     captain VARCHAR(50),
     country VARCHAR(50),
     region  VARCHAR(50),
@@ -25,57 +19,70 @@ CREATE TABLE teams(
 
 CREATE TABLE players (
     player_id INT PRIMARY KEY, 
-    last_name VARCHAR(50), first_name VARCHAR(50),
-    age INTEGER, country VARCHAR(50), 
-    FOREIGN KEY (current_team) REFERENCES teams(team),
-    status VARCHAR(10)
+    last_name VARCHAR(50), 
+    first_name VARCHAR(50),
+    age INTEGER, 
+    country VARCHAR(50),
+    current_team VARCHAR(50), 
+    status VARCHAR(10), 
+    FOREIGN KEY (current_team) REFERENCES teams(team)
 );
+
 
 CREATE TABLE playerhistory (
     history_id INT PRIMARY KEY,
+    player_id INT,
+    old_team VARCHAR (50),
+    left_old_team DATE,
+    new_team VARCHAR (50),
+    joined_new_team DATE,
     FOREIGN KEY(player_id) REFERENCES players(player_id),
     FOREIGN KEY(old_team) REFERENCES teams(team),
-    left_old_team DATE,
-    FOREIGN KEY(new_team) REFERENCES teams(team),
-    joined_new_team DATE
+    FOREIGN KEY(new_team) REFERENCES teams(team)
 );
 
 CREATE TABLE sponsorhistory(
     history_id INT PRIMARY KEY,
-    sponsor_id INT PRIMARY KEY,
-    FOREIGN KEY (team_name) REFERENCES teams(team),
-    contract_amount FLOAT(6, 2),
+    sponsor_id INT,
+    team VARCHAR(50),
+    contract_amount DOUBLE,
     contract_start DATE,
-    contract_end DATE
+    contract_end DATE,
+    FOREIGN KEY (sponsor_id) REFERENCES companies(id),
+    FOREIGN KEY (team) REFERENCES teams(team)
 );
 
 CREATE TABLE teamhistory(
     history_id INT PRIMARY,
-    FOREIGN KEY(team_id) REFERENCES teams(team),
+    team VARCHAR(50),
+    FOREIGN KEY(team_) REFERENCES teams(team),
     creation_date DATE,
     disband_date DATE
 );
 
 CREATE TABLE teamperformancehistory(
     history_id INT PRIMARY KEY,
-    FOREIGN KEY(team_name) REFERENCES teams(team),
+    team_name VARCHAR(50),
     match_date DATE,
     result VARCHAR (10),
-    winnings FLOAT(6, 2)
+    winnings DOUBLE,
+    FOREIGN KEY(team_name) REFERENCES teams(team)
 );
 
 CREATE TABLE teamsponsor(
-    sponsor_id INT PRIMARY KEY, 
-    FOREIGN KEY(team) REFERENCES teams(team),
-    contract_amount FLOAT(6, 2), 
+    sponsor_id INT PRIMARY KEY,
+    team VARCHAR(50), 
+    contract_amount DOUBLE, 
     contract_start DATE, 
-    contract_end DATE
+    contract_end DATE,
+    FOREIGN KEY(team) REFERENCES teams(team)
 );
 
 CREATE TABLE teamstats(
-    FOREIGN KEY(team) REFERENCES teams(team),
-    total_winnings FLOAT(7, 2),
+    team VARCHAR(50),
+    total_winnings DOUBLE,
     favored_map VARCHAR (20),
     wins INT,
-    losses INT
+    losses INT,
+    FOREIGN KEY(team) REFERENCES teams(team),
 );

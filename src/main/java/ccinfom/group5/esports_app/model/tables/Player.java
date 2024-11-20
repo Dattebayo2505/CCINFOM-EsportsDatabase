@@ -1,8 +1,7 @@
 package ccinfom.group5.esports_app.model.tables;
 
 public class Player {
-
-    private int player_id;
+    private String player_id;
     private String last_name;
     private String first_name;
     private int age;
@@ -10,7 +9,7 @@ public class Player {
     private String current_team;
     private String status;
 
-    public Player(int player_id, String last_name, String first_name, int age, String country, String current_team, String status) {
+    public Player(String player_id, String last_name, String first_name, int age, String country, String current_team, String status) {
         this.player_id = player_id;
         this.last_name = last_name;
         this.first_name = first_name;
@@ -23,16 +22,16 @@ public class Player {
     public String getAllDetails() {
         String details;
 
-        details = player_id+", "+"\'"+last_name+"\'"+", "+"\'"+first_name+"\'"+", "+age+", "+
+        details = "\'"+player_id+"\'"+", "+"\'"+last_name+"\'"+", "+"\'"+first_name+"\'"+", "+age+", "+
                   "\'"+country+"\'"+", "+"\'"+current_team+"\'"+", "+"\'"+status+"\'";
 
         return details;
     }
 
-    public int getPlayerID() {
+    public String getPlayerID() {
         return player_id;
     }
-    public void setPlayerID(int player_id) {
+    public void setPlayerID(String player_id) {
         this.player_id = player_id;
     }
 

@@ -2,13 +2,13 @@ package ccinfom.group5.esports_app.model.tables;
 
 public class PlayerHistory {
     private int history_id;
-    private int player_id;
+    private String player_id;
     private String old_team;
     private String left_old_team;
     private String new_team;
     private String join_new_team;
 
-    public PlayerHistory(int history_id, int player_id, String old_team, String left_old_team, String new_team, String join_new_team){
+    public PlayerHistory(int history_id, String player_id, String old_team, String left_old_team, String new_team, String join_new_team){
         this.history_id = history_id;
         this.player_id = player_id;
         this.old_team = old_team;
@@ -21,7 +21,7 @@ public class PlayerHistory {
         String details;
 
         details = history_id + ", " + 
-        player_id + ", " + 
+              "\'" + player_id + "\'" + ", " + 
               "\'" + old_team + "\'" + ", " +
               "\'" + left_old_team + "\'" + ", " +   
               "\'" + new_team + "\'" + "," +
@@ -38,11 +38,11 @@ public class PlayerHistory {
         this.history_id = history_id;
     }
 
-    public int getPlayerID(){
+    public String getPlayerID(){
         return player_id;
     }
 
-    public void setPlayerID(int player_id){
+    public void setPlayerID(String player_id){
         this.player_id = player_id;
     }
 

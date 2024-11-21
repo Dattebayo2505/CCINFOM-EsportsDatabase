@@ -27,8 +27,7 @@ public class JavaSQLConnection {
     public static Connection tryMakeConnection() {
         try {
             Class.forName(driver);
-            Connection connection = DriverManager.getConnection("jdbc:mysql://" + server + ":" + port,
-                                                                username, password);
+            Connection connection = DriverManager.getConnection("jdbc:mysql://" + server + ":" + port, username, password);
             GeneralUtil.debugPrint("Connection established");
 
             return connection;

@@ -1,10 +1,13 @@
 package ccinfom.group5.esports_app.model;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ccinfom.group5.esports_app.model.tables.*;
@@ -25,6 +28,8 @@ public class Database {
     private ArrayList<SponsorHistory> allSponsorHistories;
     private ArrayList<TeamPerformanceHistory> allTeamPerformanceHistories;
 
+    private HashMap<String, String[]> tableColumns; 
+
     public Database() {
         this.con = null;
         this.statement = null;
@@ -37,16 +42,105 @@ public class Database {
         this.allTeamHistories = new ArrayList<TeamHistory>();
         this.allSponsorHistories = new ArrayList<SponsorHistory>();
         this.allTeamPerformanceHistories = new ArrayList<TeamPerformanceHistory>();
+        this.tableColumns = new HashMap<String, String[]>();
     }
 
-    public void initializeDatabase(List<String> filepaths, Connection con) {
+    public void initializeDatabase(List<String> filepaths) {
         FileReaderUtil.getDatabase(filepaths, con);
     }
 
-    public void initiateModel(List<String> tables) {
-        ArrayList columnsCompany = new ArrayList<String>();
-    }
 
+
+    public void initiateModel(List<String> tables) {
+        int i, columnCount;
+        String query, columnName, columnType;
+        String[] columnNames = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData metaData;
+        ArrayList<Object> allObjects; 
+        
+
+        for (String table : tables) {
+            try {
+                statement = con.createStatement();
+                query = "SELECT * FROM " + table;
+                resultSet = statement.executeQuery(query);
+                
+                metaData = resultSet.getMetaData();
+                columnCount = metaData.getColumnCount();
+                
+                while (resultSet.next()) {
+                    allObjects = new ArrayList<Object>();
+                    columnNames = new String[columnCount];
+                    for (i=1; i<=columnCount; i++) {
+                        columnName = metaData.getColumnName(i);
+                        columnType = metaData.getColumnTypeName(i);
+
+                        columnNames[i-1] = columnName;
+
+                        switch (columnType) {
+                            case "INT":
+                                int num = resultSet.getInt(columnName);
+                                allObjects.add(num);
+                                break;
+                            case "VARCHAR":
+                                String str = resultSet.getString(columnName);
+                                allObjects.add(str);
+                                break;
+                            case "DATE":
+                                String date = resultSet.getString(columnName);
+                                allObjects.add(date);
+                                break;
+                            case "DECIMAL":
+                                double dec = resultSet.getDouble(columnName);
+                                allObjects.add(dec);
+                                break;
+                            case "NULL":
+                                allObjects.add(null);
+                                break;
+                            default:
+                                System.out.println("Unknown type");
+                                break;
+                        }
+                    }
+
+                    switch (table) {
+                        case "companies":
+                            Company company = new Company(
+                                (int) allObjects.get(0), 
+                                allObjects.get(1).toString()
+                            );
+
+
+                                
+                            allCompanies.add(company);
+                            break;
+                        case "teams":
+                            Team team = new Team(
+                                allObjects.get(0).toString(), // team
+                                allObjects.get(1).toString(), // captain
+                                allObjects.get(2).toString(), // region
+                                allObjects.get(3).toString(), // country
+                                allObjects.get(4).toString()  // status
+                            );
+
+
+                            allTeams.add(team);
+                            break;
+                        case "players":
+                    }
+
+                }
+
+                tableColumns.put(table, columnNames);
+            } 
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+            
+    }
+    
     // TODO: ADD OTHER QUERY/UPDATE METHODS HERE - JOB 
 
 
@@ -115,6 +209,9 @@ public class Database {
         this.allTeamPerformanceHistories = allTeamPerformanceHistories;
     }
 
+    public HashMap<String, String[]> getTableColumns() {
+        return tableColumns;
+    }
 
 }
 

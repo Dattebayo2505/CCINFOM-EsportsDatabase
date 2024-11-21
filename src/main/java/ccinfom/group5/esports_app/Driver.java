@@ -29,18 +29,14 @@ public class Driver {
         if (database.initialStatus() == false) return;
 
         ArrayList<String> sqlDirectory = new ArrayList<String>();
-        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/esports.sql");
-        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/companies.sql");
-        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/teams.sql");
-        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/players.sql");
-        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/playerhistory.sql");
-        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/sponsorhistory.sql");
-        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/teamhistory.sql");
-        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/teamperformancehistory.sql");
-        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/teamsponsor.sql");
-        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/teamstats.sql");
+        sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/esports.sql"); // Main database
 
-        database.initializeDatabase(sqlDirectory, database.getCon());       
+        for (String tableName : GeneralUtil.getTableNames()) {
+            sqlDirectory.add(GeneralUtil.resourcesDirectory + "sql/" + tableName + ".sql");
+        }
+
+        database.initializeDatabase(sqlDirectory);
+        database.initiateModel(GeneralUtil.getTableNames());
         
         
         
@@ -48,7 +44,7 @@ public class Driver {
         GUI gui = new GUI();
         gui.setVisible(true);
         
-        // new MainController(database, oldGui);         
+        new MainController(database, gui);         
         
     }
 }

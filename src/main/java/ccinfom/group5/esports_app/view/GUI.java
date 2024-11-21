@@ -4,6 +4,8 @@
  */
 package ccinfom.group5.esports_app.view;
 
+import ccinfom.group5.esports_app.utils.GeneralUtil;
+
 /**
  *
  * @author Sean Kyle
@@ -42,7 +44,7 @@ public class GUI extends javax.swing.JFrame {
         mainViewPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         mainViewTable = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        tablesMainViewComboBox = new javax.swing.JComboBox<>();
         queryTxtField = new javax.swing.JTextField();
         mainViewMainMenuBtn = new javax.swing.JButton();
         mainViewMakeTransacBtn = new javax.swing.JButton();
@@ -50,6 +52,7 @@ public class GUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ESports Tracker - Valorant");
         setPreferredSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         mainMainPanel.setLayout(new java.awt.CardLayout());
@@ -211,18 +214,10 @@ public class GUI extends javax.swing.JFrame {
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(452, 380));
 
-        mainViewTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
         mainViewTable.setMaximumSize(new java.awt.Dimension(225, 100));
         mainViewTable.setPreferredSize(new java.awt.Dimension(400, 80));
         mainViewTable.setRequestFocusEnabled(false);
+        mainViewTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(mainViewTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -234,19 +229,18 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 15, 10, 15);
         mainViewPanel.add(jScrollPane1, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(200, 35));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
+        tablesMainViewComBoxDefModel = new javax.swing.DefaultComboBoxModel<String>();
+        for (String tableName : GeneralUtil.getArrayTableNames()) {
+            tablesMainViewComBoxDefModel.addElement(tableName);
+        }
+        tablesMainViewComboBox.setModel(tablesMainViewComBoxDefModel);
+        tablesMainViewComboBox.setPreferredSize(new java.awt.Dimension(200, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 165, 5, 165);
-        mainViewPanel.add(jComboBox1, gridBagConstraints);
+        mainViewPanel.add(tablesMainViewComboBox, gridBagConstraints);
 
         queryTxtField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         queryTxtField.setMinimumSize(new java.awt.Dimension(64, 28));
@@ -302,10 +296,6 @@ public class GUI extends javax.swing.JFrame {
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_exitBtnActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void genReportsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genReportsBtnActionPerformed
         // TODO add your handling code here:
@@ -366,7 +356,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel bannerPanel;
     private javax.swing.JButton exitBtn;
     private javax.swing.JButton genReportsBtn;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel lowerLeftPanel;
@@ -382,5 +371,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton makeTransacBtn;
     private javax.swing.JLabel menuLbl;
     private javax.swing.JTextField queryTxtField;
+    private javax.swing.JComboBox<String> tablesMainViewComboBox;
+    private javax.swing.DefaultComboBoxModel<String> tablesMainViewComBoxDefModel;
     // End of variables declaration//GEN-END:variables
 }

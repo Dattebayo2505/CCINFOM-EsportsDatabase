@@ -1,8 +1,10 @@
 package ccinfom.group5.esports_app.model.tables;
 
-public class Company {
+public class Company implements BaseTable {
     private int company_id;
     private String company;
+
+    private String[] columnNames;
 
     public Company(int company_id, String company){
         this.company_id = company_id;
@@ -33,4 +35,5 @@ public class Company {
     public void setCompanyName(String company){
         this.company = company;
     }
+
 }

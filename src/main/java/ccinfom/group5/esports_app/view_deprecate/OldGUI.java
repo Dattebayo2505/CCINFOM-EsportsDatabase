@@ -7,7 +7,7 @@ import ccinfom.group5.esports_app.utils.GUIUtil;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-
+@Deprecated
 public class OldGUI {
     
     private JFrame mainFrame;

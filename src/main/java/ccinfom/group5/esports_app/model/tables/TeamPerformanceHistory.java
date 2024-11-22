@@ -1,6 +1,6 @@
 package ccinfom.group5.esports_app.model.tables;
 
-public class TeamPerformanceHistory {
+public class TeamPerformanceHistory implements BaseTable{
     private int history_id;
     private String team;
     private String match_date;
@@ -14,6 +14,11 @@ public class TeamPerformanceHistory {
         this.match_date = match_date;
         this.result = result;
         this.winnings = winnings;
+    }
+
+    @Override
+    public Object[] getRecord() {
+        return new Object[]{history_id, team, match_date, result, winnings};
     }
 
     public String getAllDetails() {

@@ -1,6 +1,6 @@
 package ccinfom.group5.esports_app.model.tables;
 
-public class SponsorHistory {
+public class SponsorHistory implements BaseTable{
     private int history_id;
     private int sponsor_id;
     private String team;
@@ -15,6 +15,11 @@ public class SponsorHistory {
         this.contract_amount = contract_amount;
         this.contract_start = contract_start;
         this.contract_end = contract_end;
+    }
+
+    @Override
+    public Object[] getRecord() {
+        return new Object[]{history_id, sponsor_id, team, contract_amount, contract_start, contract_end};
     }
 
     public String getAllDetails() {

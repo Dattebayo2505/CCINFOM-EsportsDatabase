@@ -4,11 +4,14 @@ public class Company implements BaseTable {
     private int company_id;
     private String company;
 
-    private String[] columnNames;
+    private Object[] records = new Object[2];
 
     public Company(int company_id, String company){
         this.company_id = company_id;
         this.company = company;
+
+        records[0] = company_id;
+        records[1] = company;
     }
 
     public String getAllDetails() {
@@ -36,4 +39,7 @@ public class Company implements BaseTable {
         this.company = company;
     }
 
+    public Object[] getRecord() {
+        return records;
+    }
 }

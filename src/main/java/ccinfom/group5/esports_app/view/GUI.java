@@ -6,6 +6,9 @@ package ccinfom.group5.esports_app.view;
 
 import ccinfom.group5.esports_app.utils.GeneralUtil;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Sean Kyle
@@ -43,7 +46,14 @@ public class GUI extends javax.swing.JFrame {
         lowerRightPanel = new javax.swing.JPanel();
         mainViewPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        mainViewTable = new javax.swing.JTable();
+        String[] columnNames = {"Column1", "Column2"};
+        Object[][] data = {
+            {"Data1", "Data2"},
+            {"Data3", "Data4"}
+        };
+
+        mainViewTable = new JTable();
+        mainViewTableModel = new DefaultTableModel(data, columnNames);
         tablesMainViewComboBox = new javax.swing.JComboBox<>();
         queryTxtField = new javax.swing.JTextField();
         mainViewMainMenuBtn = new javax.swing.JButton();
@@ -214,6 +224,7 @@ public class GUI extends javax.swing.JFrame {
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(452, 380));
 
+        mainViewTable.setModel(getMainViewTableModel());
         mainViewTable.setMaximumSize(new java.awt.Dimension(225, 100));
         mainViewTable.setPreferredSize(new java.awt.Dimension(400, 80));
         mainViewTable.setRequestFocusEnabled(false);
@@ -235,6 +246,11 @@ public class GUI extends javax.swing.JFrame {
         }
         tablesMainViewComboBox.setModel(tablesMainViewComBoxDefModel);
         tablesMainViewComboBox.setPreferredSize(new java.awt.Dimension(200, 35));
+        tablesMainViewComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tablesMainViewComboBoxActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -317,6 +333,21 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_mainViewMakeTransacBtnActionPerformed
 
+    private void tablesMainViewComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tablesMainViewComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablesMainViewComboBoxActionPerformed
+
+    public JTable getMainViewTable() {
+        return mainViewTable;
+    }
+    
+    public DefaultTableModel getMainViewTableModel() {
+        return mainViewTableModel;
+    }
+    public void setMainViewTableModel(DefaultTableModel mainViewTableModel) {
+        this.mainViewTableModel = mainViewTableModel;  
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -351,7 +382,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
     }
-
+    private DefaultTableModel mainViewTableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bannerPanel;
     private javax.swing.JButton exitBtn;

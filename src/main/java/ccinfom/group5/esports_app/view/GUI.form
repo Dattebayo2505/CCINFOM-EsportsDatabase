@@ -299,6 +299,9 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="mainViewTable">
                   <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="getMainViewTableModel()" type="code"/>
+                    </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0"/>
                     </Property>
@@ -314,6 +317,7 @@
                     </Property>
                   </Properties>
                   <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="String[] columnNames = {&quot;Column1&quot;, &quot;Column2&quot;};&#xa;Object[][] data = {&#xa;    {&quot;Data1&quot;, &quot;Data2&quot;},&#xa;    {&quot;Data3&quot;, &quot;Data4&quot;}&#xa;};&#xa;&#xa;mainViewTableModel = new DefaultTableModel(data, columnNames);"/>
                     <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="GUI_mainViewTable"/>
                   </AuxValues>
                 </Component>
@@ -328,6 +332,9 @@
                   <Dimension value="[200, 35]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tablesMainViewComboBoxActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;&gt;()"/>
                 <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="private javax.swing.DefaultComboBoxModel&lt;String&gt; tablesMainViewComBoxDefModel;"/>

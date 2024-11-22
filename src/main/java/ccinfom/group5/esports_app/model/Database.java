@@ -173,7 +173,7 @@ public class Database {
                         case "teamhistory":
                             TeamHistory teamHistory = new TeamHistory(
                                 (int) tableRecord[0], //history_id
-                                (int) tableRecord[1], //team
+                                tableRecord[1].toString(), //team
                                 tableRecord[2].toString(), //creation_date
                                 tableRecord[3].toString() //disband_date
                             );

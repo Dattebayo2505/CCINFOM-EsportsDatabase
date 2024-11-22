@@ -24,12 +24,65 @@ public class Hello {
         String[] column = {"2312", "124"};
         Object[][] ano = {
             {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
+            {"Danat", "fabat"},
             {"legot", "abat"}
         };
 
         mainViewTableModel = new DefaultTableModel(ano, column);
         mainViewTable.setModel(mainViewTableModel);
-
     }
 
     public DefaultTableModel getMainViewTableModel() {
@@ -48,7 +101,11 @@ public class Hello {
         // Create a JFrame to display the JTable
         JFrame frame = new JFrame("Main View Table");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new JScrollPane(gui.mainViewTable));
+
+        // Add the JTable to a JScrollPane
+        JScrollPane scrollPane = new JScrollPane(gui.mainViewTable);
+        frame.add(scrollPane);
+
         frame.pack();
         frame.setVisible(true);
     }

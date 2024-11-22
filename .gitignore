@@ -24,7 +24,7 @@ libs/
 *.log
 
 # Ignore Maven status files
-target/maven-status/
+target/
 
 # OS-specific files
 ### VS Code ###

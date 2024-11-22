@@ -1,6 +1,6 @@
 package ccinfom.group5.esports_app.model.tables;
 
-public class TeamStats {
+public class TeamStats implements BaseTable{
     private String team;
     private double total_winnings;
     private String favored_map;
@@ -13,6 +13,11 @@ public class TeamStats {
         this.favored_map = favored_map;
         this.wins = wins;
         this.losses = losses;
+    }
+
+    @Override
+    public Object[] getRecord() {
+        return new Object[]{team, total_winnings, favored_map, wins, losses};
     }
 
     public String getAllDetails() {

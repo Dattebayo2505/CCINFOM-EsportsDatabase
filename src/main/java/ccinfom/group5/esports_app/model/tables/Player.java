@@ -1,6 +1,6 @@
 package ccinfom.group5.esports_app.model.tables;
 
-public class Player {
+public class Player implements BaseTable {
     private String player_id;
     private String last_name;
     private String first_name;
@@ -17,6 +17,11 @@ public class Player {
         this.country = country;
         this.current_team = current_team;
         this.status = status;
+    }
+
+    @Override
+    public Object[] getRecord() {
+        return new Object[]{player_id, last_name, first_name, age, country, current_team, status};
     }
 
     public String getAllDetails() {

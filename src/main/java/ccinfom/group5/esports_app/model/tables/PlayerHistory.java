@@ -1,6 +1,6 @@
 package ccinfom.group5.esports_app.model.tables;
 
-public class PlayerHistory {
+public class PlayerHistory implements BaseTable{
     private int history_id;
     private String player_id;
     private String old_team;
@@ -15,6 +15,11 @@ public class PlayerHistory {
         this.left_old_team = left_old_team;
         this.new_team = new_team;
         this.join_new_team = join_new_team;
+    }
+    
+    @Override
+    public Object[] getRecord() {
+        return new Object[]{history_id, player_id, old_team, left_old_team, new_team, join_new_team};
     }
 
     public String getAllDetails() {

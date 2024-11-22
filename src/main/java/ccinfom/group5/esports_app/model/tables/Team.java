@@ -1,6 +1,6 @@
 package ccinfom.group5.esports_app.model.tables;
 /* Team, Region, Country, Win Rate */
-public class Team {
+public class Team implements BaseTable{
     private String team;
     private String captain;
     private String region;
@@ -13,6 +13,11 @@ public class Team {
         this.region = region;
         this.country = country;
         this.status = status;
+    }
+
+    @Override
+    public Object[] getRecord() {
+        return new Object[]{team, captain, region, country, status};
     }
 
     public String getAllDetails() {

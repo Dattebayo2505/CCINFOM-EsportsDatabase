@@ -71,4 +71,5 @@ public class TeamStats implements BaseTable{
     public void setLosses(int losses){
         this.losses = losses;
     }
+
 }

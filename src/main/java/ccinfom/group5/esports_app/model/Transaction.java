@@ -59,4 +59,30 @@ public class Transaction {
             }
         }
     }
+
+    public void teamStatistics(String teamName, String matchDate, String result, double winnings) {
+        // Get the last history record index for TeamPerformanceHistory
+        int lastHistory = database.getAllTeamPerformanceHistories().size();
+        
+        // Add the new TeamPerformanceHistory record
+        database.getAllTeamPerformanceHistories().add(new TeamPerformanceHistory(lastHistory + 1, 
+                                                            teamName, 
+                                                            matchDate, 
+                                                            result, 
+                                                            winnings));
+
+        // Update the TeamStats for the team directly by matching teamName
+        for (TeamStats teamStats : database.getAllTeamStats()) {
+            if (teamStats.getTeamName().equals(teamName)) {
+                if (result.equalsIgnoreCase("win")) {
+                    // Increment wins if the result is "win"
+                    teamStats.setWins(teamStats.getWins() + 1); 
+                } else {
+                    // Increment losses if the result is not "win"
+                    teamStats.setLosses(teamStats.getLosses() + 1); 
+                }
+                break; // Exit the loop once the correct team is found and updated
+            }
+        }
+    }    
 }

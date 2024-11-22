@@ -1,4 +1,7 @@
 package ccinfom.group5.esports_app.model.tables;
+
+import ccinfom.group5.esports_app.model.Database;
+
 /* Team, Region, Country, Win Rate */
 public class Team implements BaseTable{
     private String team;
@@ -70,5 +73,14 @@ public class Team implements BaseTable{
 
     public void setStatus (String status){
         this.status = status;
+    }
+
+    public String getTeamHistory(Database database){
+            for (TeamHistory history : database.getAllTeamHistories()) {
+                if (history.getTeamID().equals(this.getTeamName())) {
+                    return history.getCreationDate();
+            }
+        }
+        return null;
     }
 }

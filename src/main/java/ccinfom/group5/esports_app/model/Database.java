@@ -136,6 +136,25 @@ public class Database {
                             allTeams.add(team);
                             break;
                         case "players":
+                            Player player = new Player(
+                                tableRecord[0].toString(), // player_id
+                                tableRecord[1].toString(), // last_name
+                                tableRecord[2].toString(), // first_name
+                                (int) tableRecord[3], // age
+                                tableRecord[4].toString(), // country
+                                tableRecord[5].toString(), // current_team
+                                tableRecord[6].toString()  // status
+                            );
+
+                        case "playerhistory":
+                            PlayerHistory playerHistory = new PlayerHistory(
+                                (int) tableRecord[0], //history_id
+                                tableRecord[1].toString(), //player_id
+                                tableRecord[2].toString(), //old_team
+                                tableRecord[3].toString(), //left_old_team
+                                tableRecord[4].toString(), //new_team
+                                tableRecord[5].toString() //joined_new_team
+                            );
                     }
                     
                     // TODO: Add Object[][] here

@@ -2,11 +2,11 @@ package ccinfom.group5.esports_app.model.tables;
 
 public class TeamHistory implements BaseTable{
     private int history_id;
-    private int team;
+    private String team;
     private String creation_date;
     private String disband_date;
 
-    public TeamHistory(int history_id, int team, String creation_date, String disband_date){
+    public TeamHistory(int history_id, String team, String creation_date, String disband_date){
         this.history_id = history_id;
         this.team = team;
         this.creation_date = creation_date;
@@ -22,7 +22,7 @@ public class TeamHistory implements BaseTable{
         String details;
 
         details = history_id + ", " + 
-              + team + ", " + 
+              team + ", " + 
               "\'" + creation_date + "\'" + ", " +
               "\'" + disband_date + "\'";
 
@@ -37,11 +37,11 @@ public class TeamHistory implements BaseTable{
         this.history_id = history_id;
     }
 
-    public int getTeamID(){
+    public String getTeamID(){
         return team;
     }
 
-    public void setTeamID(int team){
+    public void setTeamID(String team){
         this.team = team;
     }
     

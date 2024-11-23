@@ -97,14 +97,12 @@ public class GUI extends javax.swing.JFrame {
         lowerMainViewPanel = new JPanel();
         mainViewMainMenuBtn = new JButton();
         tablesMainViewComboBox = new JComboBox<>();
-        mainViewMakeTransacBtn = new JButton();
         executeQueryMainViewBtn = new JButton();
         jScrollPane3 = new JScrollPane();
         queryMainViewTxtArea = new JTextArea();
         makeTransacPanel = new JPanel();
         leftMakeTransacPanel = new JPanel();
         transferPlayerBtn = new JButton();
-        dissTeamBtn = new JButton();
         changeSponsorBtn = new JButton();
         updateTeamBtn = new JButton();
         mainMenuTransacBtn = new JButton();
@@ -129,6 +127,11 @@ public class GUI extends javax.swing.JFrame {
         refreshTableTransferPlayerBtn = new JButton();
         tableChooserTransferPlayerComboBox = new JComboBox<>();
         genReportsPanel = new JPanel();
+        genReportsMainMenuBtn = new JButton();
+        jScrollPane5 = new JScrollPane();
+        genReportsTable = new JTable();
+        jComboBox1 = new JComboBox<>();
+        jComboBox2 = new JComboBox<>();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("ESports Tracker - Valorant");
@@ -255,7 +258,7 @@ public class GUI extends javax.swing.JFrame {
         GroupLayout lowerRightPanelLayout = new GroupLayout(lowerRightPanel);
         lowerRightPanel.setLayout(lowerRightPanelLayout);
         lowerRightPanelLayout.setHorizontalGroup(lowerRightPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 1103, Short.MAX_VALUE)
+            .addGap(0, 1102, Short.MAX_VALUE)
         );
         lowerRightPanelLayout.setVerticalGroup(lowerRightPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 682, Short.MAX_VALUE)
@@ -328,15 +331,6 @@ public class GUI extends javax.swing.JFrame {
         tablesMainViewComboBox.setModel(tablesMainViewComBoxDefModel);
         tablesMainViewComboBox.setPreferredSize(new Dimension(200, 35));
 
-        mainViewMakeTransacBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
-        mainViewMakeTransacBtn.setText("<html><div style='text-align: center;'>Make<br>Transactions</div></html>");
-        mainViewMakeTransacBtn.setToolTipText("");
-        mainViewMakeTransacBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                mainViewMakeTransacBtnActionPerformed(evt);
-            }
-        });
-
         executeQueryMainViewBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         executeQueryMainViewBtn.setText("Execute Query");
         executeQueryMainViewBtn.addActionListener(new ActionListener() {
@@ -361,19 +355,14 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 537, GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
-                        .addGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(mainViewMakeTransacBtn, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(mainViewMainMenuBtn, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(mainViewMainMenuBtn, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(197, Short.MAX_VALUE))
         );
         lowerMainViewPanelLayout.setVerticalGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
-                        .addComponent(mainViewMainMenuBtn, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mainViewMakeTransacBtn, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mainViewMainMenuBtn, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
                     .addComponent(tablesMainViewComboBox, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -404,19 +393,7 @@ public class GUI extends javax.swing.JFrame {
 
         leftMakeTransacPanel.setBackground(new Color(204, 204, 0));
 
-        transferPlayerBtn.setText("Transfer Player(s)");
-        transferPlayerBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                transferPlayerBtnActionPerformed(evt);
-            }
-        });
-
-        dissTeamBtn.setText("Dissolve Team");
-        dissTeamBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                dissTeamBtnActionPerformed(evt);
-            }
-        });
+        transferPlayerBtn.setText("<html><div style='text-align': center;'>Transfer Player(s) & <br>Dissolve Team</div></html>");
 
         changeSponsorBtn.setText("Change Sponsorship(s)");
         changeSponsorBtn.addActionListener(new ActionListener() {
@@ -432,6 +409,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        mainMenuTransacBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         mainMenuTransacBtn.setText("Main Menu");
         mainMenuTransacBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -446,8 +424,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(leftMakeTransacPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                     .addComponent(updateTeamBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(transferPlayerBtn, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dissTeamBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(transferPlayerBtn, GroupLayout.Alignment.LEADING)
                     .addComponent(changeSponsorBtn, GroupLayout.Alignment.LEADING)
                     .addComponent(mainMenuTransacBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(23, 23, 23))
@@ -456,9 +433,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(leftMakeTransacPanelLayout.createSequentialGroup()
                 .addGap(78, 78, 78)
                 .addComponent(transferPlayerBtn, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(dissTeamBtn, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(117, 117, 117)
                 .addComponent(changeSponsorBtn, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(updateTeamBtn, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
@@ -553,7 +528,7 @@ public class GUI extends javax.swing.JFrame {
                                         .addComponent(monthTransferPlayerTxtField)))
                                 .addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel3)
-                                .addComponent(jLabel5))
+                                .addComponent(jLabel5, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE))
                             .addGap(45, 45, 45)
                             .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                 .addComponent(finalTransferPlayerBtn, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
@@ -627,13 +602,55 @@ public class GUI extends javax.swing.JFrame {
 
         mainMainPanel.add(makeTransacPanel, "maketransac");
 
+        genReportsMainMenuBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        genReportsMainMenuBtn.setText("Main Menu");
+
+        genReportsTable.setModel(new DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(genReportsTable);
+
+        jComboBox1.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox2.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         GroupLayout genReportsPanelLayout = new GroupLayout(genReportsPanel);
         genReportsPanel.setLayout(genReportsPanelLayout);
         genReportsPanelLayout.setHorizontalGroup(genReportsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 1280, Short.MAX_VALUE)
+            .addGroup(genReportsPanelLayout.createSequentialGroup()
+                .addGroup(genReportsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(genReportsPanelLayout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(genReportsMainMenuBtn, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE))
+                    .addGroup(GroupLayout.Alignment.TRAILING, genReportsPanelLayout.createSequentialGroup()
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, GroupLayout.PREFERRED_SIZE, 912, GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
         );
         genReportsPanelLayout.setVerticalGroup(genReportsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 780, Short.MAX_VALUE)
+            .addGroup(GroupLayout.Alignment.TRAILING, genReportsPanelLayout.createSequentialGroup()
+                .addGap(91, 91, 91)
+                .addGroup(genReportsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addGroup(genReportsPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                .addComponent(genReportsMainMenuBtn, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44))
         );
 
         mainMainPanel.add(genReportsPanel, "genreports");
@@ -655,10 +672,6 @@ public class GUI extends javax.swing.JFrame {
     private void makeTransacBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_makeTransacBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_makeTransacBtnActionPerformed
-
-    private void mainViewMakeTransacBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_mainViewMakeTransacBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mainViewMakeTransacBtnActionPerformed
 
     private void mainViewMainMenuBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_mainViewMainMenuBtnActionPerformed
         // TODO add your handling code here:
@@ -683,14 +696,6 @@ public class GUI extends javax.swing.JFrame {
     private void changeSponsorBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_changeSponsorBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_changeSponsorBtnActionPerformed
-
-    private void dissTeamBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_dissTeamBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dissTeamBtnActionPerformed
-
-    private void transferPlayerBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_transferPlayerBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_transferPlayerBtnActionPerformed
 
     public CardLayout getCardLayout() {
         return (CardLayout) mainMainPanel.getLayout();
@@ -742,6 +747,11 @@ public class GUI extends javax.swing.JFrame {
     }
     
     // Transactions
+    
+    // TRANSFER PLAYER
+    public JButton getMainMenuTransacBtn() {
+        return mainMenuTransacBtn;
+    }
     public JButton getFinalTransferPlayerBtn() {
         return finalTransferPlayerBtn;
     }
@@ -758,6 +768,21 @@ public class GUI extends javax.swing.JFrame {
         return tableChooserTransferPlayerComboBox;
     }
  
+    public JTextField getYearTransferPlayerTxtField() {
+        return yearTransferPlayerTxtField;
+    }
+    public JTextField getMonthTransferPlayerTxtField() {
+        return monthTransferPlayerTxtField;
+    }
+    public JTextField getDayTransferPlayerTxtField() {
+        return dayTransferPlayerTxtField;
+    }
+    
+    public JButton getRefreshTableTransferPlayerBtn() {
+        return refreshTableTransferPlayerBtn;
+    }
+    
+    // 
     
     
     public DefaultTableModel getMainViewTableModel() {
@@ -775,7 +800,11 @@ public class GUI extends javax.swing.JFrame {
         this.exitBtn.addActionListener(e);
 
         this.executeQueryMainViewBtn.addActionListener(e);
+        this.mainViewMainMenuBtn.addActionListener(e);
         this.tablesMainViewComboBox.addActionListener(e);
+
+        this.mainMenuTransacBtn.addActionListener(e);
+        this.finalTransferPlayerBtn.addActionListener(e);
     }
 
     public ArrayList<String> getPlayerNames() {
@@ -852,12 +881,15 @@ public class GUI extends javax.swing.JFrame {
     private JPanel bannerPanel;
     private JButton changeSponsorBtn;
     private JTextField dayTransferPlayerTxtField;
-    private JButton dissTeamBtn;
     private JButton executeQueryMainViewBtn;
     private JButton exitBtn;
     private JButton finalTransferPlayerBtn;
     private JButton genReportsBtn;
+    private JButton genReportsMainMenuBtn;
     private JPanel genReportsPanel;
+    private JTable genReportsTable;
+    private JComboBox<String> jComboBox1;
+    private JComboBox<String> jComboBox2;
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JLabel jLabel3;
@@ -869,6 +901,7 @@ public class GUI extends javax.swing.JFrame {
     private JScrollPane jScrollPane2;
     private JScrollPane jScrollPane3;
     private JScrollPane jScrollPane4;
+    private JScrollPane jScrollPane5;
     private JScrollPane jScrollPane6;
     private JPanel leftMakeTransacPanel;
     private JPanel lowerLeftPanel;
@@ -880,7 +913,6 @@ public class GUI extends javax.swing.JFrame {
     private JPanel mainPanel;
     private JButton mainViewBtn;
     private JButton mainViewMainMenuBtn;
-    private JButton mainViewMakeTransacBtn;
     private JPanel mainViewPanel;
     private static JTable mainViewTable;
     private JButton makeTransacBtn;
@@ -905,4 +937,5 @@ public class GUI extends javax.swing.JFrame {
     private JTextField yearTransferPlayerTxtField;
     // End of variables declaration//GEN-END:variables
     private ArrayList<String> playerNames, teamNames, sponsorNames;
+    private DefaultComboBoxModel<String> playerTransferDefaultComboBoxModel;
 }

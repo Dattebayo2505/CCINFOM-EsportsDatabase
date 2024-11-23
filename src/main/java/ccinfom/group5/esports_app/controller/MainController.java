@@ -414,10 +414,6 @@ public class MainController implements ActionListener {
             rs = stmt.executeQuery(query);
             while (rs.next()) {
                 int totalTransfers = rs.getInt("total_transfers");
-                double avgTransfersPerPlayer = rs.getDouble("avg_transfers_per_player");
-
-                GeneralUtil.debugPrint("Total Transfers: " + totalTransfers + "\n" +
-                "Average Transfers per Player: " + avgTransfersPerPlayer + "\n");
             }
     
             gui.getGenReportsTable().setModel(initializeTable(rs));

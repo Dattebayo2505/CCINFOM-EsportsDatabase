@@ -89,81 +89,81 @@ public class Database {
                     tableRecords[j] = tableRecord;
                     ++j;
 
-                    switch (table) {
-                        case "companies":
-                            Company company = new Company(
-                                (int) tableRecord[0], 
-                                tableRecord[1].toString()
-                            );
+                    // switch (table) {
+                    //     case "companies":
+                    //         Company company = new Company(
+                    //             (int) tableRecord[0], 
+                    //             tableRecord[1].toString()
+                    //         );
                            
-                            allCompanies.add(company);
-                            break;
-                        case "teams":
-                            Team team = new Team(
-                                tableRecord[0].toString(), // team
-                                tableRecord[1].toString(), // captain
-                                tableRecord[2].toString(), // region
-                                tableRecord[3].toString(), // country
-                                tableRecord[4].toString()  // status
-                            );
+                    //         allCompanies.add(company);
+                    //         break;
+                    //     case "teams":
+                    //         Team team = new Team(
+                    //             tableRecord[0].toString(), // team
+                    //             tableRecord[1].toString(), // captain
+                    //             tableRecord[2].toString(), // region
+                    //             tableRecord[3].toString(), // country
+                    //             tableRecord[4].toString()  // status
+                    //         );
 
-                            allTeams.add(team);
-                            break;
-                        case "players":
-                            Player player = new Player(
-                                tableRecord[0].toString(), // player_id
-                                tableRecord[1].toString(), // last_name
-                                tableRecord[2].toString(), // first_name
-                                (int) tableRecord[3], // age
-                                tableRecord[4].toString(), // country
-                                tableRecord[5].toString(), // current_team
-                                tableRecord[6].toString()  // status
-                            );
-                            allPlayers.add(player);
-                            break;
+                    //         allTeams.add(team);
+                    //         break;
+                    //     case "players":
+                    //         Player player = new Player(
+                    //             tableRecord[0].toString(), // player_id
+                    //             tableRecord[1].toString(), // last_name
+                    //             tableRecord[2].toString(), // first_name
+                    //             (int) tableRecord[3], // age
+                    //             tableRecord[4].toString(), // country
+                    //             tableRecord[5].toString(), // current_team
+                    //             tableRecord[6].toString()  // status
+                    //         );
+                    //         allPlayers.add(player);
+                    //         break;
 
-                        case "playerhistory":
-                            PlayerHistory playerHistory = new PlayerHistory(
-                                (int) tableRecord[0], //history_id
-                                tableRecord[1].toString(), //player_id
-                                tableRecord[2] != null ? tableRecord[2].toString() : null, // old_team
-                                tableRecord[3] != null ? tableRecord[3].toString() : null, // left_old_team
-                                tableRecord[4].toString(), //new_team
-                                tableRecord[5].toString() //joined_new_team
-                            );
-                            allPlayerHistories.add(playerHistory);
-                            break;
-                        case "sponsorhistory":
-                            SponsorHistory sponsorHistory = new SponsorHistory(
-                                (int) tableRecord[0], //history_id
-                                (int) tableRecord[1], //sponsor_id
-                                tableRecord[2].toString(), //team
-                                (double) tableRecord[3], //contract_amount
-                                tableRecord[4].toString(), //contract_start
-                                tableRecord[5].toString() //contract_end
-                            );
-                            allSponsorHistories.add(sponsorHistory);
-                            break;
-                        case "teamhistory":
-                            TeamHistory teamHistory = new TeamHistory(
-                                (int) tableRecord[0], //history_id
-                                tableRecord[1].toString(), //team
-                                tableRecord[2].toString(), //creation_date
-                                tableRecord[3] != null ? tableRecord[3].toString() : null //disband_date
-                            );
-                            allTeamHistories.add(teamHistory);
-                            break;
-                        case "teamperformancehistory":
-                            TeamPerformanceHistory teamPerformanceHistory = new TeamPerformanceHistory(
-                                (int) tableRecord[0], //history_id
-                                tableRecord[1].toString(), //team
-                                tableRecord[2].toString(), //match_date
-                                tableRecord[3].toString(), //result
-                                (double) tableRecord[4] //winnings
-                            );
-                            allTeamPerformanceHistories.add(teamPerformanceHistory);
-                            break;
-                    }
+                    //     case "playerhistory":
+                    //         PlayerHistory playerHistory = new PlayerHistory(
+                    //             (int) tableRecord[0], //history_id
+                    //             tableRecord[1].toString(), //player_id
+                    //             tableRecord[2] != null ? tableRecord[2].toString() : null, // old_team
+                    //             tableRecord[3] != null ? tableRecord[3].toString() : null, // left_old_team
+                    //             tableRecord[4].toString(), //new_team
+                    //             tableRecord[5].toString() //joined_new_team
+                    //         );
+                    //         allPlayerHistories.add(playerHistory);
+                    //         break;
+                    //     case "sponsorhistory":
+                    //         SponsorHistory sponsorHistory = new SponsorHistory(
+                    //             (int) tableRecord[0], //history_id
+                    //             (int) tableRecord[1], //sponsor_id
+                    //             tableRecord[2].toString(), //team
+                    //             (double) tableRecord[3], //contract_amount
+                    //             tableRecord[4].toString(), //contract_start
+                    //             tableRecord[5].toString() //contract_end
+                    //         );
+                    //         allSponsorHistories.add(sponsorHistory);
+                    //         break;
+                    //     case "teamhistory":
+                    //         TeamHistory teamHistory = new TeamHistory(
+                    //             (int) tableRecord[0], //history_id
+                    //             tableRecord[1].toString(), //team
+                    //             tableRecord[2].toString(), //creation_date
+                    //             tableRecord[3] != null ? tableRecord[3].toString() : null //disband_date
+                    //         );
+                    //         allTeamHistories.add(teamHistory);
+                    //         break;
+                    //     case "teamperformancehistory":
+                    //         TeamPerformanceHistory teamPerformanceHistory = new TeamPerformanceHistory(
+                    //             (int) tableRecord[0], //history_id
+                    //             tableRecord[1].toString(), //team
+                    //             tableRecord[2].toString(), //match_date
+                    //             tableRecord[3].toString(), //result
+                    //             (double) tableRecord[4] //winnings
+                    //         );
+                    //         allTeamPerformanceHistories.add(teamPerformanceHistory);
+                    //         break;
+                    // }
                     
                     // TODO: Add Object[][] here
                 }

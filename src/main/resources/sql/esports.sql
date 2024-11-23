@@ -6,14 +6,14 @@ USE esports;
 -- Create tables
 CREATE TABLE companies (
     company_id INT PRIMARY KEY,
-    company VARCHAR(50)
+    company VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE teams(
     team VARCHAR(50) PRIMARY KEY,
-    captain VARCHAR(50) NOT NULL,
-    country VARCHAR(50) NOT NULL,
-    region  VARCHAR(50) NOT NULL,
+    captain VARCHAR(50),
+    country VARCHAR(50),
+    region  VARCHAR(50),
     status VARCHAR(50) NOT NULL
 );
 
@@ -23,7 +23,7 @@ CREATE TABLE players (
     first_name VARCHAR(50) NOT NULL,
     age INTEGER NOT NULL, 
     country VARCHAR(50) NOT NULL,
-    current_team VARCHAR(50) NOT NULL, 
+    current_team VARCHAR(50), 
     status VARCHAR(10) NOT NULL, 
     FOREIGN KEY (current_team) REFERENCES teams(team)
 );
@@ -55,7 +55,7 @@ CREATE TABLE sponsorhistory(
 CREATE TABLE teamhistory(
     history_id INT PRIMARY KEY,
     team VARCHAR(50) NOT NULL,
-    creation_date DATE NOTN ULL,
+    creation_date DATE NOT NULL,
     disband_date DATE,
     FOREIGN KEY(team) REFERENCES teams(team)
 );
@@ -83,7 +83,6 @@ CREATE TABLE teamsponsor (
 CREATE TABLE teamstats(
     team VARCHAR(50),
     total_winnings DECIMAL,
-    favored_map VARCHAR (20),
     wins INT,
     losses INT,
     FOREIGN KEY(team) REFERENCES teams(team)

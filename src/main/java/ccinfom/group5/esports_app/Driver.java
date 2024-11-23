@@ -1,7 +1,6 @@
 package ccinfom.group5.esports_app;
 
 import ccinfom.group5.esports_app.model.*; // Refer here for Database.java
-import ccinfom.group5.esports_app.view_deprecate.OldGUI;
 import ccinfom.group5.esports_app.view.GUI;
 
 import java.util.ArrayList;
@@ -37,10 +36,7 @@ public class Driver {
 
         database.initializeDatabase(sqlDirectory);
         database.initiateModel(GeneralUtil.getTableNames());
-        
-        
-        
-        // OldGUI oldGui = new OldGUI();
+
         GUI gui = new GUI();
         gui.setVisible(true);
         

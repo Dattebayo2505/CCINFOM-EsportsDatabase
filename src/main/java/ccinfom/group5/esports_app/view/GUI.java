@@ -25,15 +25,18 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
@@ -49,13 +52,7 @@ public class GUI extends javax.swing.JFrame {
      * Creates new form GUI
      */
     public GUI() {
-        
-        playerNames = new ArrayList<String>();
-        teamNames = new ArrayList<String>();
-        sponsorNames = new ArrayList<String>();
-    
-
-
+         
 
 
         
@@ -122,16 +119,34 @@ public class GUI extends javax.swing.JFrame {
         yearTransferPlayerTxtField = new JTextField();
         monthTransferPlayerTxtField = new JTextField();
         dayTransferPlayerTxtField = new JTextField();
+        jLabel8 = new JLabel();
+        jCheckBox1 = new JCheckBox();
+        finalDissolveTeamBtn = new JButton();
         jScrollPane6 = new JScrollPane();
-        tableTransferPlayer = new JTable();
-        refreshTableTransferPlayerBtn = new JButton();
-        tableChooserTransferPlayerComboBox = new JComboBox<>();
+        teamTransferTeamDissolveComboBox = new JComboBox<>();
+        jLabel9 = new JLabel();
+        yearDissolveTeamTxtField = new JTextField();
+        jLabel10 = new JLabel();
+        monthDissolveTeamTxtField = new JTextField();
+        jLabel11 = new JLabel();
+        dayDissolveTeamTxtField = new JTextField();
+        jLabel12 = new JLabel();
+        jLabel14 = new JLabel();
+        jLabel15 = new JLabel();
+        jLabel16 = new JLabel();
+        jComboBox2 = new JComboBox<>();
+        teamsUpdateStatsComboBox = new JComboBox<>();
+        jLabel17 = new JLabel();
+        jLabel18 = new JLabel();
+        teamsUpdateStatsComboBox2 = new JComboBox<>();
+        jLabel19 = new JLabel();
+        teamsWinnerUpdateStatsComboBox = new JComboBox<>();
         genReportsPanel = new JPanel();
         genReportsMainMenuBtn = new JButton();
         jScrollPane5 = new JScrollPane();
         genReportsTable = new JTable();
+        yearGenReportsComboBox = new JComboBox<>();
         jComboBox1 = new JComboBox<>();
-        jComboBox2 = new JComboBox<>();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("ESports Tracker - Valorant");
@@ -139,6 +154,7 @@ public class GUI extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
+        mainMainPanel.setPreferredSize(new Dimension(1280, 720));
         mainMainPanel.setLayout(new CardLayout());
 
         mainPanel.setBackground(new Color(255, 204, 51));
@@ -203,27 +219,17 @@ public class GUI extends javax.swing.JFrame {
         lowerLeftPanel.add(mainViewBtn, gridBagConstraints);
 
         makeTransacBtn.setFont(new Font("sansserif", 0, 15)); // NOI18N
-        makeTransacBtn.setText("Make Transactions");
+        makeTransacBtn.setLabel("<html><div style='text-align': center;'>Make<br>Transactions</div></html>");
         makeTransacBtn.setPreferredSize(mainViewBtn.getPreferredSize());
-        makeTransacBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                makeTransacBtnActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.insets = new Insets(7, 10, 7, 10);
         lowerLeftPanel.add(makeTransacBtn, gridBagConstraints);
 
-        genReportsBtn.setFont(new Font("sansserif", 0, 16)); // NOI18N
+        genReportsBtn.setFont(new Font("sansserif", 0, 15)); // NOI18N
         genReportsBtn.setText("Generate Reports");
         genReportsBtn.setPreferredSize(mainViewBtn.getPreferredSize());
-        genReportsBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                genReportsBtnActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
@@ -234,11 +240,6 @@ public class GUI extends javax.swing.JFrame {
         exitBtn.setFont(new Font("sansserif", 0, 18)); // NOI18N
         exitBtn.setText("Exit");
         exitBtn.setPreferredSize(new Dimension(72, 40));
-        exitBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                exitBtnActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
@@ -258,10 +259,10 @@ public class GUI extends javax.swing.JFrame {
         GroupLayout lowerRightPanelLayout = new GroupLayout(lowerRightPanel);
         lowerRightPanel.setLayout(lowerRightPanelLayout);
         lowerRightPanelLayout.setHorizontalGroup(lowerRightPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 1102, Short.MAX_VALUE)
+            .addGap(0, 868, Short.MAX_VALUE)
         );
         lowerRightPanelLayout.setVerticalGroup(lowerRightPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 682, Short.MAX_VALUE)
+            .addGap(0, 622, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new GridBagConstraints();
@@ -284,6 +285,11 @@ public class GUI extends javax.swing.JFrame {
         mainMainPanel.add(mainPanel, "mainmenu");
         mainPanel.getAccessibleContext().setAccessibleParent(mainMainPanel);
 
+        mainViewPanel.setBackground(new Color(204, 255, 204));
+        mainViewPanel.setOpaque(false);
+        mainViewPanel.setPreferredSize(new Dimension(1280, 720));
+
+        upperMainViewPanel.setBackground(new Color(204, 255, 204));
         upperMainViewPanel.setPreferredSize(new Dimension(1280, 400));
 
         jScrollPane1.setViewportBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
@@ -313,31 +319,23 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
+        lowerMainViewPanel.setBackground(new Color(204, 255, 204));
         lowerMainViewPanel.setPreferredSize(new Dimension(1124, 270));
 
         mainViewMainMenuBtn.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
         mainViewMainMenuBtn.setText("Main Menu");
         mainViewMainMenuBtn.setPreferredSize(new Dimension(89, 30));
-        mainViewMainMenuBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                mainViewMainMenuBtnActionPerformed(evt);
-            }
-        });
 
         tablesMainViewComBoxDefModel = new DefaultComboBoxModel<String>();
         for (String tableName : GeneralUtil.getArrayTableNames()) {
             tablesMainViewComBoxDefModel.addElement(tableName);
         }
         tablesMainViewComboBox.setModel(tablesMainViewComBoxDefModel);
+        tablesMainViewComboBox.setSelectedItem("players");
         tablesMainViewComboBox.setPreferredSize(new Dimension(200, 35));
 
         executeQueryMainViewBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         executeQueryMainViewBtn.setText("Execute Query");
-        executeQueryMainViewBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                executeQueryMainViewBtnActionPerformed(evt);
-            }
-        });
 
         queryMainViewTxtArea.setColumns(20);
         queryMainViewTxtArea.setRows(5);
@@ -347,45 +345,42 @@ public class GUI extends javax.swing.JFrame {
         lowerMainViewPanel.setLayout(lowerMainViewPanelLayout);
         lowerMainViewPanelLayout.setHorizontalGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(169, 169, 169)
                 .addComponent(tablesMainViewComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(executeQueryMainViewBtn, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
                     .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 537, GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
-                        .addComponent(mainViewMainMenuBtn, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(197, Short.MAX_VALUE))
+                        .addComponent(mainViewMainMenuBtn, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(executeQueryMainViewBtn, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         lowerMainViewPanelLayout.setVerticalGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(34, 34, 34)
                 .addGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(mainViewMainMenuBtn, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
                     .addComponent(tablesMainViewComboBox, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(executeQueryMainViewBtn, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         GroupLayout mainViewPanelLayout = new GroupLayout(mainViewPanel);
         mainViewPanel.setLayout(mainViewPanelLayout);
         mainViewPanelLayout.setHorizontalGroup(mainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, mainViewPanelLayout.createSequentialGroup()
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lowerMainViewPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(mainViewPanelLayout.createSequentialGroup()
                 .addComponent(upperMainViewPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(lowerMainViewPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
         );
         mainViewPanelLayout.setVerticalGroup(mainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(mainViewPanelLayout.createSequentialGroup()
                 .addComponent(upperMainViewPanel, GroupLayout.PREFERRED_SIZE, 446, GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lowerMainViewPanel, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(lowerMainViewPanel, GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -396,26 +391,11 @@ public class GUI extends javax.swing.JFrame {
         transferPlayerBtn.setText("<html><div style='text-align': center;'>Transfer Player(s) & <br>Dissolve Team</div></html>");
 
         changeSponsorBtn.setText("Change Sponsorship(s)");
-        changeSponsorBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                changeSponsorBtnActionPerformed(evt);
-            }
-        });
 
         updateTeamBtn.setText("Update Team Stats");
-        updateTeamBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                updateTeamBtnActionPerformed(evt);
-            }
-        });
 
         mainMenuTransacBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         mainMenuTransacBtn.setText("Main Menu");
-        mainMenuTransacBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                mainMenuTransacBtnActionPerformed(evt);
-            }
-        });
 
         GroupLayout leftMakeTransacPanelLayout = new GroupLayout(leftMakeTransacPanel);
         leftMakeTransacPanel.setLayout(leftMakeTransacPanelLayout);
@@ -445,9 +425,6 @@ public class GUI extends javax.swing.JFrame {
         rightMakeTransacPanel.setLayout(new CardLayout());
 
         playersComboBoxModel = new DefaultComboBoxModel<String>();
-        for (String player : playerNames) {
-            playersComboBoxModel.addElement(player);
-        }
         playerTransferPlayerComboBox.setModel(playersComboBoxModel);
         jScrollPane2.setViewportView(playerTransferPlayerComboBox);
 
@@ -456,11 +433,8 @@ public class GUI extends javax.swing.JFrame {
         finalTransferPlayerBtn.setForeground(new Color(255, 255, 255));
         finalTransferPlayerBtn.setText("Transfer Player");
 
-        teamsComboBoxModel = new DefaultComboBoxModel<String>();
-        for (String team : teamNames) {
-            teamsComboBoxModel.addElement(team);
-        }
-        teamTransferPlayerTransacComboBox.setModel(teamsComboBoxModel);
+        teamsTransferPlayerComboBoxModel = new DefaultComboBoxModel<String>();
+        teamTransferPlayerTransacComboBox.setModel(teamsTransferPlayerComboBoxModel);
         jScrollPane4.setViewportView(teamTransferPlayerTransacComboBox);
 
         jLabel3.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
@@ -481,77 +455,161 @@ public class GUI extends javax.swing.JFrame {
         jLabel7.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Day");
 
-        yearTransferPlayerTxtField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                yearTransferPlayerTxtFieldActionPerformed(evt);
-            }
-        });
-
         dayTransferPlayerTxtField.setToolTipText("");
 
-        tableTransferPlayer.setModel(new DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane6.setViewportView(tableTransferPlayer);
+        jLabel8.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setText("Team to Dissolve");
+        jLabel8.setToolTipText("");
 
-        refreshTableTransferPlayerBtn.setText("Click to Refresh Tables");
-        refreshTableTransferPlayerBtn.setEnabled(false);
+        jCheckBox1.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
+        jCheckBox1.setText("set to Active");
+        jCheckBox1.setToolTipText("");
 
-        tableChooserTransferPlayerComboBox.setModel(tablesMainViewComBoxDefModel);
+        finalDissolveTeamBtn.setBackground(new Color(255, 0, 0));
+        finalDissolveTeamBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        finalDissolveTeamBtn.setForeground(new Color(255, 255, 255));
+        finalDissolveTeamBtn.setText("Dissolve Team");
+
+        teamsDissolveTeamComboBoxModel = new DefaultComboBoxModel<String>();
+        teamTransferTeamDissolveComboBox.setModel(teamsDissolveTeamComboBoxModel);
+        jScrollPane6.setViewportView(teamTransferTeamDissolveComboBox);
+
+        jLabel9.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel9.setText("Year");
+
+        jLabel10.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel10.setText("Month");
+
+        jLabel11.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel11.setText("Day");
+
+        dayDissolveTeamTxtField.setToolTipText("");
+
+        jLabel12.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel12.setText("Dissolution Date");
+        jLabel12.setToolTipText("");
+
+        jLabel14.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel14.setText("Sponsor to Add");
+
+        jLabel15.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel15.setText("Team");
+
+        jLabel16.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel16.setText("Match Status");
+
+        jComboBox2.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        teamsUpdateStatsComboBoxModel = new DefaultComboBoxModel<String>();
+        teamsUpdateStatsComboBox.setModel(teamsUpdateStatsComboBoxModel);
+
+        jLabel17.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel17.setText("Team 1");
+
+        jLabel18.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel18.setText("Team 2");
+
+        teamsUpdateStatsComboBoxModel2 = new DefaultComboBoxModel<String>();
+        teamsUpdateStatsComboBox2.setModel(teamsUpdateStatsComboBoxModel2);
+
+        jLabel19.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel19.setText("Winner");
+
+        teamsWinnerUpdateStatsComboBoxModel = new DefaultComboBoxModel<String>();
+        teamsWinnerUpdateStatsComboBox.setModel(teamsUpdateStatsComboBoxModel);
 
         GroupLayout transferPlayerPanelLayout = new GroupLayout(transferPlayerPanel);
         transferPlayerPanel.setLayout(transferPlayerPanelLayout);
         transferPlayerPanelLayout.setHorizontalGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(transferPlayerPanelLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
+                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                    .addGroup(GroupLayout.Alignment.TRAILING, transferPlayerPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel8, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55))
+                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel6, GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                            .addComponent(yearTransferPlayerTxtField, GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                            .addComponent(dayTransferPlayerTxtField, GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                            .addComponent(monthTransferPlayerTxtField)))
+                    .addComponent(jScrollPane2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane6)
+                    .addComponent(finalDissolveTeamBtn, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE))
                 .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(transferPlayerPanelLayout.createSequentialGroup()
-                            .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                .addGroup(transferPlayerPanelLayout.createSequentialGroup()
-                                    .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel7))
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(yearTransferPlayerTxtField, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(dayTransferPlayerTxtField, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(monthTransferPlayerTxtField)))
-                                .addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel5, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE))
-                            .addGap(45, 45, 45)
-                            .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(finalTransferPlayerBtn, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addComponent(finalTransferPlayerBtn, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                            .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox1, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)))
+                        .addGap(164, 164, 164))
+                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel12, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
+                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10, GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(yearDissolveTeamTxtField)
+                                    .addComponent(dayDissolveTeamTxtField)
+                                    .addComponent(monthDissolveTeamTxtField, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE))))
+                        .addGap(275, 275, 275)))
+                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(teamsUpdateStatsComboBox, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17))
+                        .addGap(38, 38, 38)
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
                                 .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(transferPlayerPanelLayout.createSequentialGroup()
-                            .addComponent(tableChooserTransferPlayerComboBox, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(refreshTableTransferPlayerBtn, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane6, GroupLayout.PREFERRED_SIZE, 439, GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(610, Short.MAX_VALUE))
+                                    .addComponent(teamsUpdateStatsComboBox2, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel18))
+                                .addGap(0, 57, Short.MAX_VALUE))))
+                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(teamsWinnerUpdateStatsComboBox, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel19))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(GroupLayout.Alignment.TRAILING, transferPlayerPanelLayout.createSequentialGroup()
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+                .addGap(94, 94, 94))
         );
         transferPlayerPanelLayout.setVerticalGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(transferPlayerPanelLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(transferPlayerPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(90, 90, 90)
-                        .addComponent(finalTransferPlayerBtn, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addComponent(jCheckBox1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)
+                        .addComponent(finalTransferPlayerBtn, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+                        .addGap(104, 104, 104))
                     .addGroup(transferPlayerPanelLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -562,24 +620,57 @@ public class GUI extends javax.swing.JFrame {
                         .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(yearTransferPlayerTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(monthTransferPlayerTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(dayTransferPlayerTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(dayTransferPlayerTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel16))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                .addComponent(jScrollPane6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(finalDissolveTeamBtn, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel9)
+                                    .addComponent(yearDissolveTeamTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel10)
+                                    .addComponent(monthDissolveTeamTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel11)
+                                    .addComponent(dayDissolveTeamTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(284, Short.MAX_VALUE))
+                    .addGroup(GroupLayout.Alignment.TRAILING, transferPlayerPanelLayout.createSequentialGroup()
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(teamsUpdateStatsComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(teamsUpdateStatsComboBox2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(refreshTableTransferPlayerBtn, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(tableChooserTransferPlayerComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane6, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(158, Short.MAX_VALUE))
+                        .addComponent(jLabel19)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(teamsWinnerUpdateStatsComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGap(244, 244, 244))))
         );
 
         rightMakeTransacPanel.add(transferPlayerPanel, "card2");
@@ -597,7 +688,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(makeTransacPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
                     .addComponent(rightMakeTransacPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(leftMakeTransacPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 50, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         mainMainPanel.add(makeTransacPanel, "maketransac");
@@ -618,27 +709,25 @@ public class GUI extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(genReportsTable);
 
-        jComboBox1.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        yearGenReportsComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox2.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         GroupLayout genReportsPanelLayout = new GroupLayout(genReportsPanel);
         genReportsPanel.setLayout(genReportsPanelLayout);
         genReportsPanelLayout.setHorizontalGroup(genReportsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(genReportsPanelLayout.createSequentialGroup()
-                .addGroup(genReportsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(genReportsPanelLayout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(genReportsMainMenuBtn, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE))
-                    .addGroup(GroupLayout.Alignment.TRAILING, genReportsPanelLayout.createSequentialGroup()
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
+                .addContainerGap(145, Short.MAX_VALUE)
+                .addComponent(yearGenReportsComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, GroupLayout.PREFERRED_SIZE, 912, GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49))
+            .addGroup(genReportsPanelLayout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addComponent(genReportsMainMenuBtn, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         genReportsPanelLayout.setVerticalGroup(genReportsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, genReportsPanelLayout.createSequentialGroup()
@@ -647,55 +736,19 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addGroup(genReportsPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                        .addComponent(yearGenReportsComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                 .addComponent(genReportsMainMenuBtn, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+                .addGap(57, 57, 57))
         );
 
         mainMainPanel.add(genReportsPanel, "genreports");
 
         getContentPane().add(mainMainPanel);
-        mainMainPanel.setBounds(0, 0, 1280, 780);
+        mainMainPanel.setBounds(0, 0, 1280, 720);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void exitBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_exitBtnActionPerformed
-
-    private void genReportsBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_genReportsBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_genReportsBtnActionPerformed
-
-    private void makeTransacBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_makeTransacBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_makeTransacBtnActionPerformed
-
-    private void mainViewMainMenuBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_mainViewMainMenuBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mainViewMainMenuBtnActionPerformed
-
-    private void executeQueryMainViewBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_executeQueryMainViewBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_executeQueryMainViewBtnActionPerformed
-
-    private void yearTransferPlayerTxtFieldActionPerformed(ActionEvent evt) {//GEN-FIRST:event_yearTransferPlayerTxtFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_yearTransferPlayerTxtFieldActionPerformed
-
-    private void mainMenuTransacBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_mainMenuTransacBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mainMenuTransacBtnActionPerformed
-
-    private void updateTeamBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_updateTeamBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateTeamBtnActionPerformed
-
-    private void changeSponsorBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_changeSponsorBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_changeSponsorBtnActionPerformed
 
     public CardLayout getCardLayout() {
         return (CardLayout) mainMainPanel.getLayout();
@@ -749,11 +802,18 @@ public class GUI extends javax.swing.JFrame {
     // Transactions
     
     // TRANSFER PLAYER
+    public JPanel getMakeTransacPanel() {
+        return makeTransacPanel;
+    }
+    
     public JButton getMainMenuTransacBtn() {
         return mainMenuTransacBtn;
     }
     public JButton getFinalTransferPlayerBtn() {
         return finalTransferPlayerBtn;
+    }
+    public JButton getFinalDissolveTeamBtn() {
+        return finalDissolveTeamBtn;
     }
     
     public JComboBox<String> getPlayerTransferPlayerComboBox() {
@@ -764,9 +824,9 @@ public class GUI extends javax.swing.JFrame {
         return teamTransferPlayerTransacComboBox;
     }
     
-    public JComboBox<String> getTableChooserTransferPlayerComboBox() {
-        return tableChooserTransferPlayerComboBox;
-    }
+    // public JComboBox<String> getTableChooserTransferPlayerComboBox() {
+    //     return tableChooserTransferPlayerComboBox;
+    // }
  
     public JTextField getYearTransferPlayerTxtField() {
         return yearTransferPlayerTxtField;
@@ -778,11 +838,23 @@ public class GUI extends javax.swing.JFrame {
         return dayTransferPlayerTxtField;
     }
     
-    public JButton getRefreshTableTransferPlayerBtn() {
-        return refreshTableTransferPlayerBtn;
-    }
+    // public JButton getRefreshTableTransferPlayerBtn() {
+    //     return refreshTableTransferPlayerBtn;
+    // }
     
-    // 
+    // DISSOLVE TEAM
+    public JComboBox<String> getTeamTransferTeamDissolveComboBox() {
+        return teamTransferTeamDissolveComboBox;
+    }
+    public JTextField getYearDissolveTeamTxtField() {
+        return yearDissolveTeamTxtField;
+    }
+    public JTextField getMonthDissolveTeamTxtField() {
+        return monthDissolveTeamTxtField;
+    }
+    public JTextField getDayDissolveTeamTxtField() {
+        return dayDissolveTeamTxtField;
+    }
     
     
     public DefaultTableModel getMainViewTableModel() {
@@ -792,6 +864,52 @@ public class GUI extends javax.swing.JFrame {
         this.mainViewTableModel = mainViewTableModel;  
     }
     
+    // Combo Box Models
+    public DefaultComboBoxModel<String> getPlayersComboBoxModel() {
+        return playersComboBoxModel;
+    }
+    public DefaultComboBoxModel<String> getTeamsComboBoxModel() {
+        return teamsTransferPlayerComboBoxModel;
+    }
+
+
+    public DefaultComboBoxModel<String> getTeamsUpdateStatsComboBoxModel() {
+        return teamsUpdateStatsComboBoxModel;
+    }
+    public DefaultComboBoxModel<String> getTeamsUpdateStatsComboBoxModel2() {
+        return teamsUpdateStatsComboBoxModel2;
+    }
+    public DefaultComboBoxModel<String> getTeamsWinnerUpdateStatsComboBoxModel() {
+        return teamsWinnerUpdateStatsComboBoxModel;
+    }
+    public void updateComboBox(DefaultComboBoxModel<String> comboBox, List<String> items, String selectedItem) {
+        comboBox.removeAllElements();
+        comboBox.addAll(items);
+        comboBox.setSelectedItem(selectedItem);
+    }
+    public void updateComboBox3(String item1, String item2) {
+        teamsWinnerUpdateStatsComboBox.removeAllItems();
+        teamsWinnerUpdateStatsComboBox.addItem(item1);
+        teamsWinnerUpdateStatsComboBox.addItem(item2);
+    }
+
+    public void setPlayersComboBoxModel(ArrayList<String> playerNames) {
+        playersComboBoxModel.removeAllElements();
+        playersComboBoxModel.addAll(playerNames);
+    }
+
+    public void setTeamsComboBoxModel(ArrayList<String> teamNames) {
+        teamsTransferPlayerComboBoxModel.removeAllElements();
+        teamsDissolveTeamComboBoxModel.removeAllElements();
+        teamsUpdateStatsComboBoxModel.removeAllElements();
+        teamsUpdateStatsComboBoxModel2.removeAllElements();
+    
+        teamsTransferPlayerComboBoxModel.addAll(teamNames);
+        teamsDissolveTeamComboBoxModel.addAll(teamNames);
+        teamsUpdateStatsComboBoxModel.addAll(teamNames);
+        teamsUpdateStatsComboBoxModel2.addAll(teamNames);
+    }
+   
 
     public void addClickListener(ActionListener e) {
         this.mainViewBtn.addActionListener(e);
@@ -805,42 +923,15 @@ public class GUI extends javax.swing.JFrame {
 
         this.mainMenuTransacBtn.addActionListener(e);
         this.finalTransferPlayerBtn.addActionListener(e);
+
+        this.finalDissolveTeamBtn.addActionListener(e);
+
+
+        this.teamsUpdateStatsComboBox.addActionListener(e);
+        this.teamsUpdateStatsComboBox2.addActionListener(e);
+        this.teamsWinnerUpdateStatsComboBox.addActionListener(e);
     }
 
-    public ArrayList<String> getPlayerNames() {
-        return playerNames;
-    }
-    public void setPlayerNames(ArrayList<String> playerNames) {
-        this.playerNames = playerNames;
-    }
-    public ArrayList<String> getTeamNames() {
-        return teamNames;
-    }
-    public void setTeamNames(ArrayList<String> teamNames) {
-        this.teamNames = teamNames;
-    }
-    public ArrayList<String> getSponsorNames() {
-        return sponsorNames;
-    }
-    public void setSponsorNames(ArrayList<String> sponsorNames) {
-        this.sponsorNames = sponsorNames;
-    }
-
-    public void updatePlayersComboBoxModel() {
-        playersComboBoxModel.removeAllElements();
-        for (String player : playerNames) {
-            playersComboBoxModel.addElement(player);
-        }
-    }
-
-    public void updateTeamsComboBoxModel() {
-        teamsComboBoxModel.removeAllElements();
-        for (String team : teamNames) {
-            teamsComboBoxModel.addElement(team);
-        }
-    }
-
-    // TODO: Add sponsor combobox model
 
     /**
      * @param args the command line arguments
@@ -880,23 +971,37 @@ public class GUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JPanel bannerPanel;
     private JButton changeSponsorBtn;
+    private JTextField dayDissolveTeamTxtField;
     private JTextField dayTransferPlayerTxtField;
     private JButton executeQueryMainViewBtn;
     private JButton exitBtn;
+    private JButton finalDissolveTeamBtn;
     private JButton finalTransferPlayerBtn;
     private JButton genReportsBtn;
     private JButton genReportsMainMenuBtn;
     private JPanel genReportsPanel;
     private JTable genReportsTable;
+    private JCheckBox jCheckBox1;
     private JComboBox<String> jComboBox1;
     private JComboBox<String> jComboBox2;
     private JLabel jLabel1;
+    private JLabel jLabel10;
+    private JLabel jLabel11;
+    private JLabel jLabel12;
+    private JLabel jLabel14;
+    private JLabel jLabel15;
+    private JLabel jLabel16;
+    private JLabel jLabel17;
+    private JLabel jLabel18;
+    private JLabel jLabel19;
     private JLabel jLabel2;
     private JLabel jLabel3;
     private JLabel jLabel4;
     private JLabel jLabel5;
     private JLabel jLabel6;
     private JLabel jLabel7;
+    private JLabel jLabel8;
+    private JLabel jLabel9;
     private JScrollPane jScrollPane1;
     private JScrollPane jScrollPane2;
     private JScrollPane jScrollPane3;
@@ -918,24 +1023,31 @@ public class GUI extends javax.swing.JFrame {
     private JButton makeTransacBtn;
     private JPanel makeTransacPanel;
     private JLabel menuLbl;
+    private JTextField monthDissolveTeamTxtField;
     private JTextField monthTransferPlayerTxtField;
     private JComboBox<String> playerTransferPlayerComboBox;
     private DefaultComboBoxModel<String> playersComboBoxModel;
     private JTextArea queryMainViewTxtArea;
-    private JButton refreshTableTransferPlayerBtn;
     private JPanel rightMakeTransacPanel;
-    private JComboBox<String> tableChooserTransferPlayerComboBox;
-    private JTable tableTransferPlayer;
     private JComboBox<String> tablesMainViewComboBox;
     private DefaultComboBoxModel<String> tablesMainViewComBoxDefModel;
     private JComboBox<String> teamTransferPlayerTransacComboBox;
-    private DefaultComboBoxModel<String> teamsComboBoxModel;
+    private DefaultComboBoxModel<String> teamsTransferPlayerComboBoxModel;
+    private JComboBox<String> teamTransferTeamDissolveComboBox;
+    private DefaultComboBoxModel<String> teamsDissolveTeamComboBoxModel;
+    private JComboBox<String> teamsUpdateStatsComboBox;
+    private DefaultComboBoxModel<String> teamsUpdateStatsComboBoxModel;
+    private JComboBox<String> teamsUpdateStatsComboBox2;
+    private DefaultComboBoxModel<String> teamsUpdateStatsComboBoxModel2;
+    private JComboBox<String> teamsWinnerUpdateStatsComboBox;
+    private DefaultComboBoxModel<String> teamsWinnerUpdateStatsComboBoxModel;
     private JButton transferPlayerBtn;
     private JPanel transferPlayerPanel;
     private JButton updateTeamBtn;
     private JPanel upperMainViewPanel;
+    private JTextField yearDissolveTeamTxtField;
+    private JComboBox<String> yearGenReportsComboBox;
     private JTextField yearTransferPlayerTxtField;
     // End of variables declaration//GEN-END:variables
-    private ArrayList<String> playerNames, teamNames, sponsorNames;
     private DefaultComboBoxModel<String> playerTransferDefaultComboBoxModel;
 }

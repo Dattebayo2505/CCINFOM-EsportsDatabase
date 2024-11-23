@@ -62,22 +62,22 @@ public class FileReaderUtil {
             switch (columnType) {
                 case "INT":
                     int num = rs.getInt(columnName);
-                    record[i] = num;
+                    record[i] = rs.wasNull() ? "NULL" : String.valueOf(num);
                     break;
                 case "VARCHAR":
                     String str = rs.getString(columnName);
-                    record[i] = str;
+                    record[i] = (str == null) ? "NULL" : str;
                     break;
                 case "DATE":
                     String date = rs.getString(columnName);
-                    record[i] = date;
+                    record[i] = (date == null) ? "NULL" : date;
                     break;
                 case "DECIMAL":
                     double dec = rs.getDouble(columnName);
-                    record[i] = dec;
+                    record[i] = rs.wasNull() ? "NULL" : String.valueOf(dec);
                     break;
                 case "NULL":
-                    record[i] = null;
+                    record[i] = "NULL";
                     break;
                 default:
                     System.out.println("Unknown type");

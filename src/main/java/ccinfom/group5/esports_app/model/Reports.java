@@ -83,8 +83,8 @@ public class Reports {
                     "COUNT(s.sponsor_id) AS total_sponsors " +
                     "FROM teams t " +
                     "JOIN teamsponsor s ON t.team = s.team " +
-                    "WHERE YEAR(s.contract_start) = " + year + "-- Specify the year you are interested in" +
-                    "AND (@month IS NULL OR MONTH(s.contract_start) = @month)  -- Optional month filter" +
+                    "WHERE YEAR(s.contract_start) = " + year +
+                    "AND (@month IS NULL OR MONTH(s.contract_start) = @month)  " +
                     "GROUP BY t.team, YEAR(s.contract_start), MONTH(s.contract_start)" +
                     "ORDER BY sponsorship_year, sponsorship_month, t.team;";
             

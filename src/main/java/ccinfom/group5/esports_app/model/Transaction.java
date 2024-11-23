@@ -68,31 +68,30 @@ public class Transaction {
     }
 
     public void modifySponsorships(int history_id, int sponsor_id, String teamName, double contract_amount, String contract_start, String contract_end) {
-        int currSponsorships = 0;
-        // check for active sponsorships by checking the number of sponsor ids in TeamSponsor
-        for (TeamSponsor teamSponsor : database.getAllTeamSponsors()) {
-            if (teamSponsor.getSponsorID() == sponsor_id) {
-                currSponsorships++;
-            }
-        }
+    // int currSponsorships = 0;
+    // // check for active sponsorships by checking the number of sponsor ids in TeamSponsor
+    // for (TeamSponsor teamSponsor : database.getAllTeamSponsors()) {
+    //     if (teamSponsor.getSponsorID() == sponsor_id) {
+    //         currSponsorships++;
+    //     }
+    // }
         
-
-        if (currSponsorships <= 3) {
-            int lastHistory = database.getAllSponsorHistories().size();
-            // add new record to sponsorhistory
-            database.getAllSponsorHistories().add(new SponsorHistory(lastHistory + 1, 
-                                                            sponsor_id, 
-                                                            teamName, 
-                                                            contract_amount, 
-                                                            contract_start, 
-                                                            contract_end));
-            // add new record to teamsponsor
-            database.getAllTeamSponsors().add(new TeamSponsor(sponsor_id, 
-                                                            teamName, 
-                                                            contract_amount, 
-                                                            contract_start, 
-                                                            contract_end));
-        }
+        // if (currSponsorships <= 3) {
+    int lastHistory = database.getAllSponsorHistories().size();
+    // add new record to sponsorhistory
+    database.getAllSponsorHistories().add(new SponsorHistory(lastHistory + 1, 
+                                                    sponsor_id, 
+                                                    teamName, 
+                                                    contract_amount, 
+                                                    contract_start, 
+                                                    contract_end));
+    // add new record to teamsponsor
+    database.getAllTeamSponsors().add(new TeamSponsor(sponsor_id, 
+                                                    teamName, 
+                                                    contract_amount, 
+                                                    contract_start, 
+                                                    contract_end));
+        // }
     }
 
     public void teamStatistics(String teamName, String matchDate, String result, double winnings) {

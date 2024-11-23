@@ -47,7 +47,6 @@ public class MainController implements ActionListener {
     private DefaultTableModel initializeTable(ResultSet rs) {
         String[] columnNames = null;
         Object[][] data = null;
-        ResultSet rs2;
         ResultSetMetaData metaData;
         int columnCount, rowCount, i;
 
@@ -149,15 +148,20 @@ public class MainController implements ActionListener {
     
         try {
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            boolean isResultSet = statement.execute(query);
-    
+            
+            boolean hasResultSet = statement.execute(query);
+            
+            if (hasResultSet) {
                 ResultSet resultSet = statement.getResultSet();
                 gui.getMainViewTable().setModel(initializeTable(resultSet));
-
-
-            JOptionPane.showMessageDialog(gui.getMainViewPanel(), "Query executed successfully.", 
-                            "Query Success", JOptionPane.INFORMATION_MESSAGE);
-                            
+                JOptionPane.showMessageDialog(gui.getMainViewPanel(), "Query executed successfully.", 
+                                "Query Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                int updateCount = statement.getUpdateCount();
+                JOptionPane.showMessageDialog(gui.getMainViewPanel(), "Update executed successfully. Rows affected: " + updateCount, 
+                                "Update Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+                                
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error executing query: \n" + e.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -213,16 +217,6 @@ public class MainController implements ActionListener {
         }
         else if (source == gui.getTablesMainViewComboBox()) {
             setMainViewTableView();
-            String selected = (String) gui.getTablesMainViewComboBox().getSelectedItem();
-
-            if (selected.equals("players") 
-                || selected.equals("teams")) {
-
-                gui.setGeneralComboBoxModel(getIDs(selected, 1));
-            }
-            if (selected.equals("companies")) {
-                gui.setGeneralComboBoxModel(getIDs(selected, 2));
-            }
         }
 
         else if (source == gui.getInsertRecordMainViewBtn()) {
@@ -242,7 +236,7 @@ public class MainController implements ActionListener {
         }
         else if (source == gui.getUpdateRecordMainViewBtn()) {
             String table = (String) gui.getTablesMainViewComboBox().getSelectedItem();
-            String query = "UPDATE " + table + "\nSET <> \nWHERE\n" +
+            String query = "UPDATE " + table + "\nSET <> = <>\nWHERE\n" +
                     "<> = <>"; 
     
             gui.getQueryMainViewTxtArea().setText(query);
@@ -406,12 +400,12 @@ public class MainController implements ActionListener {
     public void viewTransferReport(int year, Integer month) throws SQLException {
         String preQuery = "SET @month = " + (month != null ? month : "NULL") + ";";
         String query = "SELECT " +
-                    "COUNT(ph.history_id) AS total_transfers, " +
-                    "COUNT(ph.history_id) / COUNT(DISTINCT ph.player_id) AS avg_transfers_per_player " +
-                    "FROM playerhistory ph " +
-                    "WHERE YEAR(ph.joined_new_team) = " + year + 
-                    " AND (MONTH(ph.joined_new_team) = @month OR @month IS NULL)" +
-                    " GROUP BY MONTH(ph.joined_new_team)";
+                    "player_id, " +
+                    "COUNT(player_id) AS total_transfers " +
+                    "FROM playerhistory " +
+                    "WHERE YEAR(joined_new_team) = " + year + " " +
+                    "GROUP BY player_id " +
+                    "HAVING COUNT(player_id) > 1";
 
         ResultSet rs = null;
         try (Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
@@ -612,9 +606,6 @@ public class MainController implements ActionListener {
                 numSponsor = resultSet.getInt(1);
             }
 
-            JOptionPane.showMessageDialog(gui.getMakeTransacPanel(), "Sponsor added successfully.", 
-                            "Add Sponsor Success", JOptionPane.INFORMATION_MESSAGE);
-        
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(gui.getMakeTransacPanel(), "Error executing query: \n" + 
                             ex.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
@@ -655,7 +646,7 @@ public class MainController implements ActionListener {
             return;
         } 
 
-        String sponsor = (String) gui.getTeamSponsorAddComboBox().getSelectedItem();
+        String sponsor = (String) gui.getSponsorAddComboBox().getSelectedItem();
 
         int contractAmount = (int) gui.getAddSponsorTeamSpinner().getValue();
 
@@ -682,9 +673,8 @@ public class MainController implements ActionListener {
             int companyID = -1;
             if (rs.next()) {
                 companyID = rs.getInt("company_id");        
-
-                pstmt1.setInt(1, getRowCount("teamsponsor") + 1);
-                pstmt1.setInt(2, companyID);
+                pstmt1.setInt(1, companyID);
+                pstmt1.setString(2, team);
                 pstmt1.setInt(3, contractAmount);
                 pstmt1.setString(4, dateStart);
                 pstmt1.setString(5, dateEnd);
@@ -698,6 +688,10 @@ public class MainController implements ActionListener {
         
                 pstmt1.executeUpdate();
                 pstmt2.executeUpdate();
+
+                JOptionPane.showMessageDialog(gui.getMakeTransacPanel(), "Sponsor added successfully.", 
+                            "Sponsor Success", JOptionPane.INFORMATION_MESSAGE);
+
             } else {
                 GeneralUtil.debugPrint("Sponsor not found" + companyID);
                 JOptionPane.showMessageDialog(gui.getMakeTransacPanel(), "Sponsor not found", "Error", JOptionPane.ERROR_MESSAGE);

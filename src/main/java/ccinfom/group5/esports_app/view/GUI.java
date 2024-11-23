@@ -82,17 +82,16 @@ public class GUI extends javax.swing.JFrame {
         mainViewTable = new JTable();
         tablesMainViewComboBox = new JComboBox<>();
         insertRecordMainViewBtn = new JButton();
-        jLabel25 = new JLabel();
         deleteRecordMainViewBtn = new JButton();
         updateRecordMainViewBtn = new JButton();
-        jComboBox1 = new JComboBox<>();
-        jComboBox2 = new JComboBox<>();
-        jLabel26 = new JLabel();
+        generalComboBox = new JComboBox<>();
         lowerMainViewPanel = new JPanel();
         mainViewMainMenuBtn = new JButton();
         executeQueryMainViewBtn = new JButton();
         jScrollPane3 = new JScrollPane();
         queryMainViewTxtArea = new JTextArea();
+        jLabel26 = new JLabel();
+        jLabel25 = new JLabel();
         makeTransacPanel = new JPanel();
         leftMakeTransacPanel = new JPanel();
         rightMakeTransacPanel = new JPanel();
@@ -326,6 +325,7 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(mainViewTable);
         jScrollPane1.setWheelScrollingEnabled(false);
 
+        mainViewTable.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
         mainViewTable.setModel(mainViewTableModel);
         mainViewTable.setPreferredSize(null);
         mainViewTable.setRequestFocusEnabled(false);
@@ -343,51 +343,28 @@ public class GUI extends javax.swing.JFrame {
 
         insertRecordMainViewBtn.setText("INSERT NEW RECORD");
 
-        jLabel25.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel25.setForeground(new Color(255, 0, 0));
-        jLabel25.setText("EDIT THE <>");
-
         deleteRecordMainViewBtn.setText("DELETE RECORD");
 
         updateRecordMainViewBtn.setText("UPDATE RECORD");
 
-        jComboBox1.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox2.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel26.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel26.setForeground(new Color(255, 0, 0));
-        jLabel26.setText("LIMIT TO 1 QUERY ONLY");
+        generalComboBoxModel = new DefaultComboBoxModel<String>();
+        generalComboBox.setModel(generalComboBoxModel);
 
         GroupLayout upperMainViewPanelLayout = new GroupLayout(upperMainViewPanel);
         upperMainViewPanel.setLayout(upperMainViewPanelLayout);
         upperMainViewPanelLayout.setHorizontalGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(upperMainViewPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 759, GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(upperMainViewPanelLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 759, GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(tablesMainViewComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addGroup(upperMainViewPanelLayout.createSequentialGroup()
-                                .addGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(deleteRecordMainViewBtn, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(updateRecordMainViewBtn, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(insertRecordMainViewBtn, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
-                                .addGap(65, 65, 65)
-                                .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addGap(46, 46, 46)
-                                .addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(upperMainViewPanelLayout.createSequentialGroup()
-                        .addGap(219, 219, 219)
-                        .addComponent(jLabel25)))
-                .addContainerGap(54, Short.MAX_VALUE))
-            .addGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(upperMainViewPanelLayout.createSequentialGroup()
-                    .addGap(30, 30, 30)
-                    .addComponent(jLabel26)
-                    .addContainerGap(1087, Short.MAX_VALUE)))
+                    .addComponent(tablesMainViewComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(generalComboBox, GroupLayout.Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(deleteRecordMainViewBtn, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(updateRecordMainViewBtn, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(insertRecordMainViewBtn, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
         upperMainViewPanelLayout.setVerticalGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(upperMainViewPanelLayout.createSequentialGroup()
@@ -396,23 +373,15 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(upperMainViewPanelLayout.createSequentialGroup()
                         .addComponent(tablesMainViewComboBox, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(insertRecordMainViewBtn)
-                            .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(insertRecordMainViewBtn)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(updateRecordMainViewBtn)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(deleteRecordMainViewBtn))
+                        .addComponent(deleteRecordMainViewBtn)
+                        .addGap(30, 30, 30)
+                        .addComponent(generalComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 365, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jLabel25)
-                .addGap(15, 15, 15))
-            .addGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(GroupLayout.Alignment.TRAILING, upperMainViewPanelLayout.createSequentialGroup()
-                    .addContainerGap(410, Short.MAX_VALUE)
-                    .addComponent(jLabel26)
-                    .addGap(16, 16, 16)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         lowerMainViewPanel.setBackground(new Color(204, 255, 204));
@@ -426,33 +395,50 @@ public class GUI extends javax.swing.JFrame {
         executeQueryMainViewBtn.setText("Execute Query");
 
         queryMainViewTxtArea.setColumns(20);
-        queryMainViewTxtArea.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
+        queryMainViewTxtArea.setFont(new Font("Segoe UI", 0, 18)); // NOI18N
         queryMainViewTxtArea.setRows(5);
         queryMainViewTxtArea.setWrapStyleWord(true);
         jScrollPane3.setViewportView(queryMainViewTxtArea);
 
+        jLabel26.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel26.setForeground(new Color(255, 0, 0));
+        jLabel26.setText("LIMIT TO 1 QUERY ONLY");
+
+        jLabel25.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel25.setForeground(new Color(255, 0, 0));
+        jLabel25.setText("EDIT THE '<>' as necessary");
+
         GroupLayout lowerMainViewPanelLayout = new GroupLayout(lowerMainViewPanel);
         lowerMainViewPanel.setLayout(lowerMainViewPanelLayout);
         lowerMainViewPanelLayout.setHorizontalGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+            .addGroup(GroupLayout.Alignment.TRAILING, lowerMainViewPanelLayout.createSequentialGroup()
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
-                        .addComponent(executeQueryMainViewBtn, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(mainViewMainMenuBtn, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 537, GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel26)
+                        .addGap(199, 199, 199)
+                        .addComponent(jLabel25))
+                    .addGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                        .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
+                            .addComponent(executeQueryMainViewBtn, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mainViewMainMenuBtn, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 825, GroupLayout.PREFERRED_SIZE)))
+                .addGap(226, 226, 226))
         );
         lowerMainViewPanelLayout.setVerticalGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                    .addComponent(executeQueryMainViewBtn, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mainViewMainMenuBtn, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel25))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(mainViewMainMenuBtn, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(executeQueryMainViewBtn, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         GroupLayout mainViewPanelLayout = new GroupLayout(mainViewPanel);
@@ -465,10 +451,9 @@ public class GUI extends javax.swing.JFrame {
         );
         mainViewPanelLayout.setVerticalGroup(mainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(mainViewPanelLayout.createSequentialGroup()
-                .addComponent(upperMainViewPanel, GroupLayout.PREFERRED_SIZE, 446, GroupLayout.PREFERRED_SIZE)
+                .addComponent(upperMainViewPanel, GroupLayout.PREFERRED_SIZE, 405, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(lowerMainViewPanel, GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(lowerMainViewPanel, GroupLayout.PREFERRED_SIZE, 319, GroupLayout.PREFERRED_SIZE))
         );
 
         mainMainPanel.add(mainViewPanel, "mainview");
@@ -654,18 +639,17 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(teamsUpdateStatsComboBox, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17)
                     .addComponent(teamsWinnerUpdateStatsComboBox, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
                     .addComponent(teamsUpdateStatsSpinner, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
                     .addComponent(finalTeamsUpdateStatsBtn, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20)
-                    .addComponent(jLabel19))
+                    .addComponent(jLabel19)
+                    .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel17, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel16, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(teamsUpdateStatsComboBox2, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel18))
+                    .addComponent(teamsUpdateStatsComboBox2, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
                     .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel39)
@@ -676,7 +660,8 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(yearTeamsUpdateStatsTxtField)
                             .addComponent(dayTeamsUpdateStatsTxtField)
                             .addComponent(monthTeamsUpdateStatsTxtField, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel21, GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel18, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -736,7 +721,6 @@ public class GUI extends javax.swing.JFrame {
                             .addGroup(transferPlayerPanelLayout.createSequentialGroup()
                                 .addGap(116, 116, 116)
                                 .addComponent(currentTeamSponsorLbl, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel14)
                             .addComponent(sponsorAddComboBox, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
                             .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                 .addComponent(finalTransferPlayerBtn, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
@@ -746,7 +730,8 @@ public class GUI extends javax.swing.JFrame {
                                     .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel4)
                                         .addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jCheckBox1, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(jCheckBox1, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel14, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(GroupLayout.Alignment.TRAILING, transferPlayerPanelLayout.createSequentialGroup()
                         .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
@@ -778,12 +763,12 @@ public class GUI extends javax.swing.JFrame {
                                             .addComponent(jLabel11))
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel15)
                                             .addComponent(teamSponsorAddComboBox, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
                                             .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                                 .addComponent(yearDissolveTeamTxtField)
                                                 .addComponent(dayDissolveTeamTxtField)
-                                                .addComponent(monthDissolveTeamTxtField, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE))))
+                                                .addComponent(monthDissolveTeamTxtField, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jLabel15, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(transferPlayerPanelLayout.createSequentialGroup()
                                         .addComponent(jLabel12, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1130,10 +1115,6 @@ public class GUI extends javax.swing.JFrame {
     public JComboBox<String> getTeamTransferPlayerTransacComboBox() {
         return teamTransferPlayerTransacComboBox;
     }
-    
-    // public JComboBox<String> getTableChooserTransferPlayerComboBox() {
-    //     return tableChooserTransferPlayerComboBox;
-    // }
  
     public JTextField getYearTransferPlayerTxtField() {
         return yearTransferPlayerTxtField;
@@ -1144,10 +1125,6 @@ public class GUI extends javax.swing.JFrame {
     public JTextField getDayTransferPlayerTxtField() {
         return dayTransferPlayerTxtField;
     }
-    
-    // public JButton getRefreshTableTransferPlayerBtn() {
-        //     return refreshTableTransferPlayerBtn;
-        // }
     
     // DISSOLVE TEAM
     public JComboBox<String> getTeamTransferTeamDissolveComboBox() {
@@ -1237,6 +1214,14 @@ public class GUI extends javax.swing.JFrame {
     }
     
     // Combo Box Models
+    // TODO Use
+    public DefaultComboBoxModel<String> getGeneralComboBoxModel() {
+        return generalComboBoxModel;
+    }
+    public void setGeneralComboBoxModel(ArrayList<String> items) {
+        generalComboBoxModel.removeAllElements();
+        generalComboBoxModel.addAll(items);
+    }
     public DefaultComboBoxModel<String> getPlayersComboBoxModel() {
         return playersComboBoxModel;
     }
@@ -1282,7 +1267,9 @@ public class GUI extends javax.swing.JFrame {
 
     public void setPlayersComboBoxModel(ArrayList<String> playerNames) {
         playersComboBoxModel.removeAllElements();
+
         playersComboBoxModel.addAll(playerNames);
+        
     }
 
     public void setTeamsComboBoxModel(ArrayList<String> teamNames) {
@@ -1401,10 +1388,10 @@ public class GUI extends javax.swing.JFrame {
     private JTable genReportsTable;
     private DefaultTableModel genReportsTableModel;
     private JToggleButton genReportsToggleBtn;
+    private JComboBox<String> generalComboBox;
+    private DefaultComboBoxModel<String> generalComboBoxModel;
     private JButton insertRecordMainViewBtn;
     private JCheckBox jCheckBox1;
-    private JComboBox<String> jComboBox1;
-    private JComboBox<String> jComboBox2;
     private JLabel jLabel1;
     private JLabel jLabel10;
     private JLabel jLabel11;

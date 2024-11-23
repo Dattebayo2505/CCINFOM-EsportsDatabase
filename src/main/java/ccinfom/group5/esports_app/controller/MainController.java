@@ -151,13 +151,13 @@ public class MainController implements ActionListener {
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             boolean isResultSet = statement.execute(query);
     
-            if (isResultSet) {
                 ResultSet resultSet = statement.getResultSet();
                 gui.getMainViewTable().setModel(initializeTable(resultSet));
-            } else {
-                int updateCount = statement.getUpdateCount();
-                JOptionPane.showMessageDialog(gui.getMainViewPanel(), "Update count: " + updateCount, "Update Successful", JOptionPane.INFORMATION_MESSAGE);
-            }
+
+
+            JOptionPane.showMessageDialog(gui.getMainViewPanel(), "Query executed successfully.", 
+                            "Query Success", JOptionPane.INFORMATION_MESSAGE);
+                            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error executing query: \n" + e.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -209,14 +209,20 @@ public class MainController implements ActionListener {
 
         // Main View Page
         if (source == gui.getExecuteQueryMainViewBtn()) {
-            doExecuteQuery();
-
-            JOptionPane.showMessageDialog(gui.getMainViewPanel(), "Query executed successfully.", 
-                            "Query Success", JOptionPane.INFORMATION_MESSAGE);
-            
+            doExecuteQuery();            
         }
         else if (source == gui.getTablesMainViewComboBox()) {
             setMainViewTableView();
+            String selected = (String) gui.getTablesMainViewComboBox().getSelectedItem();
+
+            if (selected.equals("players") 
+                || selected.equals("teams")) {
+
+                gui.setGeneralComboBoxModel(getIDs(selected, 1));
+            }
+            if (selected.equals("companies")) {
+                gui.setGeneralComboBoxModel(getIDs(selected, 2));
+            }
         }
 
         else if (source == gui.getInsertRecordMainViewBtn()) {
@@ -305,11 +311,7 @@ public class MainController implements ActionListener {
         }   
 
         else if(source == gui.getFinalAddSponsorTeamBtn()) {
-            
             doAddSponsor();
-
-            JOptionPane.showMessageDialog(gui.getMakeTransacPanel(), "Sponsor added successfully.", 
-                            "Add Sponsor Success", JOptionPane.INFORMATION_MESSAGE);
         } 
         
         else if (source == gui.getFinalDissolveTeamBtn()) {
@@ -331,7 +333,7 @@ public class MainController implements ActionListener {
                     ex.printStackTrace();
                 }
 
-                gui.setTeamsComboBoxModel(getIDs("teams", "team"));
+                gui.setTeamsComboBoxModel(getIDs("teams", "team", "active"));
 
                 JOptionPane.showMessageDialog(gui.getMakeTransacPanel(), "Team dissolved successfully.", 
                 "Dissolve Success", JOptionPane.INFORMATION_MESSAGE);
@@ -610,6 +612,9 @@ public class MainController implements ActionListener {
                 numSponsor = resultSet.getInt(1);
             }
 
+            JOptionPane.showMessageDialog(gui.getMakeTransacPanel(), "Sponsor added successfully.", 
+                            "Add Sponsor Success", JOptionPane.INFORMATION_MESSAGE);
+        
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(gui.getMakeTransacPanel(), "Error executing query: \n" + 
                             ex.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
@@ -660,37 +665,44 @@ public class MainController implements ActionListener {
             return;
         }
         
-        String getSponsorIDFromNameQuery = "SELECT company FROM companies WHERE company = ?";
+        String getSponsorIDFromNameQuery = "SELECT company_id FROM companies WHERE company = ?";
         String insertQuery1 = "INSERT INTO teamsponsor (sponsor_id, team, contract_amount, contract_start, contract_end) " 
                     + "VALUES (?, ?, ?, ?, ?)";
         String insertQuery2 = "INSERT INTO sponsorhistory (history_id, sponsor_id, team, contract_amount, contract_start, contract_end) "
                     + "VALUES (?, ?, ?, ?, ?, ?)";
-
+        
         try (PreparedStatement pstmt = con.prepareStatement(getSponsorIDFromNameQuery);
             PreparedStatement pstmt1 = con.prepareStatement(insertQuery1);
             PreparedStatement pstmt2 = con.prepareStatement(insertQuery2)
             ) {
-
+        
             pstmt.setString(1, sponsor);
             ResultSet rs = pstmt.executeQuery();
-            String companyID = rs.getString("company_id");
+            
+            int companyID = -1;
+            if (rs.next()) {
+                companyID = rs.getInt("company_id");        
 
-            pstmt1.setInt(1, getRowCount("teamsponsor") + 1);
-            pstmt1.setString(2, companyID);
-            pstmt1.setInt(3, contractAmount);
-            pstmt1.setString(4, dateStart);
-            pstmt1.setString(5, dateEnd);
-
-            pstmt2.setInt(1, getRowCount("sponsorhistory") + 1);
-            pstmt2.setString(2, sponsor);
-            pstmt2.setString(3, companyID);
-            pstmt2.setInt(4, contractAmount);
-            pstmt2.setString(5, dateStart);
-            pstmt2.setString(6, dateEnd);
-
-            pstmt1.executeUpdate();
-            pstmt2.executeUpdate();
-
+                pstmt1.setInt(1, getRowCount("teamsponsor") + 1);
+                pstmt1.setInt(2, companyID);
+                pstmt1.setInt(3, contractAmount);
+                pstmt1.setString(4, dateStart);
+                pstmt1.setString(5, dateEnd);
+        
+                pstmt2.setInt(1, getRowCount("sponsorhistory") + 1);
+                pstmt2.setInt(2, companyID);
+                pstmt2.setString(3, team);
+                pstmt2.setInt(4, contractAmount);
+                pstmt2.setString(5, dateStart);
+                pstmt2.setString(6, dateEnd);
+        
+                pstmt1.executeUpdate();
+                pstmt2.executeUpdate();
+            } else {
+                GeneralUtil.debugPrint("Sponsor not found" + companyID);
+                JOptionPane.showMessageDialog(gui.getMakeTransacPanel(), "Sponsor not found", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(gui.getMakeTransacPanel(), "Error executing query: \n" + 
                             e.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
@@ -931,6 +943,29 @@ public class MainController implements ActionListener {
                             e.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
         }
 
+        return iD;
+    }
+
+    private ArrayList<String> getIDs(String table, int columnIndex) {
+        ArrayList<String> iD = new ArrayList<>();
+    
+        try {
+            statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                                            ResultSet.CONCUR_READ_ONLY);
+    
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM " + table);
+    
+            while (resultSet.next()) {
+                iD.add(resultSet.getString(columnIndex));
+            }
+    
+            Collections.sort(iD);
+    
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(gui.getMainViewPanel(), "Error executing query: \n" + 
+                            e.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
+        }
+    
         return iD;
     }
 

@@ -8,4 +8,4 @@ INSERT INTO teamhistory (history_id, team, creation_date, disband_date) VALUES
 (7, 'Sentinels', '2017-03-23', NULL),
 (8, 'Cloud9', '2008-09-01', NULL),
 (9, 'Dattebayo', '2005-04-23', NULL),
-(10, 'CCS Nation', '2018-09-10', NULL);
+(10, 'CCS Nation', '2017-09-10', NULL);

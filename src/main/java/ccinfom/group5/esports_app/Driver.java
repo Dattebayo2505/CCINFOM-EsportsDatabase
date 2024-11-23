@@ -22,7 +22,7 @@ public class Driver {
     public static void main(String[] args) {
         System.out.println("GROUP 5 - Esports Database Application\n");
         
-        FileReaderUtil.readConfigAndSetConnection(GeneralUtil.mainDirectory + "config-must-edit.txt");
+        FileReaderUtil.readConfigAndSetConnection("config-must-edit.txt");
 
         Database database = new Database();
         if (database.initialStatus() == false) return;

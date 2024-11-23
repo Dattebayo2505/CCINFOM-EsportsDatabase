@@ -1,6 +1,12 @@
 package ccinfom.group5.esports_app.model;
 
-import ccinfom.group5.esports_app.model.tables.*;
+import ccinfom.group5.esports_app.model.tables.Player;
+import ccinfom.group5.esports_app.model.tables.PlayerHistory;
+import ccinfom.group5.esports_app.model.tables.SponsorHistory;
+import ccinfom.group5.esports_app.model.tables.Team;
+import ccinfom.group5.esports_app.model.tables.TeamHistory;
+import ccinfom.group5.esports_app.model.tables.TeamPerformanceHistory;
+import ccinfom.group5.esports_app.model.tables.TeamStats;
 
 public class Transaction {
     private Database database;
@@ -11,9 +17,9 @@ public class Transaction {
 
 
     public void playerTransfer(Player player, 
-                               String leftOldTeam, 
-                               String newTeam,
-                               String joinedNewTeam) {
+                                String leftOldTeam, 
+                                String newTeam,
+                                String joinedNewTeam) {
 
         int lastHistory = database.getAllPlayerHistories().size();
         database.getAllPlayerHistories().add(new PlayerHistory(lastHistory + 1, 
@@ -32,9 +38,9 @@ public class Transaction {
         int lastHistory = database.getAllTeamHistories().size();
 
         TeamHistory teamHistory = new TeamHistory(lastHistory + 1, 
-                                                  team.getTeamName(), 
-                                                  team.getTeamHistory(database), 
-                                                  disbandDate);
+                                                    team.getTeamName(), 
+                                                    team.getTeamHistory(database), 
+                                                    disbandDate);
         database.getAllTeamHistories().add(teamHistory);
 
         // Set all players in the team to "inactive" and update their histories
@@ -57,6 +63,27 @@ public class Transaction {
                 player.setCurrentTeam(null);
                 player.setStatus("inactive");
             }
+        }
+    }
+
+    public void modifySponsorships(int history_id, int sponsor_id, String teamName, double contract_amount, String contract_start, String contract_end) {
+        int currSponsorships = 0;
+        // check for active sponsorships
+        for (SponsorHistory sponsorHistory : database.getAllSponsorHistories()) {
+            if (sponsorHistory.getSponsorID() == sponsor_id) {
+                // help pls
+            }
+        }
+
+        if (currSponsorships <= 3) {
+            int lastHistory = database.getAllSponsorHistories().size();
+            // add new record to sponsorhistory
+            database.getAllSponsorHistories().add(new SponsorHistory(lastHistory + 1, 
+                                                            sponsor_id, 
+                                                            teamName, 
+                                                            contract_amount, 
+                                                            contract_start, 
+                                                            contract_end));
         }
     }
 

@@ -189,6 +189,26 @@ public class Database {
                             );
                             allTeamPerformanceHistories.add(teamPerformanceHistory);
                             break;
+                        case "teamstats":
+                            TeamStats teamStats = new TeamStats(
+                                tableRecord[0].toString(), //team
+                                (double) tableRecord[1], //total_winnings
+                                tableRecord[2].toString(), //favored_map
+                                (int) tableRecord[3], //wins
+                                (int) tableRecord[4] //losses
+                            );
+                            allTeamStats.add(teamStats);
+                            break;
+                        case "teamsponsor":
+                            TeamSponsor teamSponsor = new TeamSponsor(
+                                (int) tableRecord[1], //sponsor_id
+                                tableRecord[0].toString(), //team
+                                (double) tableRecord[2], //contract_amount
+                                tableRecord[3].toString(), //contract_start
+                                tableRecord[4].toString() //contract_end
+                            );
+                            allTeamSponsors.add(teamSponsor);
+                            break;
                     }
                     
                     // TODO: Add Object[][] here

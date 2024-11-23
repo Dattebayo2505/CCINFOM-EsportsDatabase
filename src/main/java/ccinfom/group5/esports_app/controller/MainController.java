@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import ccinfom.group5.esports_app.model.*;
+import ccinfom.group5.esports_app.model.tables.*;
 import ccinfom.group5.esports_app.utils.FileReaderUtil;
 import ccinfom.group5.esports_app.view.GUI;
 import ccinfom.group5.esports_app.view_deprecate.OldGUI;
@@ -28,13 +29,14 @@ public class MainController implements ActionListener {
     private GUI gui;
     private Connection con;
     private Statement statement;
+    private Transaction transaction;
 
     public MainController(Database database, GUI gui, Connection con) {
         this.database = database;
         this.gui = gui;
         this.con = con;     
         
-        Transaction transaction = new Transaction(database);
+        transaction = new Transaction(database);
 
         gui.addClickListener(this);
 
@@ -44,6 +46,7 @@ public class MainController implements ActionListener {
 
         gui.updatePlayersComboBoxModel();
         gui.updateTeamsComboBoxModel();
+        // TODO add gui updatesponsorcomboboxmodel
 
         initializeTable();
     }
@@ -171,7 +174,13 @@ public class MainController implements ActionListener {
         }
 
         // Make Transaction Page
+        else if (source == gui.getFinalTransferPlayerBtn()) {
+            doTransferPlayer();
 
+
+
+            
+        }
 
         
         // Generate Reports Page
@@ -179,6 +188,16 @@ public class MainController implements ActionListener {
 
 
 
+    }
+
+    private void doTransferPlayer() {
+        String playerID = (String) gui.getPlayerTransferPlayerComboBox().getSelectedItem();
+        String newTeam = (String) gui.getTeamTransferPlayerTransacComboBox().getSelectedItem();
+
+        
+        
+
+        transaction.playerTransfer(choosePlayer(playerID), null, newTeam, null);
     }
 
     private boolean isSemicolonPresent(String query) {
@@ -208,12 +227,21 @@ public class MainController implements ActionListener {
             }
 
             Collections.sort(iD);
-            
+
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error executing query: \n" + e.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
         }
 
         return iD;
+    }
+
+    private Player choosePlayer(String name) {
+        for (Player player : database.getAllPlayers()) {
+            if (player.getPlayerID().equals(name)) {
+                return player;
+            }
+        }
+        return null;
     }
 
 }

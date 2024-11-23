@@ -112,7 +112,7 @@ public class GUI extends javax.swing.JFrame {
         transferPlayerPanel = new JPanel();
         jScrollPane2 = new JScrollPane();
         playerTransferPlayerComboBox = new JComboBox<>();
-        jButton1 = new JButton();
+        finalTransferPlayerBtn = new JButton();
         jScrollPane4 = new JScrollPane();
         teamTransferPlayerTransacComboBox = new JComboBox<>();
         jLabel3 = new JLabel();
@@ -127,7 +127,7 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane6 = new JScrollPane();
         tableTransferPlayer = new JTable();
         refreshTableTransferPlayerBtn = new JButton();
-        jComboBox1 = new JComboBox<>();
+        tableChooserTransferPlayerComboBox = new JComboBox<>();
         genReportsPanel = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -476,10 +476,10 @@ public class GUI extends javax.swing.JFrame {
         playerTransferPlayerComboBox.setModel(playersComboBoxModel);
         jScrollPane2.setViewportView(playerTransferPlayerComboBox);
 
-        jButton1.setBackground(new Color(255, 0, 0));
-        jButton1.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new Color(255, 255, 255));
-        jButton1.setText("Transfer Player");
+        finalTransferPlayerBtn.setBackground(new Color(255, 0, 0));
+        finalTransferPlayerBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        finalTransferPlayerBtn.setForeground(new Color(255, 255, 255));
+        finalTransferPlayerBtn.setText("Transfer Player");
 
         teamsComboBoxModel = new DefaultComboBoxModel<String>();
         for (String team : teamNames) {
@@ -530,7 +530,7 @@ public class GUI extends javax.swing.JFrame {
         refreshTableTransferPlayerBtn.setText("Click to Refresh Tables");
         refreshTableTransferPlayerBtn.setEnabled(false);
 
-        jComboBox1.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tableChooserTransferPlayerComboBox.setModel(tablesMainViewComBoxDefModel);
 
         GroupLayout transferPlayerPanelLayout = new GroupLayout(transferPlayerPanel);
         transferPlayerPanel.setLayout(transferPlayerPanelLayout);
@@ -556,12 +556,12 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(jLabel5))
                             .addGap(45, 45, 45)
                             .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(finalTransferPlayerBtn, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
                                 .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
                                     .addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE))))
                         .addGroup(transferPlayerPanelLayout.createSequentialGroup()
-                            .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tableChooserTransferPlayerComboBox, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(refreshTableTransferPlayerBtn, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane6, GroupLayout.PREFERRED_SIZE, 439, GroupLayout.PREFERRED_SIZE))
@@ -576,7 +576,7 @@ public class GUI extends javax.swing.JFrame {
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addGap(90, 90, 90)
-                        .addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(finalTransferPlayerBtn, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
                     .addGroup(transferPlayerPanelLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -601,7 +601,7 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(refreshTableTransferPlayerBtn, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
                     .addGroup(transferPlayerPanelLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tableChooserTransferPlayerComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane6, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(158, Short.MAX_VALUE))
@@ -720,11 +720,12 @@ public class GUI extends javax.swing.JFrame {
         return exitBtn;
     }
 
+    // Main View
     public JButton getExecuteQueryMainViewBtn() {
         return executeQueryMainViewBtn;
     }
     
-    public JComboBox getTablesMainViewComboBox() {
+    public JComboBox<String> getTablesMainViewComboBox() {
         return tablesMainViewComboBox;
     }
     
@@ -739,6 +740,26 @@ public class GUI extends javax.swing.JFrame {
     public JTable getMainViewTable() {
         return mainViewTable;
     }
+    
+    // Transactions
+    public JButton getFinalTransferPlayerBtn() {
+        return finalTransferPlayerBtn;
+    }
+    
+    public JComboBox<String> getPlayerTransferPlayerComboBox() {
+        return playerTransferPlayerComboBox;
+    }
+    
+    public JComboBox<String> getTeamTransferPlayerTransacComboBox() {
+        return teamTransferPlayerTransacComboBox;
+    }
+    
+    public JComboBox<String> getTableChooserTransferPlayerComboBox() {
+        return tableChooserTransferPlayerComboBox;
+    }
+ 
+    
+    
     public DefaultTableModel getMainViewTableModel() {
         return mainViewTableModel;
     }
@@ -834,10 +855,9 @@ public class GUI extends javax.swing.JFrame {
     private JButton dissTeamBtn;
     private JButton executeQueryMainViewBtn;
     private JButton exitBtn;
+    private JButton finalTransferPlayerBtn;
     private JButton genReportsBtn;
     private JPanel genReportsPanel;
-    private JButton jButton1;
-    private JComboBox<String> jComboBox1;
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JLabel jLabel3;
@@ -872,6 +892,7 @@ public class GUI extends javax.swing.JFrame {
     private JTextArea queryMainViewTxtArea;
     private JButton refreshTableTransferPlayerBtn;
     private JPanel rightMakeTransacPanel;
+    private JComboBox<String> tableChooserTransferPlayerComboBox;
     private JTable tableTransferPlayer;
     private JComboBox<String> tablesMainViewComboBox;
     private DefaultComboBoxModel<String> tablesMainViewComBoxDefModel;

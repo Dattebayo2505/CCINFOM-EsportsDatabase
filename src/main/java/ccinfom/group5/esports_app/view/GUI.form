@@ -645,7 +645,7 @@
                                           </Group>
                                           <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="jButton1" min="-2" pref="200" max="-2" attributes="0"/>
+                                              <Component id="finalTransferPlayerBtn" min="-2" pref="200" max="-2" attributes="0"/>
                                               <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jScrollPane4" min="-2" pref="197" max="-2" attributes="0"/>
@@ -653,7 +653,7 @@
                                           </Group>
                                       </Group>
                                       <Group type="102" attributes="0">
-                                          <Component id="jComboBox1" min="-2" pref="95" max="-2" attributes="0"/>
+                                          <Component id="tableChooserTransferPlayerComboBox" min="-2" pref="95" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Component id="refreshTableTransferPlayerBtn" min="-2" pref="153" max="-2" attributes="0"/>
                                       </Group>
@@ -674,7 +674,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-                                      <Component id="jButton1" min="-2" pref="46" max="-2" attributes="0"/>
+                                      <Component id="finalTransferPlayerBtn" min="-2" pref="46" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -706,7 +706,7 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tableChooserTransferPlayerComboBox" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
@@ -735,7 +735,7 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JButton" name="jButton1">
+                    <Component class="javax.swing.JButton" name="finalTransferPlayerBtn">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="0" red="ff" type="rgb"/>
@@ -851,15 +851,10 @@
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="jComboBox1">
+                    <Component class="javax.swing.JComboBox" name="tableChooserTransferPlayerComboBox">
                       <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="4">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
-                          </StringArray>
+                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="tablesMainViewComBoxDefModel" type="code"/>
                         </Property>
                       </Properties>
                       <AuxValues>

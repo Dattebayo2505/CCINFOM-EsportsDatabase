@@ -65,6 +65,11 @@ public class MainController implements ActionListener {
         gui.getMainViewTable().setModel(model);
     }
 
+    private void doRefreshTable() {
+        String selectedTable = (String) gui.getTablesMainViewComboBox().getSelectedItem();
+        initializeTable(selectedTable);
+    }
+
     private void initializeTable(String tableName) {
         String[] columnNames = database.getTableColumnNameMap().get(tableName);
         Object[][] data = database.getTableDataMap().get(tableName);
@@ -137,6 +142,28 @@ public class MainController implements ActionListener {
         }
     }
 
+    private void doTransferPlayer() {
+        String playerID = (String) gui.getPlayerTransferPlayerComboBox().getSelectedItem();
+        String newTeam = (String) gui.getTeamTransferPlayerTransacComboBox().getSelectedItem();
+        Player player = choosePlayer(playerID);
+
+        if (player.getCurrentTeam().equals(newTeam)) {
+            JOptionPane.showMessageDialog(null, "The player is already in the selected team.", "Transfer Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder(gui.getYearTransferPlayerTxtField().toString());
+
+        sb.append("-");
+        sb.append(gui.getMonthTransferPlayerTxtField().toString());
+        sb.append("-");
+        sb.append(gui.getDayTransferPlayerTxtField().toString());
+
+        transaction.playerTransfer(player, sb.toString(), newTeam, sb.toString());
+
+        JOptionPane.showMessageDialog(null, "Player transferred successfully.", "Transfer Success", JOptionPane.INFORMATION_MESSAGE);
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -175,11 +202,21 @@ public class MainController implements ActionListener {
 
         // Make Transaction Page
         else if (source == gui.getFinalTransferPlayerBtn()) {
-            doTransferPlayer();
+            int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to transfer the player?", "Confirm Transfer", JOptionPane.YES_NO_OPTION);
+            if (response == JOptionPane.YES_OPTION) {
+                doTransferPlayer();
+            }
 
-
-
+            gui.getRefreshTableTransferPlayerBtn().setVisible(true);
+        }
+        else if (source == gui.getRefreshTableTransferPlayerBtn()) {
+            // TODO INSERT HERE ALGO
             
+            doRefreshTable();
+            gui.getRefreshTableTransferPlayerBtn().setVisible(false);
+        }
+        else if (source == gui.getMainMenuTransacBtn()) {
+            gui.getCardLayout().show(gui.getMainMainPanel(), "mainmenu");
         }
 
         
@@ -188,16 +225,6 @@ public class MainController implements ActionListener {
 
 
 
-    }
-
-    private void doTransferPlayer() {
-        String playerID = (String) gui.getPlayerTransferPlayerComboBox().getSelectedItem();
-        String newTeam = (String) gui.getTeamTransferPlayerTransacComboBox().getSelectedItem();
-
-        
-        
-
-        transaction.playerTransfer(choosePlayer(playerID), null, newTeam, null);
     }
 
     private boolean isSemicolonPresent(String query) {

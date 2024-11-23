@@ -39,6 +39,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.LayoutStyle;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
@@ -99,9 +100,6 @@ public class GUI extends javax.swing.JFrame {
         queryMainViewTxtArea = new JTextArea();
         makeTransacPanel = new JPanel();
         leftMakeTransacPanel = new JPanel();
-        transferPlayerBtn = new JButton();
-        changeSponsorBtn = new JButton();
-        updateTeamBtn = new JButton();
         mainMenuTransacBtn = new JButton();
         rightMakeTransacPanel = new JPanel();
         transferPlayerPanel = new JPanel();
@@ -134,13 +132,44 @@ public class GUI extends javax.swing.JFrame {
         jLabel14 = new JLabel();
         jLabel15 = new JLabel();
         jLabel16 = new JLabel();
-        jComboBox2 = new JComboBox<>();
         teamsUpdateStatsComboBox = new JComboBox<>();
         jLabel17 = new JLabel();
         jLabel18 = new JLabel();
         teamsUpdateStatsComboBox2 = new JComboBox<>();
         jLabel19 = new JLabel();
         teamsWinnerUpdateStatsComboBox = new JComboBox<>();
+        finalTeamsUpdateStatsBtn = new JButton();
+        teamsUpdateStatsSpinnerModel = new SpinnerNumberModel(5000, 5000, 1000000, 5000);
+        teamsUpdateStatsSpinner = new JSpinner(teamsUpdateStatsSpinnerModel);
+        jLabel39 = new JLabel();
+        yearTeamsUpdateStatsTxtField = new JTextField();
+        jLabel40 = new JLabel();
+        monthTeamsUpdateStatsTxtField = new JTextField();
+        jLabel41 = new JLabel();
+        dayTeamsUpdateStatsTxtField = new JTextField();
+        jLabel20 = new JLabel();
+        jLabel21 = new JLabel();
+        sponsorAddComboBox = new JComboBox<>();
+        teamSponsorAddComboBox = new JComboBox<>();
+        currentTeamSponsorLbl = new JLabel();
+        finalAddSponsorTeamBtn = new JButton();
+        jLabel22 = new JLabel();
+        addSponsorTeamSpinnerModel = new SpinnerNumberModel(20000, 20000, 1000000, 20000);
+        addSponsorTeamSpinner = new JSpinner(addSponsorTeamSpinnerModel);
+        jLabel23 = new JLabel();
+        jLabel42 = new JLabel();
+        yearSponsorAddTxtField = new JTextField();
+        jLabel43 = new JLabel();
+        monthSponsorAddTxtField = new JTextField();
+        jLabel44 = new JLabel();
+        daySponsorAddTxtField = new JTextField();
+        jLabel24 = new JLabel();
+        jLabel45 = new JLabel();
+        yearSponsorAddTxtField1 = new JTextField();
+        jLabel46 = new JLabel();
+        monthSponsorAddTxtField1 = new JTextField();
+        jLabel47 = new JLabel();
+        daySponsorAddTxtField1 = new JTextField();
         genReportsPanel = new JPanel();
         genReportsMainMenuBtn = new JButton();
         jScrollPane5 = new JScrollPane();
@@ -386,13 +415,9 @@ public class GUI extends javax.swing.JFrame {
 
         mainMainPanel.add(mainViewPanel, "mainview");
 
+        makeTransacPanel.setPreferredSize(new Dimension(1280, 720));
+
         leftMakeTransacPanel.setBackground(new Color(204, 204, 0));
-
-        transferPlayerBtn.setText("<html><div style='text-align': center;'>Transfer Player(s) & <br>Dissolve Team</div></html>");
-
-        changeSponsorBtn.setText("Change Sponsorship(s)");
-
-        updateTeamBtn.setText("Update Team Stats");
 
         mainMenuTransacBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         mainMenuTransacBtn.setText("Main Menu");
@@ -402,22 +427,12 @@ public class GUI extends javax.swing.JFrame {
         leftMakeTransacPanelLayout.setHorizontalGroup(leftMakeTransacPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(leftMakeTransacPanelLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(leftMakeTransacPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                    .addComponent(updateTeamBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(transferPlayerBtn, GroupLayout.Alignment.LEADING)
-                    .addComponent(changeSponsorBtn, GroupLayout.Alignment.LEADING)
-                    .addComponent(mainMenuTransacBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(mainMenuTransacBtn, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                 .addGap(23, 23, 23))
         );
         leftMakeTransacPanelLayout.setVerticalGroup(leftMakeTransacPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(leftMakeTransacPanelLayout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(transferPlayerBtn, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-                .addGap(117, 117, 117)
-                .addComponent(changeSponsorBtn, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(updateTeamBtn, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
+                .addGap(513, 513, 513)
                 .addComponent(mainMenuTransacBtn, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -498,8 +513,6 @@ public class GUI extends javax.swing.JFrame {
         jLabel16.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         jLabel16.setText("Match Status");
 
-        jComboBox2.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         teamsUpdateStatsComboBoxModel = new DefaultComboBoxModel<String>();
         teamsUpdateStatsComboBox.setModel(teamsUpdateStatsComboBoxModel);
 
@@ -516,7 +529,74 @@ public class GUI extends javax.swing.JFrame {
         jLabel19.setText("Winner");
 
         teamsWinnerUpdateStatsComboBoxModel = new DefaultComboBoxModel<String>();
-        teamsWinnerUpdateStatsComboBox.setModel(teamsUpdateStatsComboBoxModel);
+        teamsWinnerUpdateStatsComboBox.setModel(teamsWinnerUpdateStatsComboBoxModel);
+
+        finalTeamsUpdateStatsBtn.setBackground(new Color(255, 0, 0));
+        finalTeamsUpdateStatsBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        finalTeamsUpdateStatsBtn.setForeground(new Color(255, 255, 255));
+        finalTeamsUpdateStatsBtn.setText("Finalize Match");
+
+        jLabel39.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel39.setText("Year");
+
+        jLabel40.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel40.setText("Month");
+
+        jLabel41.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel41.setText("Day");
+
+        dayTeamsUpdateStatsTxtField.setToolTipText("");
+
+        jLabel20.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel20.setText("Winner Prize");
+
+        jLabel21.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel21.setText("Match Date");
+
+        sponsorAddComboBoxModel = new DefaultComboBoxModel<String>();
+        sponsorAddComboBox.setModel(sponsorAddComboBoxModel);
+
+        teamSponsorAddComboBoxModel = new DefaultComboBoxModel<String>();
+        teamSponsorAddComboBox.setModel(teamSponsorAddComboBoxModel);
+
+        currentTeamSponsorLbl.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        currentTeamSponsorLbl.setText("Current Team has");
+
+        finalAddSponsorTeamBtn.setBackground(new Color(255, 0, 0));
+        finalAddSponsorTeamBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        finalAddSponsorTeamBtn.setForeground(new Color(255, 255, 255));
+        finalAddSponsorTeamBtn.setText("Add Sponsor");
+
+        jLabel22.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel22.setText("Set Contract Amount");
+
+        jLabel23.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel23.setText("Start of Contract");
+
+        jLabel42.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel42.setText("Year");
+
+        jLabel43.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel43.setText("Month");
+
+        jLabel44.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel44.setText("Day");
+
+        daySponsorAddTxtField.setToolTipText("");
+
+        jLabel24.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel24.setText("End of Contract");
+
+        jLabel45.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel45.setText("Year");
+
+        jLabel46.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel46.setText("Month");
+
+        jLabel47.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel47.setText("Day");
+
+        daySponsorAddTxtField1.setToolTipText("");
 
         GroupLayout transferPlayerPanelLayout = new GroupLayout(transferPlayerPanel);
         transferPlayerPanel.setLayout(transferPlayerPanelLayout);
@@ -544,18 +624,16 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(finalDissolveTeamBtn, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE))
                 .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(transferPlayerPanelLayout.createSequentialGroup()
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(finalTransferPlayerBtn, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                            .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jCheckBox1, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)))
-                        .addGap(164, 164, 164))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox1, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(finalTransferPlayerBtn, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+                        .addGap(161, 161, 161))
                     .addGroup(transferPlayerPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel12, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addGroup(transferPlayerPanelLayout.createSequentialGroup()
                                 .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel9)
@@ -565,51 +643,87 @@ public class GUI extends javax.swing.JFrame {
                                 .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                     .addComponent(yearDissolveTeamTxtField)
                                     .addComponent(dayDissolveTeamTxtField)
-                                    .addComponent(monthDissolveTeamTxtField, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE))))
-                        .addGap(275, 275, 275)))
+                                    .addComponent(monthDissolveTeamTxtField, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel12, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(currentTeamSponsorLbl, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE))
+                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel23, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel42)
+                                    .addComponent(jLabel43, GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel44))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(yearSponsorAddTxtField)
+                                    .addComponent(daySponsorAddTxtField)
+                                    .addComponent(monthSponsorAddTxtField, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel24, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel45)
+                                    .addComponent(jLabel46, GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel47))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(yearSponsorAddTxtField1)
+                                    .addComponent(daySponsorAddTxtField1)
+                                    .addComponent(monthSponsorAddTxtField1, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel22)
+                            .addComponent(finalAddSponsorTeamBtn, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addSponsorTeamSpinner, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)))
                     .addGroup(transferPlayerPanelLayout.createSequentialGroup()
                         .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
                             .addComponent(teamsUpdateStatsComboBox, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16)
-                            .addComponent(jLabel17))
-                        .addGap(38, 38, 38)
-                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
-                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                    .addComponent(teamsUpdateStatsComboBox2, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel18))
-                                .addGap(0, 57, Short.MAX_VALUE))))
-                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
-                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17)
                             .addComponent(teamsWinnerUpdateStatsComboBox, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel19))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(GroupLayout.Alignment.TRAILING, transferPlayerPanelLayout.createSequentialGroup()
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-                .addGap(94, 94, 94))
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel20)
+                            .addComponent(teamsUpdateStatsSpinner, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(finalTeamsUpdateStatsBtn, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sponsorAddComboBox, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                    .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addComponent(teamsUpdateStatsComboBox2, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel18))
+                                    .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel21)
+                                        .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                            .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel39)
+                                                .addComponent(jLabel40, GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel41))
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(yearTeamsUpdateStatsTxtField)
+                                                .addComponent(dayTeamsUpdateStatsTxtField)
+                                                .addComponent(monthTeamsUpdateStatsTxtField, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(0, 47, Short.MAX_VALUE))
+                            .addGroup(GroupLayout.Alignment.TRAILING, transferPlayerPanelLayout.createSequentialGroup()
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel15)
+                                    .addComponent(teamSponsorAddComboBox, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
+                                .addGap(35, 35, 35))))))
         );
         transferPlayerPanelLayout.setVerticalGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(transferPlayerPanelLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
-                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                        .addComponent(jCheckBox1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
-                        .addComponent(finalTransferPlayerBtn, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-                        .addGap(104, 104, 104))
+                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                     .addGroup(transferPlayerPanelLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -625,52 +739,136 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(monthTransferPlayerTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(dayTransferPlayerTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel16))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(finalTransferPlayerBtn, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+                            .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel7)
+                                .addComponent(dayTransferPlayerTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
                     .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel14))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(sponsorAddComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(teamSponsorAddComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)))
+                        .addComponent(currentTeamSponsorLbl)
+                        .addGap(8, 8, 8)
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBox1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel23)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel42)
+                                    .addComponent(yearSponsorAddTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel43)
+                                    .addComponent(monthSponsorAddTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel44)
+                                    .addComponent(daySponsorAddTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel24)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel45)
+                                            .addComponent(yearSponsorAddTxtField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel22)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(addSponsorTeamSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel46)
+                                            .addComponent(monthSponsorAddTxtField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel47)
+                                            .addComponent(daySponsorAddTxtField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                        .addGap(22, 22, 22)
+                                        .addComponent(finalAddSponsorTeamBtn, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(18, 18, 18)))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addGroup(transferPlayerPanelLayout.createSequentialGroup()
                                 .addComponent(jScrollPane6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(finalDissolveTeamBtn, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(finalDissolveTeamBtn, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(transferPlayerPanelLayout.createSequentialGroup()
-                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(yearDissolveTeamTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel10)
-                                    .addComponent(monthDissolveTeamTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel16)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel17)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(teamsUpdateStatsComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel18)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(teamsUpdateStatsComboBox2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel11)
-                                    .addComponent(dayDissolveTeamTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(284, Short.MAX_VALUE))
-                    .addGroup(GroupLayout.Alignment.TRAILING, transferPlayerPanelLayout.createSequentialGroup()
-                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel17)
+                                    .addComponent(jLabel19)
+                                    .addComponent(jLabel21))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(teamsUpdateStatsComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(transferPlayerPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel18)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(teamsUpdateStatsComboBox2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                        .addComponent(teamsWinnerUpdateStatsComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(4, 4, 4)
+                                        .addComponent(jLabel20)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(teamsUpdateStatsSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(finalTeamsUpdateStatsBtn, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel39)
+                                            .addComponent(yearTeamsUpdateStatsTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel40)
+                                            .addComponent(monthTeamsUpdateStatsTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel41)
+                                            .addComponent(dayTeamsUpdateStatsTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(transferPlayerPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(yearDissolveTeamTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel19)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(teamsWinnerUpdateStatsComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(244, 244, 244))))
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(monthDissolveTeamTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(dayDissolveTeamTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addGap(260, 260, 260))))
         );
 
         rightMakeTransacPanel.add(transferPlayerPanel, "card2");
@@ -688,7 +886,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(makeTransacPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
                     .addComponent(rightMakeTransacPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(leftMakeTransacPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 69, Short.MAX_VALUE))
         );
 
         mainMainPanel.add(makeTransacPanel, "maketransac");
@@ -815,6 +1013,12 @@ public class GUI extends javax.swing.JFrame {
     public JButton getFinalDissolveTeamBtn() {
         return finalDissolveTeamBtn;
     }
+    public JButton getFinalAddSponsorTeamBtn() {
+        return finalAddSponsorTeamBtn;
+    }
+    public JButton getFinalTeamsUpdateStatsBtn() {
+        return finalTeamsUpdateStatsBtn;
+    }
     
     public JComboBox<String> getPlayerTransferPlayerComboBox() {
         return playerTransferPlayerComboBox;
@@ -839,8 +1043,8 @@ public class GUI extends javax.swing.JFrame {
     }
     
     // public JButton getRefreshTableTransferPlayerBtn() {
-    //     return refreshTableTransferPlayerBtn;
-    // }
+        //     return refreshTableTransferPlayerBtn;
+        // }
     
     // DISSOLVE TEAM
     public JComboBox<String> getTeamTransferTeamDissolveComboBox() {
@@ -855,7 +1059,46 @@ public class GUI extends javax.swing.JFrame {
     public JTextField getDayDissolveTeamTxtField() {
         return dayDissolveTeamTxtField;
     }
+
+    // SPONSOR ADD
+    public JLabel getCurrentTeamSponsorLbl() {
+        return currentTeamSponsorLbl;
+    }
+    public JTextField getYearSponsorAddTxtField() {
+        return yearSponsorAddTxtField;
+    }
+    public JTextField getMonthSponsorAddTxtField() {
+        return monthSponsorAddTxtField;
+    }
+    public JTextField getDaySponsorAddTxtField() {
+        return daySponsorAddTxtField;
+    }
+    public JTextField getYearSponsorAddTxtField1() {
+        return yearSponsorAddTxtField1;
+    }
+    public JTextField getMonthSponsorAddTxtField1() {
+        return monthSponsorAddTxtField1;
+    }
+    public JTextField getDaySponsorAddTxtField1() {
+        return daySponsorAddTxtField1;
+    }
+    public JSpinner getAddSponsorTeamSpinner() {
+        return addSponsorTeamSpinner;
+    }
     
+    // UPDATE STATS 
+    public JTextField getYearTeamsUpdateStatsTxtField() {
+        return yearTeamsUpdateStatsTxtField;
+    }
+    public JTextField getMonthTeamsUpdateStatsTxtField() {
+        return monthTeamsUpdateStatsTxtField;
+    }
+    public JTextField getDayTeamsUpdateStatsTxtField() {
+        return dayTeamsUpdateStatsTxtField;
+    }
+    public JSpinner getTeamsUpdateStatsSpinner() {
+        return teamsUpdateStatsSpinner;
+    }
     
     public DefaultTableModel getMainViewTableModel() {
         return mainViewTableModel;
@@ -872,16 +1115,30 @@ public class GUI extends javax.swing.JFrame {
         return teamsTransferPlayerComboBoxModel;
     }
 
-
+    public JComboBox<String> getTeamsUpdateStatsComboBox() {
+        return teamsUpdateStatsComboBox;
+    }
+    public JComboBox<String> getTeamsUpdateStatsComboBox2() {
+        return teamsUpdateStatsComboBox2;
+    }
+    public JComboBox<String> getTeamsWinnerUpdateStatsComboBox() {
+        return teamsWinnerUpdateStatsComboBox;
+    }
     public DefaultComboBoxModel<String> getTeamsUpdateStatsComboBoxModel() {
         return teamsUpdateStatsComboBoxModel;
     }
     public DefaultComboBoxModel<String> getTeamsUpdateStatsComboBoxModel2() {
         return teamsUpdateStatsComboBoxModel2;
     }
-    public DefaultComboBoxModel<String> getTeamsWinnerUpdateStatsComboBoxModel() {
-        return teamsWinnerUpdateStatsComboBoxModel;
+
+    // Sponsor Add
+    public JComboBox<String> getSponsorAddComboBox() {
+        return sponsorAddComboBox;
     }
+    public JComboBox<String> getTeamSponsorAddComboBox() {
+        return teamSponsorAddComboBox;
+    }
+
     public void updateComboBox(DefaultComboBoxModel<String> comboBox, List<String> items, String selectedItem) {
         comboBox.removeAllElements();
         comboBox.addAll(items);
@@ -903,11 +1160,21 @@ public class GUI extends javax.swing.JFrame {
         teamsDissolveTeamComboBoxModel.removeAllElements();
         teamsUpdateStatsComboBoxModel.removeAllElements();
         teamsUpdateStatsComboBoxModel2.removeAllElements();
+        teamsWinnerUpdateStatsComboBoxModel.removeAllElements();
+        teamSponsorAddComboBoxModel.removeAllElements();
     
         teamsTransferPlayerComboBoxModel.addAll(teamNames);
         teamsDissolveTeamComboBoxModel.addAll(teamNames);
         teamsUpdateStatsComboBoxModel.addAll(teamNames);
         teamsUpdateStatsComboBoxModel2.addAll(teamNames);
+        teamsWinnerUpdateStatsComboBoxModel.addAll(teamNames);
+        teamSponsorAddComboBoxModel.addAll(teamNames);
+    }
+
+    public void setSponsorsComboBoxModel(ArrayList<String> sponsorNames) {
+        sponsorAddComboBoxModel.removeAllElements();
+
+        sponsorAddComboBoxModel.addAll(sponsorNames);
     }
    
 
@@ -930,6 +1197,12 @@ public class GUI extends javax.swing.JFrame {
         this.teamsUpdateStatsComboBox.addActionListener(e);
         this.teamsUpdateStatsComboBox2.addActionListener(e);
         this.teamsWinnerUpdateStatsComboBox.addActionListener(e);
+
+        this.teamSponsorAddComboBox.addActionListener(e);
+        this.finalAddSponsorTeamBtn.addActionListener(e);
+
+
+        this.finalTeamsUpdateStatsBtn.addActionListener(e);
     }
 
 
@@ -969,13 +1242,20 @@ public class GUI extends javax.swing.JFrame {
     }
     private DefaultTableModel mainViewTableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JSpinner addSponsorTeamSpinner;
+    private SpinnerNumberModel addSponsorTeamSpinnerModel;
     private JPanel bannerPanel;
-    private JButton changeSponsorBtn;
+    private JLabel currentTeamSponsorLbl;
     private JTextField dayDissolveTeamTxtField;
+    private JTextField daySponsorAddTxtField;
+    private JTextField daySponsorAddTxtField1;
+    private JTextField dayTeamsUpdateStatsTxtField;
     private JTextField dayTransferPlayerTxtField;
     private JButton executeQueryMainViewBtn;
     private JButton exitBtn;
+    private JButton finalAddSponsorTeamBtn;
     private JButton finalDissolveTeamBtn;
+    private JButton finalTeamsUpdateStatsBtn;
     private JButton finalTransferPlayerBtn;
     private JButton genReportsBtn;
     private JButton genReportsMainMenuBtn;
@@ -983,7 +1263,6 @@ public class GUI extends javax.swing.JFrame {
     private JTable genReportsTable;
     private JCheckBox jCheckBox1;
     private JComboBox<String> jComboBox1;
-    private JComboBox<String> jComboBox2;
     private JLabel jLabel1;
     private JLabel jLabel10;
     private JLabel jLabel11;
@@ -995,8 +1274,22 @@ public class GUI extends javax.swing.JFrame {
     private JLabel jLabel18;
     private JLabel jLabel19;
     private JLabel jLabel2;
+    private JLabel jLabel20;
+    private JLabel jLabel21;
+    private JLabel jLabel22;
+    private JLabel jLabel23;
+    private JLabel jLabel24;
     private JLabel jLabel3;
+    private JLabel jLabel39;
     private JLabel jLabel4;
+    private JLabel jLabel40;
+    private JLabel jLabel41;
+    private JLabel jLabel42;
+    private JLabel jLabel43;
+    private JLabel jLabel44;
+    private JLabel jLabel45;
+    private JLabel jLabel46;
+    private JLabel jLabel47;
     private JLabel jLabel5;
     private JLabel jLabel6;
     private JLabel jLabel7;
@@ -1024,13 +1317,20 @@ public class GUI extends javax.swing.JFrame {
     private JPanel makeTransacPanel;
     private JLabel menuLbl;
     private JTextField monthDissolveTeamTxtField;
+    private JTextField monthSponsorAddTxtField;
+    private JTextField monthSponsorAddTxtField1;
+    private JTextField monthTeamsUpdateStatsTxtField;
     private JTextField monthTransferPlayerTxtField;
     private JComboBox<String> playerTransferPlayerComboBox;
     private DefaultComboBoxModel<String> playersComboBoxModel;
     private JTextArea queryMainViewTxtArea;
     private JPanel rightMakeTransacPanel;
+    private JComboBox<String> sponsorAddComboBox;
+    private DefaultComboBoxModel<String> sponsorAddComboBoxModel;
     private JComboBox<String> tablesMainViewComboBox;
     private DefaultComboBoxModel<String> tablesMainViewComBoxDefModel;
+    private JComboBox<String> teamSponsorAddComboBox;
+    private DefaultComboBoxModel<String> teamSponsorAddComboBoxModel;
     private JComboBox<String> teamTransferPlayerTransacComboBox;
     private DefaultComboBoxModel<String> teamsTransferPlayerComboBoxModel;
     private JComboBox<String> teamTransferTeamDissolveComboBox;
@@ -1039,14 +1339,17 @@ public class GUI extends javax.swing.JFrame {
     private DefaultComboBoxModel<String> teamsUpdateStatsComboBoxModel;
     private JComboBox<String> teamsUpdateStatsComboBox2;
     private DefaultComboBoxModel<String> teamsUpdateStatsComboBoxModel2;
+    private JSpinner teamsUpdateStatsSpinner;
+    private SpinnerNumberModel teamsUpdateStatsSpinnerModel;
     private JComboBox<String> teamsWinnerUpdateStatsComboBox;
     private DefaultComboBoxModel<String> teamsWinnerUpdateStatsComboBoxModel;
-    private JButton transferPlayerBtn;
     private JPanel transferPlayerPanel;
-    private JButton updateTeamBtn;
     private JPanel upperMainViewPanel;
     private JTextField yearDissolveTeamTxtField;
     private JComboBox<String> yearGenReportsComboBox;
+    private JTextField yearSponsorAddTxtField;
+    private JTextField yearSponsorAddTxtField1;
+    private JTextField yearTeamsUpdateStatsTxtField;
     private JTextField yearTransferPlayerTxtField;
     // End of variables declaration//GEN-END:variables
     private DefaultComboBoxModel<String> playerTransferDefaultComboBoxModel;

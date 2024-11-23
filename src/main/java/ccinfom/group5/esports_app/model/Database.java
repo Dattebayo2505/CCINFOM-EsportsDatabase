@@ -79,6 +79,9 @@ public class Database {
                 j = 0;
                 tableRecords = new Object[rowCount][columnCount];
                 columnNames = new String[columnCount];
+
+                columnNames = FileReaderUtil.setColumnNames(columnCount, metaData);
+
                 while (resultSet.next()) {
                     tableRecord = new Object[columnCount];
 
@@ -172,15 +175,6 @@ public class Database {
             }
         }
             
-    }
-    
-    // TODO: ADD OTHER QUERY/UPDATE METHODS HERE - JOB 
-
-    public Object[][] getTableData(String table) {
-        Object data[][];
-
-
-        return null;
     }
 
     public boolean initialStatus() {

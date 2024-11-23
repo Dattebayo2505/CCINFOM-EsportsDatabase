@@ -11,27 +11,27 @@ CREATE TABLE companies (
 
 CREATE TABLE teams(
     team VARCHAR(50) PRIMARY KEY,
-    captain VARCHAR(50),
-    country VARCHAR(50),
-    region  VARCHAR(50),
-    status VARCHAR(50)
+    captain VARCHAR(50) NOT NULL,
+    country VARCHAR(50) NOT NULL,
+    region  VARCHAR(50) NOT NULL,
+    status VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE players (
     player_id VARCHAR(50) PRIMARY KEY, 
-    last_name VARCHAR(50), 
-    first_name VARCHAR(50),
-    age INTEGER, 
-    country VARCHAR(50),
-    current_team VARCHAR(50), 
-    status VARCHAR(10), 
+    last_name VARCHAR(50) NOT NULL, 
+    first_name VARCHAR(50) NOT NULL,
+    age INTEGER NOT NULL, 
+    country VARCHAR(50) NOT NULL,
+    current_team VARCHAR(50) NOT NULL, 
+    status VARCHAR(10) NOT NULL, 
     FOREIGN KEY (current_team) REFERENCES teams(team)
 );
 
 
 CREATE TABLE playerhistory (
     history_id INT PRIMARY KEY,
-    player_id VARCHAR(50),
+    player_id VARCHAR(50) NOT NULL,
     old_team VARCHAR (50),
     left_old_team DATE,
     new_team VARCHAR (50),
@@ -43,10 +43,10 @@ CREATE TABLE playerhistory (
 
 CREATE TABLE sponsorhistory(
     history_id INT PRIMARY KEY,
-    sponsor_id INT,
-    team VARCHAR(50),
-    contract_amount DECIMAL,
-    contract_start DATE,
+    sponsor_id INT NOT NULL,
+    team VARCHAR(50) NOT NULL,
+    contract_amount DECIMAL NOT NULL,
+    contract_start DATE NOT NULL,
     contract_end DATE,
     FOREIGN KEY (sponsor_id) REFERENCES companies(company_id),
     FOREIGN KEY (team) REFERENCES teams(team)
@@ -54,15 +54,15 @@ CREATE TABLE sponsorhistory(
 
 CREATE TABLE teamhistory(
     history_id INT PRIMARY KEY,
-    team VARCHAR(50),
-    creation_date DATE,
+    team VARCHAR(50) NOT NULL,
+    creation_date DATE NOTN ULL,
     disband_date DATE,
     FOREIGN KEY(team) REFERENCES teams(team)
 );
 
 CREATE TABLE teamperformancehistory(
     history_id INT PRIMARY KEY,
-    team VARCHAR(50),
+    team VARCHAR(50) NOT NULL,
     match_date DATE,
     result VARCHAR (10),
     winnings DECIMAL,
@@ -71,8 +71,8 @@ CREATE TABLE teamperformancehistory(
 
 CREATE TABLE teamsponsor (
     sponsor_id INT,
-    team VARCHAR(50), 
-    contract_amount DECIMAL, 
+    team VARCHAR(50) NOT NULL, 
+    contract_amount DECIMAL NOT NULL, 
     contract_start DATE, 
     contract_end DATE,
     PRIMARY KEY (sponsor_id, team),

@@ -4,36 +4,41 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+@Deprecated
 public class Reports {
     // execute query
+    private Connection con;
+    
+    public Reports(Connection con) {
+        this.con = con;
+    }
 
-    // refer to database class
-    // store the query in a string and use the string as a parameter
-
-    public static void viewTransferReport(Connection con, int year, int month) throws SQLException {
-        String query = "SELECT YEAR(ph.joined_new_team) AS year_transferred, " +
-                    "MONTH(ph.joined_new_team) AS month_transferred, " +
+    public void viewTransferReport(int year, int month) throws SQLException {
+        String query = "SELECT " +
                     "COUNT(ph.history_id) AS total_transfers, " +
                     "COUNT(ph.history_id) / COUNT(DISTINCT ph.player_id) AS avg_transfers_per_player " +
                     "FROM playerhistory ph " +
-                    "WHERE YEAR(ph.joined_new_team) = " + year + " AND MONTH(ph.joined_new_team) = " + month +
-                    "GROUP BY YEAR(ph.joined_new_team), MONTH(ph.joined_new_team);";
+                    "WHERE YEAR(ph.joined_new_team) = " + year + 
+                    " AND MONTH(ph.joined_new_team) = " + month +
+                    " GROUP BY YEAR(ph.joined_new_team), MONTH(ph.joined_new_team)";
 
+        ResultSet rs = null;
         try (Statement stmt = con.createStatement()) {
-            ResultSet rs = stmt.executeQuery(query);
+            rs = stmt.executeQuery(query);
             while (rs.next()) {
                 int yearTransferred = rs.getInt("year_transferred");
                 int monthTransferred = rs.getInt("month_transferred");
                 int totalTransfers = rs.getInt("total_transfers");
                 float avgTransfersPerPlayer = rs.getFloat("avg_transfers_per_player");
                 System.out.println("Year: " + yearTransferred + ", Month: " + monthTransferred +
-                                ", Total Transfers: " + totalTransfers +
-                                ", Avg Transfers per Player: " + avgTransfersPerPlayer);
+                ", Total Transfers: " + totalTransfers +
+                ", Avg Transfers per Player: " + avgTransfersPerPlayer);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     public static void viewCreationDeletionReport(Connection con, int year, int month) throws SQLException {

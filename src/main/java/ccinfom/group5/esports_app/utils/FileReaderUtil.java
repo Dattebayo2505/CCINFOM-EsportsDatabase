@@ -64,6 +64,10 @@ public class FileReaderUtil {
                     int num = rs.getInt(columnName);
                     record[i] = rs.wasNull() ? "NULL" : String.valueOf(num);
                     break;
+                case "BIGINT":
+                    int num2 = rs.getInt(columnName);
+                    record[i] = rs.wasNull() ? "NULL" : String.valueOf(num2);
+                    break;
                 case "VARCHAR":
                     String str = rs.getString(columnName);
                     record[i] = (str == null) ? "NULL" : str;

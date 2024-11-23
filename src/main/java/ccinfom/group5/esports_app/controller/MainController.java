@@ -8,18 +8,20 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
-
-import com.mysql.cj.x.protobuf.MysqlxPrepare.Prepare;
 
 import ccinfom.group5.esports_app.model.*;
 import ccinfom.group5.esports_app.utils.FileReaderUtil;
+import ccinfom.group5.esports_app.utils.GeneralUtil;
 import ccinfom.group5.esports_app.view.GUI;
 
 public class MainController implements ActionListener {
@@ -34,17 +36,59 @@ public class MainController implements ActionListener {
         this.database = database;
         this.gui = gui;
         this.con = con;     
-
+        
         gui.addClickListener(this);
-
         
         gui.setPlayersComboBoxModel(getIDs("players", "player_id", "active"));
         gui.setTeamsComboBoxModel(getIDs("teams", "team", "active"));
-        // TODO add gui updatesponsorcomboboxmodel
         gui.setSponsorsComboBoxModel(getIDs("companies", "company"));
 
-
         gui.getMainViewTable().setModel(initializeTable("players"));
+        gui.getGenReportsTable().setModel(initializeTable("playerhistory"));
+    }
+
+    private DefaultTableModel initializeTable(ResultSet rs) {
+        String[] columnNames = null;
+        Object[][] data = null;
+        ResultSet rs2;
+        ResultSetMetaData metaData;
+        int columnCount, rowCount, i;
+
+        try {
+            statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                                            ResultSet.CONCUR_READ_ONLY);
+
+            metaData = rs.getMetaData();
+            columnCount = metaData.getColumnCount();
+
+            rs.last();
+            rowCount = rs.getRow();
+            rs.beforeFirst();
+
+            columnNames = new String[columnCount];
+            data = new Object[rowCount][columnCount];
+
+            columnNames = FileReaderUtil.setColumnNames(columnCount, metaData);
+
+            i=0;
+            while (rs.next()) {
+                data[i] = FileReaderUtil.setTableRecord(columnCount, rs, metaData);
+                ++i;
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error executing query: \n" + 
+                            e.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // All cells are non-editable
+            }
+        };
+
+        return model;
     }
 
     private DefaultTableModel initializeTable(String tableName) {
@@ -170,7 +214,6 @@ public class MainController implements ActionListener {
                     + "-" + gui.getDayTransferPlayerTxtField().getText();
 
         dbTransacPlayer(playerID, date, oldTeam, newTeam);
-        // transaction.playerTransfer(player, date, newTeam, date);
 
         gui.getMainViewTable().setModel(initializeTable("playerhistory"));
 
@@ -237,11 +280,38 @@ public class MainController implements ActionListener {
         }
 
         else if (source == gui.getTeamSponsorAddComboBox()) {
-            doAddSponsor();
-        }
+            String team = (String) gui.getTeamSponsorAddComboBox().getSelectedItem();
+            int numSponsor = 0;
+    
+            try {
+                statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                                                ResultSet.CONCUR_READ_ONLY);
+    
+                ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM teamsponsor WHERE team = '" + team + "'");
+    
+                if (resultSet.next()) {
+                    numSponsor = resultSet.getInt(1);
+                }
+    
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(gui.getMakeTransacPanel(), "Error executing query: \n" + 
+                                ex.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
+            }
+    
+            if (numSponsor == 0) 
+                gui.getCurrentTeamSponsorLbl().setText("Current Team has no sponsors.");
+            else if (numSponsor == 1)
+                gui.getCurrentTeamSponsorLbl().setText("Current Team has 1 sponsor.");
+            else
+                gui.getCurrentTeamSponsorLbl().setText("Current Team has " + numSponsor + " sponsors.");
+        }   
 
         else if(source == gui.getFinalAddSponsorTeamBtn()) {
-            String team = (String) gui.getSponsorAddComboBox().getSelectedItem();
+            
+            doAddSponsor();
+
+            JOptionPane.showMessageDialog(gui.getMakeTransacPanel(), "Sponsor added successfully.", 
+                            "Add Sponsor Success", JOptionPane.INFORMATION_MESSAGE);
         } 
         
         else if (source == gui.getFinalDissolveTeamBtn()) {
@@ -274,12 +344,7 @@ public class MainController implements ActionListener {
             }
             
             
-        }
-        
-        // else if (source == gui.getFinalAddSponsor()) {
-
-        // }
-        
+        }       
 
         else if (source == gui.getTeamsUpdateStatsComboBox() || 
                  source == gui.getTeamsUpdateStatsComboBox2()) {
@@ -296,19 +361,185 @@ public class MainController implements ActionListener {
                             "Update Success", JOptionPane.INFORMATION_MESSAGE);
         }
 
-
-
-
         else if (source == gui.getMainMenuTransacBtn()) {
             gui.getCardLayout().show(gui.getMainMainPanel(), "mainmenu");
         }
 
-        
+        // TODO ADD FOR YEAR ONLY
         // Generate Reports Page
+        else if (source == gui.getFinalGenReportsBtn()) {
+            try {
+                int year = Integer.parseInt(gui.getYearGenReportsTxtField().getText());
+                
+                if (gui.getTablesGenReportsComboBox().getSelectedIndex() == 0)
+                    viewTransferReport(year, gui.getMonthGenReportsComboBox().getSelectedIndex() + 1);
+                if (gui.getTablesGenReportsComboBox().getSelectedIndex() == 1)
+                    viewCreationDeletionReport(year, gui.getMonthGenReportsComboBox().getSelectedIndex() + 1);
+                if (gui.getTablesGenReportsComboBox().getSelectedIndex() == 2)
+                    viewSponsorshipSummaryReport(year, gui.getMonthGenReportsComboBox().getSelectedIndex() + 1);
+                if (gui.getTablesGenReportsComboBox().getSelectedIndex() == 3)
+                    viewTeamPerformanceReport(year, gui.getMonthGenReportsComboBox().getSelectedIndex() + 1);
 
+            } 
+            catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
 
+        else if (source == gui.getGenReportsMainMenuBtn()) {
+            gui.getCardLayout().show(gui.getMainMainPanel(), "mainmenu");
+        }
 
+    }
 
+    // TODO REVISE TO ACCOMODATE ANOTEHER FOR YEAR ONLY ()
+    public void viewTransferReport(int year, int month) throws SQLException {
+        String query = "SELECT " +
+                    "COUNT(ph.history_id) AS total_transfers, " +
+                    "COUNT(ph.history_id) / COUNT(DISTINCT ph.player_id) AS avg_transfers_per_player " +
+                    "FROM playerhistory ph " +
+                    "WHERE YEAR(ph.joined_new_team) = " + year + 
+                    " AND MONTH(ph.joined_new_team) = " + month +
+                    " GROUP BY YEAR(ph.joined_new_team), MONTH(ph.joined_new_team)";
+
+        ResultSet rs = null;
+        try (Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
+                                    ResultSet.CONCUR_READ_ONLY)) {
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                int totalTransfers = rs.getInt("total_transfers");
+                double avgTransfersPerPlayer = rs.getDouble("avg_transfers_per_player");
+            }
+
+            gui.getGenReportsTable().setModel(initializeTable(rs));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void viewCreationDeletionReport(int year, int month) throws SQLException {
+        String query = "SELECT " +
+                    "MONTH(th.creation_date) AS month, " +
+                    "COALESCE(COUNT(DISTINCT CASE WHEN YEAR(th.creation_date) = " + year + 
+                    " AND MONTH(th.creation_date) = " + month + 
+                    " THEN th.team END), 0) AS teams_created, " +
+                    "COALESCE(COUNT(DISTINCT CASE WHEN YEAR(th.disband_date) = " + year + 
+                    " AND MONTH(th.disband_date) = " + month + 
+                    " THEN th.team END), 0) AS teams_disbanded, " +
+                    "COALESCE(ROUND(AVG(CASE WHEN YEAR(th.creation_date) = " + year + 
+                    " AND MONTH(th.creation_date) = " + month + 
+                    " THEN 1 ELSE NULL END), 2), 0) AS avg_teams_created, " +
+                    "COALESCE(ROUND(AVG(CASE WHEN YEAR(th.disband_date) = " + year + 
+                    " AND MONTH(th.disband_date) = " + month + 
+                    " THEN 1 ELSE NULL END), 2), 0) AS avg_teams_disbanded, " +
+                    "COALESCE(COUNT(DISTINCT ph.player_id), 0) AS players_affected_by_disband " +
+                    "FROM teamhistory th " +
+                    "LEFT JOIN playerhistory ph ON th.team = ph.old_team " +
+                    "AND ph.left_old_team = th.disband_date " +
+                    "WHERE (YEAR(th.creation_date) = " + year + " AND MONTH(th.creation_date) = " + month + ") " +
+                    "OR (YEAR(th.disband_date) = " + year + " AND MONTH(th.disband_date) = " + month + ") " +
+                    "GROUP BY month";
+
+        try (Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
+                                    ResultSet.CONCUR_READ_ONLY)) {
+        ResultSet rs = stmt.executeQuery(query);
+        while (rs.next()) {
+            int teamsCreated = rs.getInt("teams_created");
+            int teamsDisbanded = rs.getInt("teams_disbanded");
+            double avgTeamsCreated = rs.getDouble("avg_teams_created");
+            double avgTeamsDisbanded = rs.getDouble("avg_teams_disbanded");
+            int playersAffectedByDisband = rs.getInt("players_affected_by_disband");
+            }
+            gui.getGenReportsTable().setModel(initializeTable(rs));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void viewSponsorshipSummaryReport(int year, int month) throws SQLException {
+        String query = "SELECT " +
+                "t.team, " +
+                "SUM( " +
+                    "CASE " +
+                        "WHEN YEAR(COALESCE(s.contract_start, h.contract_start)) = YEAR(CURRENT_DATE) " +
+                        "THEN s.contract_amount " +
+                        "ELSE h.contract_amount " +
+                    "END " +
+                ") AS total_sponsorship, " +
+                "AVG( " +
+                    "CASE " +
+                        "WHEN YEAR(COALESCE(s.contract_start, h.contract_start)) = YEAR(CURRENT_DATE) " +
+                        "THEN s.contract_amount " +
+                        "ELSE h.contract_amount " +
+                    "END " +
+                ") AS average_sponsorship, " +
+                "COUNT( " +
+                    "CASE " +
+                        "WHEN YEAR(COALESCE(s.contract_start, h.contract_start)) = YEAR(CURRENT_DATE) " +
+                        "THEN s.sponsor_id " +
+                        "ELSE h.sponsor_id " +
+                    "END " +
+                ") AS total_sponsors " +
+            "FROM " +
+                "teams t " +
+            "LEFT JOIN " +
+                "teamsponsor s ON t.team = s.team " +
+            "LEFT JOIN " +
+                "sponsorhistory h ON t.team = h.team " +
+                "AND YEAR(h.contract_start) < YEAR(CURRENT_DATE) " +
+            "WHERE " +
+                "YEAR(COALESCE(s.contract_start, h.contract_start)) = " + year + 
+                " AND MONTH(COALESCE(s.contract_start, h.contract_start)) = " + month +
+            " GROUP BY " +
+                "t.team, " +
+                "YEAR(COALESCE(s.contract_start, h.contract_start)), " +
+                "MONTH(COALESCE(s.contract_start, h.contract_start)) " +
+            "ORDER BY team";
+            
+        try (Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
+                                    ResultSet.CONCUR_READ_ONLY)) {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String team = rs.getString("team");
+                double totalSponsorship = rs.getDouble("total_sponsorship");
+                double averageSponsorship = rs.getDouble("average_sponsorship");
+                int totalSponsors = rs.getInt("total_sponsors");
+            }
+            gui.getGenReportsTable().setModel(initializeTable(rs));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // TODO WHILE LOOP MIGHT REMOVE rs.next() don't change yet
+    public void viewTeamPerformanceReport(int year, int month) {
+        String setMonthQuery = "SET @month = " + month;
+        String selectQuery = "SELECT tph.team, " +
+                             "tph.winnings, " +
+                             "COUNT(CASE WHEN tph.result = 'win' THEN 1 END) AS total_wins " +
+                             "FROM teamperformancehistory tph " +
+                             "WHERE YEAR(tph.match_date) = " + year + " " +
+                             "AND (@month IS NULL OR MONTH(tph.match_date) = @month) " +
+                             "GROUP BY tph.team, YEAR(tph.match_date), MONTH(tph.match_date), tph.winnings " +
+                             "ORDER BY team DESC";
+    
+        try (Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
+                                    ResultSet.CONCUR_READ_ONLY)) {
+            // Execute the SET query
+            stmt.execute(setMonthQuery);
+    
+            // Execute the SELECT query
+            ResultSet rs = stmt.executeQuery(selectQuery);
+            while (rs.next()) {
+                String team = rs.getString("team");
+                double winnings = rs.getDouble("winnings");
+                int totalWins = rs.getInt("total_wins");
+            }
+            gui.getGenReportsTable().setModel(initializeTable(rs));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setMainViewTableView() {
@@ -331,8 +562,9 @@ public class MainController implements ActionListener {
 
     private void doAddSponsor() {
         String team = (String) gui.getTeamSponsorAddComboBox().getSelectedItem();
+        
         int numSponsor = 0;
-
+    
         try {
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                                             ResultSet.CONCUR_READ_ONLY);
@@ -348,26 +580,42 @@ public class MainController implements ActionListener {
                             ex.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        if (numSponsor == 0) 
-            gui.getCurrentTeamSponsorLbl().setText("Current Team has no sponsors.");
-        else if (numSponsor == 1)
-            gui.getCurrentTeamSponsorLbl().setText("Current Team has 1 sponsor.");
-        else
-            gui.getCurrentTeamSponsorLbl().setText("Current Team has " + numSponsor + " sponsors.");
-
-
         dpAddSponsor(team, numSponsor);
     }
 
     private void dpAddSponsor(String team, int numSponsor) {
-        String sponsor = (String) gui.getTeamSponsorAddComboBox().getSelectedItem();
-        String dateStart = gui.getYearSponsorAddTxtField().getText() 
-                    + "-" + gui.getMonthSponsorAddTxtField().getText() 
-                    + "-" + gui.getDaySponsorAddTxtField().getText();
+        String yearStart = gui.getYearSponsorAddTxtField().getText();
+        String monthStart = gui.getMonthSponsorAddTxtField().getText();
+        String dayStart = gui.getDaySponsorAddTxtField().getText();
+        
+        String yearEnd = gui.getYearSponsorAddTxtField1().getText();
+        String monthEnd = gui.getMonthSponsorAddTxtField1().getText();
+        String dayEnd = gui.getDaySponsorAddTxtField1().getText();
+        
+        if (yearStart.isEmpty() || monthStart.isEmpty() || dayStart.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Start date fields cannot be empty.", "Date Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (yearEnd.isEmpty() || monthEnd.isEmpty() || dayEnd.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "End date fields cannot be empty.", "Date Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String dateStart = yearStart + "-" + monthStart + "-" + dayStart;
+        String dateEnd = yearEnd + "-" + monthEnd + "-" + dayEnd;
 
-        String dateEnd = gui.getYearSponsorAddTxtField1().getText() 
-                    + "-" + gui.getMonthSponsorAddTxtField1().getText() 
-                    + "-" + gui.getDaySponsorAddTxtField1().getText();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        LocalDate startDate = LocalDate.parse(dateStart, dateFormatter);
+        LocalDate endDate = LocalDate.parse(dateEnd, dateFormatter);
+    
+        if (startDate.isAfter(endDate)) {
+            JOptionPane.showMessageDialog(gui.getMakeTransacPanel(), "Start date cannot be later than end date.", "Date Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        } 
+
+        String sponsor = (String) gui.getTeamSponsorAddComboBox().getSelectedItem();
 
         int contractAmount = (int) gui.getAddSponsorTeamSpinner().getValue();
 
@@ -378,9 +626,6 @@ public class MainController implements ActionListener {
         }
         
         String getSponsorIDFromNameQuery = "SELECT company FROM companies WHERE company = ?";
-
-
-
         String insertQuery1 = "INSERT INTO teamsponsor (sponsor_id, team, contract_amount, contract_start, contract_end) " 
                     + "VALUES (?, ?, ?, ?, ?)";
         String insertQuery2 = "INSERT INTO sponsorhistory (history_id, sponsor_id, team, contract_amount, contract_start, contract_end) "
@@ -419,15 +664,24 @@ public class MainController implements ActionListener {
     }        
 
     private void dpUpdateTeamStats() {
+        String year = gui.getYearTeamsUpdateStatsTxtField().getText();
+        String month = gui.getMonthTeamsUpdateStatsTxtField().getText();
+        String day = gui.getDayTeamsUpdateStatsTxtField().getText();
+
+        if (year.isEmpty() || month.isEmpty() || day.isEmpty()) {
+            JOptionPane.showMessageDialog(gui.getMakeTransacPanel(), "All date fields must be filled out.", 
+                            "Input Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String date = year + "-" + month + "-" + day;
+
         String team1 = (String) gui.getTeamsUpdateStatsComboBox().getSelectedItem();
         String team2 = (String) gui.getTeamsUpdateStatsComboBox2().getSelectedItem();
         String winner = (String) gui.getTeamsWinnerUpdateStatsComboBox().getSelectedItem();
 
         int winnings = (int) gui.getTeamsUpdateStatsSpinner().getValue();
 
-        String date = gui.getYearTeamsUpdateStatsTxtField().getText() 
-                    + "-" + gui.getMonthTeamsUpdateStatsTxtField().getText() 
-                    + "-" + gui.getDayTeamsUpdateStatsTxtField().getText();
 
         String insertTeamPerformanceQuery = "INSERT INTO teamperformancehistory (history_id, team, match_date, result, winnings) VALUES (?, ?, ?, ?, ?)";
         String updateTeamStatsQuery = "UPDATE teamstats SET total_winnings = total_winnings + ?, wins = wins + ?, losses = losses + ? WHERE team = ?";
@@ -678,5 +932,4 @@ public class MainController implements ActionListener {
         }
         return rs;
     }
-
 }

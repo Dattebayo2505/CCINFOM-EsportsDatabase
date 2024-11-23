@@ -37,22 +37,28 @@ public class Reports {
     }
 
     public static void viewCreationDeletionReport(Connection con, int year, int month) throws SQLException {
-        String query = "SELECT YEAR(th.creation_date) AS year, " +
+        String query = "SELECT " +
+                    "YEAR(th.creation_date) AS year, " +
                     "MONTH(th.creation_date) AS month, " +
-                    "COUNT(DISTINCT CASE WHEN YEAR(th.creation_date) = " + year +
-                    "AND MONTH(th.creation_date) = " + month +
-                    "THEN th.team END) AS teams_created, " +
-                    "COUNT(DISTINCT CASE WHEN YEAR(th.disband_date) = " + year +
-                    "AND MONTH(th.disband_date) = " + month + "11 THEN th.team END) AS teams_disbanded, " +
-                    "COUNT(DISTINCT ph.old_team) AS players_affected_by_disband " +
-                    "FROM teamhistory th" +
-                    "LEFT JOIN playerhistory ph " +
-                    "ON th.team = ph.old_team " +
+                    "COALESCE(COUNT(DISTINCT CASE WHEN YEAR(th.creation_date) = " + year + 
+                    " AND MONTH(th.creation_date) = " + month + 
+                    " THEN th.team END), 0) AS teams_created, " +
+                    "COALESCE(COUNT(DISTINCT CASE WHEN YEAR(th.disband_date) = " + year + 
+                    " AND MONTH(th.disband_date) = " + month + 
+                    " THEN th.team END), 0) AS teams_disbanded, " +
+                    "COALESCE(ROUND(AVG(CASE WHEN YEAR(th.creation_date) = " + year + 
+                    " AND MONTH(th.creation_date) = " + month + 
+                    " THEN 1 ELSE NULL END), 2), 0) AS avg_teams_created, " +
+                    "COALESCE(ROUND(AVG(CASE WHEN YEAR(th.disband_date) = " + year + 
+                    " AND MONTH(th.disband_date) = " + month + 
+                    " THEN 1 ELSE NULL END), 2), 0) AS avg_teams_disbanded, " +
+                    "COALESCE(COUNT(DISTINCT ph.player_id), 0) AS players_affected_by_disband " +
+                    "FROM teamhistory th " +
+                    "LEFT JOIN playerhistory ph ON th.team = ph.old_team " +
+                    "AND ph.left_old_team = th.disband_date " +
                     "WHERE (YEAR(th.creation_date) = " + year + " AND MONTH(th.creation_date) = " + month + ") " +
-                    "ON th.team = ph.old_team " +
-                    "WHERE (YEAR(th.creation_date) = " + year + " AND MONTH(th.creation_date) = " + month + ")" +
-                    "OR (YEAR(th.disband_date) = " + year + "AND MONTH(th.disband_date) = " + month + ")" +
-                    "OR GROUP BY year, month";
+                    "OR (YEAR(th.disband_date) = " + year + " AND MONTH(th.disband_date) = " + month + ") " +
+                    "GROUP BY year, month;";
 
         try (Statement stmt = con.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);

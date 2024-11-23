@@ -12,9 +12,26 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.LayoutStyle;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -38,23 +55,23 @@ public class GUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
+        GridBagConstraints gridBagConstraints;
 
-        mainMainPanel = new javax.swing.JPanel();
-        mainPanel = new javax.swing.JPanel();
-        bannerPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        lowerPanel = new javax.swing.JPanel();
-        lowerLeftPanel = new javax.swing.JPanel();
-        menuLbl = new javax.swing.JLabel();
-        mainViewBtn = new javax.swing.JButton();
-        makeTransacBtn = new javax.swing.JButton();
-        genReportsBtn = new javax.swing.JButton();
-        exitBtn = new javax.swing.JButton();
-        lowerRightPanel = new javax.swing.JPanel();
-        mainViewPanel = new javax.swing.JPanel();
-        upperMainViewPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        mainMainPanel = new JPanel();
+        mainPanel = new JPanel();
+        bannerPanel = new JPanel();
+        jLabel1 = new JLabel();
+        lowerPanel = new JPanel();
+        lowerLeftPanel = new JPanel();
+        menuLbl = new JLabel();
+        mainViewBtn = new JButton();
+        makeTransacBtn = new JButton();
+        genReportsBtn = new JButton();
+        exitBtn = new JButton();
+        lowerRightPanel = new JPanel();
+        mainViewPanel = new JPanel();
+        upperMainViewPanel = new JPanel();
+        jScrollPane1 = new JScrollPane();
         String[] columnNames = {"Column1", "Column2"};
         Object[][] data = {
             {"Data1", "Data2"},
@@ -109,161 +126,158 @@ public class GUI extends javax.swing.JFrame {
         };
 
         mainViewTableModel = new DefaultTableModel(data, columnNames);
-        mainViewTable = new javax.swing.JTable();
-        lowerMainViewPanel = new javax.swing.JPanel();
-        mainViewMainMenuBtn = new javax.swing.JButton();
-        tablesMainViewComboBox = new javax.swing.JComboBox<>();
-        mainViewMakeTransacBtn = new javax.swing.JButton();
-        queryMainViewTxtField = new javax.swing.JTextField();
-        executeQueryMainViewBtn = new javax.swing.JButton();
+        mainViewTable = new JTable();
+        lowerMainViewPanel = new JPanel();
+        mainViewMainMenuBtn = new JButton();
+        tablesMainViewComboBox = new JComboBox<>();
+        mainViewMakeTransacBtn = new JButton();
+        executeQueryMainViewBtn = new JButton();
+        jScrollPane3 = new JScrollPane();
+        queryMainViewTxtArea = new JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("ESports Tracker - Valorant");
-        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setPreferredSize(new Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(null);
 
-        mainMainPanel.setLayout(new java.awt.CardLayout());
+        mainMainPanel.setLayout(new CardLayout());
 
-        mainPanel.setBackground(new java.awt.Color(255, 204, 51));
-        mainPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        mainPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
-        mainPanel.setLayout(new java.awt.GridBagLayout());
+        mainPanel.setBackground(new Color(255, 204, 51));
+        mainPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        mainPanel.setPreferredSize(new Dimension(1280, 720));
+        mainPanel.setLayout(new GridBagLayout());
 
-        bannerPanel.setBackground(new java.awt.Color(51, 102, 0));
+        bannerPanel.setBackground(new Color(51, 102, 0));
 
-        jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 45)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setFont(new Font("Berlin Sans FB Demi", 0, 45)); // NOI18N
+        jLabel1.setForeground(new Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setText("ESports Tracker - Valorant");
-        jLabel1.setPreferredSize(new java.awt.Dimension(1280, 720));
+        jLabel1.setPreferredSize(new Dimension(1280, 720));
 
-        javax.swing.GroupLayout bannerPanelLayout = new javax.swing.GroupLayout(bannerPanel);
+        GroupLayout bannerPanelLayout = new GroupLayout(bannerPanel);
         bannerPanel.setLayout(bannerPanelLayout);
-        bannerPanelLayout.setHorizontalGroup(
-            bannerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        bannerPanelLayout.setHorizontalGroup(bannerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(bannerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1268, Short.MAX_VALUE)
+                .addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, 1268, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        bannerPanelLayout.setVerticalGroup(
-            bannerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        bannerPanelLayout.setVerticalGroup(bannerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(bannerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 0.1;
         mainPanel.add(bannerPanel, gridBagConstraints);
 
-        lowerPanel.setMinimumSize(new java.awt.Dimension(400, 600));
-        lowerPanel.setLayout(new java.awt.GridBagLayout());
+        lowerPanel.setMinimumSize(new Dimension(400, 600));
+        lowerPanel.setLayout(new GridBagLayout());
 
-        lowerLeftPanel.setBackground(new java.awt.Color(204, 204, 204));
-        lowerLeftPanel.setLayout(new java.awt.GridBagLayout());
+        lowerLeftPanel.setBackground(new Color(204, 204, 204));
+        lowerLeftPanel.setLayout(new GridBagLayout());
 
-        menuLbl.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
-        menuLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        menuLbl.setFont(new Font("sansserif", 1, 24)); // NOI18N
+        menuLbl.setHorizontalAlignment(SwingConstants.CENTER);
         menuLbl.setText("MENU");
-        menuLbl.setPreferredSize(new java.awt.Dimension(70, 28));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        menuLbl.setPreferredSize(new Dimension(70, 28));
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 50;
         lowerLeftPanel.add(menuLbl, gridBagConstraints);
 
-        mainViewBtn.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+        mainViewBtn.setFont(new Font("sansserif", 0, 16)); // NOI18N
         mainViewBtn.setText("Main View");
-        mainViewBtn.setPreferredSize(new java.awt.Dimension(135, 60));
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        mainViewBtn.setPreferredSize(new Dimension(135, 60));
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(7, 10, 7, 10);
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new Insets(7, 10, 7, 10);
         lowerLeftPanel.add(mainViewBtn, gridBagConstraints);
 
-        makeTransacBtn.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
+        makeTransacBtn.setFont(new Font("sansserif", 0, 15)); // NOI18N
         makeTransacBtn.setText("Make Transactions");
         makeTransacBtn.setPreferredSize(mainViewBtn.getPreferredSize());
-        makeTransacBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        makeTransacBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 makeTransacBtnActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(7, 10, 7, 10);
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new Insets(7, 10, 7, 10);
         lowerLeftPanel.add(makeTransacBtn, gridBagConstraints);
 
-        genReportsBtn.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+        genReportsBtn.setFont(new Font("sansserif", 0, 16)); // NOI18N
         genReportsBtn.setText("Generate Reports");
         genReportsBtn.setPreferredSize(mainViewBtn.getPreferredSize());
-        genReportsBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        genReportsBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 genReportsBtnActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 21;
-        gridBagConstraints.insets = new java.awt.Insets(7, 10, 7, 10);
+        gridBagConstraints.insets = new Insets(7, 10, 7, 10);
         lowerLeftPanel.add(genReportsBtn, gridBagConstraints);
 
-        exitBtn.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        exitBtn.setFont(new Font("sansserif", 0, 18)); // NOI18N
         exitBtn.setText("Exit");
-        exitBtn.setPreferredSize(new java.awt.Dimension(72, 40));
-        exitBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        exitBtn.setPreferredSize(new Dimension(72, 40));
+        exitBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 exitBtnActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(75, 10, 75, 10);
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new Insets(75, 10, 75, 10);
         lowerLeftPanel.add(exitBtn, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.2;
         gridBagConstraints.weighty = 1.0;
         lowerPanel.add(lowerLeftPanel, gridBagConstraints);
 
-        lowerRightPanel.setBackground(new java.awt.Color(0, 255, 204));
+        lowerRightPanel.setBackground(new Color(0, 255, 204));
 
-        javax.swing.GroupLayout lowerRightPanelLayout = new javax.swing.GroupLayout(lowerRightPanel);
+        GroupLayout lowerRightPanelLayout = new GroupLayout(lowerRightPanel);
         lowerRightPanel.setLayout(lowerRightPanelLayout);
-        lowerRightPanelLayout.setHorizontalGroup(
-            lowerRightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        lowerRightPanelLayout.setHorizontalGroup(lowerRightPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        lowerRightPanelLayout.setVerticalGroup(
-            lowerRightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        lowerRightPanelLayout.setVerticalGroup(lowerRightPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.8;
         gridBagConstraints.weighty = 1.0;
         lowerPanel.add(lowerRightPanel, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 2;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 0.9;
@@ -272,164 +286,154 @@ public class GUI extends javax.swing.JFrame {
         mainMainPanel.add(mainPanel, "mainmenu");
         mainPanel.getAccessibleContext().setAccessibleParent(mainMainPanel);
 
-        upperMainViewPanel.setPreferredSize(new java.awt.Dimension(1280, 400));
+        upperMainViewPanel.setPreferredSize(new Dimension(1280, 400));
 
-        jScrollPane1.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 470));
+        jScrollPane1.setViewportBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+        jScrollPane1.setPreferredSize(new Dimension(1000, 470));
         jScrollPane1.setViewportView(mainViewTable);
         jScrollPane1.setWheelScrollingEnabled(false);
 
         mainViewTable.setModel(mainViewTableModel);
-        mainViewTable.setPreferredSize(jScrollPane1.getPreferredSize());
+        mainViewTable.setPreferredSize(null);
         mainViewTable.setRequestFocusEnabled(false);
         mainViewTable.setRowSelectionAllowed(false);
         mainViewTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(mainViewTable);
 
-        javax.swing.GroupLayout upperMainViewPanelLayout = new javax.swing.GroupLayout(upperMainViewPanel);
+        GroupLayout upperMainViewPanelLayout = new GroupLayout(upperMainViewPanel);
         upperMainViewPanel.setLayout(upperMainViewPanelLayout);
-        upperMainViewPanelLayout.setHorizontalGroup(
-            upperMainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, upperMainViewPanelLayout.createSequentialGroup()
-                .addContainerGap(159, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(121, 121, 121))
+        upperMainViewPanelLayout.setHorizontalGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GroupLayout.Alignment.TRAILING, upperMainViewPanelLayout.createSequentialGroup()
+                .addContainerGap(142, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(138, 138, 138))
         );
-        upperMainViewPanelLayout.setVerticalGroup(
-            upperMainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, upperMainViewPanelLayout.createSequentialGroup()
-                .addGap(0, 68, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE))
+        upperMainViewPanelLayout.setVerticalGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(upperMainViewPanelLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 365, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        mainViewMainMenuBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lowerMainViewPanel.setPreferredSize(new Dimension(1124, 270));
+
+        mainViewMainMenuBtn.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
         mainViewMainMenuBtn.setText("Main Menu");
-        mainViewMainMenuBtn.setPreferredSize(new java.awt.Dimension(89, 30));
-        mainViewMainMenuBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mainViewMainMenuBtn.setPreferredSize(new Dimension(89, 30));
+        mainViewMainMenuBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 mainViewMainMenuBtnActionPerformed(evt);
             }
         });
 
-        tablesMainViewComBoxDefModel = new javax.swing.DefaultComboBoxModel<String>();
+        tablesMainViewComBoxDefModel = new DefaultComboBoxModel<String>();
         for (String tableName : GeneralUtil.getArrayTableNames()) {
             tablesMainViewComBoxDefModel.addElement(tableName);
         }
         tablesMainViewComboBox.setModel(tablesMainViewComBoxDefModel);
-        tablesMainViewComboBox.setPreferredSize(new java.awt.Dimension(200, 35));
+        tablesMainViewComboBox.setPreferredSize(new Dimension(200, 35));
 
-        mainViewMakeTransacBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        mainViewMakeTransacBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         mainViewMakeTransacBtn.setText("<html><div style='text-align: center;'>Make<br>Transactions</div></html>");
         mainViewMakeTransacBtn.setToolTipText("");
-        mainViewMakeTransacBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        mainViewMakeTransacBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 mainViewMakeTransacBtnActionPerformed(evt);
             }
         });
 
-        queryMainViewTxtField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        queryMainViewTxtField.setMinimumSize(new java.awt.Dimension(64, 28));
-        queryMainViewTxtField.setPreferredSize(new java.awt.Dimension(500, 100));
-        queryMainViewTxtField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                queryMainViewTxtFieldActionPerformed(evt);
-            }
-        });
-
-        executeQueryMainViewBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        executeQueryMainViewBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         executeQueryMainViewBtn.setText("Execute Query");
-        executeQueryMainViewBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        executeQueryMainViewBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 executeQueryMainViewBtnActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout lowerMainViewPanelLayout = new javax.swing.GroupLayout(lowerMainViewPanel);
+        queryMainViewTxtArea.setColumns(20);
+        queryMainViewTxtArea.setRows(5);
+        jScrollPane3.setViewportView(queryMainViewTxtArea);
+
+        GroupLayout lowerMainViewPanelLayout = new GroupLayout(lowerMainViewPanel);
         lowerMainViewPanel.setLayout(lowerMainViewPanelLayout);
-        lowerMainViewPanelLayout.setHorizontalGroup(
-            lowerMainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        lowerMainViewPanelLayout.setHorizontalGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
-                .addGap(157, 157, 157)
-                .addComponent(tablesMainViewComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(lowerMainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addComponent(tablesMainViewComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(executeQueryMainViewBtn, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
                     .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
-                        .addComponent(queryMainViewTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addGroup(lowerMainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(mainViewMainMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(mainViewMakeTransacBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(executeQueryMainViewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(166, Short.MAX_VALUE))
+                        .addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 537, GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(mainViewMakeTransacBtn, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mainViewMainMenuBtn, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
-        lowerMainViewPanelLayout.setVerticalGroup(
-            lowerMainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        lowerMainViewPanelLayout.setVerticalGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(lowerMainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
-                        .addComponent(mainViewMainMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(mainViewMakeTransacBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47))
-                    .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
-                        .addGroup(lowerMainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(queryMainViewTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tablesMainViewComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(executeQueryMainViewBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(mainViewMainMenuBtn, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(mainViewMakeTransacBtn, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tablesMainViewComboBox, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(executeQueryMainViewBtn, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout mainViewPanelLayout = new javax.swing.GroupLayout(mainViewPanel);
+        GroupLayout mainViewPanelLayout = new GroupLayout(mainViewPanel);
         mainViewPanel.setLayout(mainViewPanelLayout);
-        mainViewPanelLayout.setHorizontalGroup(
-            mainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(upperMainViewPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(lowerMainViewPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        mainViewPanelLayout.setVerticalGroup(
-            mainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        mainViewPanelLayout.setHorizontalGroup(mainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GroupLayout.Alignment.TRAILING, mainViewPanelLayout.createSequentialGroup()
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lowerMainViewPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(mainViewPanelLayout.createSequentialGroup()
-                .addComponent(upperMainViewPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lowerMainViewPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(upperMainViewPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        mainViewPanelLayout.setVerticalGroup(mainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(mainViewPanelLayout.createSequentialGroup()
+                .addComponent(upperMainViewPanel, GroupLayout.PREFERRED_SIZE, 446, GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lowerMainViewPanel, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         mainMainPanel.add(mainViewPanel, "mainview");
 
         getContentPane().add(mainMainPanel);
-        mainMainPanel.setBounds(0, 0, 1280, 720);
+        mainMainPanel.setBounds(0, 0, 1280, 780);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
+    private void exitBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_exitBtnActionPerformed
 
-    private void genReportsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genReportsBtnActionPerformed
+    private void genReportsBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_genReportsBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_genReportsBtnActionPerformed
 
-    private void makeTransacBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeTransacBtnActionPerformed
+    private void makeTransacBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_makeTransacBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_makeTransacBtnActionPerformed
 
-    private void queryMainViewTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queryMainViewTxtFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_queryMainViewTxtFieldActionPerformed
-
-    private void mainViewMakeTransacBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainViewMakeTransacBtnActionPerformed
+    private void mainViewMakeTransacBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_mainViewMakeTransacBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mainViewMakeTransacBtnActionPerformed
 
-    private void mainViewMainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainViewMainMenuBtnActionPerformed
+    private void mainViewMainMenuBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_mainViewMainMenuBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mainViewMainMenuBtnActionPerformed
 
-    private void executeQueryMainViewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeQueryMainViewBtnActionPerformed
+    private void executeQueryMainViewBtnActionPerformed(ActionEvent evt) {//GEN-FIRST:event_executeQueryMainViewBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_executeQueryMainViewBtnActionPerformed
 
@@ -470,8 +474,8 @@ public class GUI extends javax.swing.JFrame {
         return tablesMainViewComboBox;
     }
     
-    public JTextField getQueryMainViewTxtField() {
-        return queryMainViewTxtField;
+    public JTextArea getQueryMainViewTxtArea() {
+        return queryMainViewTxtArea;
     }
     
     public JButton getMainViewMainMenuBtn() {
@@ -539,28 +543,29 @@ public class GUI extends javax.swing.JFrame {
     }
     private DefaultTableModel mainViewTableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel bannerPanel;
-    private javax.swing.JButton executeQueryMainViewBtn;
-    private javax.swing.JButton exitBtn;
-    private javax.swing.JButton genReportsBtn;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JPanel lowerLeftPanel;
-    private javax.swing.JPanel lowerMainViewPanel;
-    private javax.swing.JPanel lowerPanel;
-    private javax.swing.JPanel lowerRightPanel;
-    private javax.swing.JPanel mainMainPanel;
-    private javax.swing.JPanel mainPanel;
-    private javax.swing.JButton mainViewBtn;
-    private javax.swing.JButton mainViewMainMenuBtn;
-    private javax.swing.JButton mainViewMakeTransacBtn;
-    private javax.swing.JPanel mainViewPanel;
-    private static javax.swing.JTable mainViewTable;
-    private javax.swing.JButton makeTransacBtn;
-    private javax.swing.JLabel menuLbl;
-    private javax.swing.JTextField queryMainViewTxtField;
-    private javax.swing.JComboBox<String> tablesMainViewComboBox;
-    private javax.swing.DefaultComboBoxModel<String> tablesMainViewComBoxDefModel;
-    private javax.swing.JPanel upperMainViewPanel;
+    private JPanel bannerPanel;
+    private JButton executeQueryMainViewBtn;
+    private JButton exitBtn;
+    private JButton genReportsBtn;
+    private JLabel jLabel1;
+    private JScrollPane jScrollPane1;
+    private JScrollPane jScrollPane3;
+    private JPanel lowerLeftPanel;
+    private JPanel lowerMainViewPanel;
+    private JPanel lowerPanel;
+    private JPanel lowerRightPanel;
+    private JPanel mainMainPanel;
+    private JPanel mainPanel;
+    private JButton mainViewBtn;
+    private JButton mainViewMainMenuBtn;
+    private JButton mainViewMakeTransacBtn;
+    private JPanel mainViewPanel;
+    private static JTable mainViewTable;
+    private JButton makeTransacBtn;
+    private JLabel menuLbl;
+    private JTextArea queryMainViewTxtArea;
+    private JComboBox<String> tablesMainViewComboBox;
+    private DefaultComboBoxModel<String> tablesMainViewComBoxDefModel;
+    private JPanel upperMainViewPanel;
     // End of variables declaration//GEN-END:variables
 }

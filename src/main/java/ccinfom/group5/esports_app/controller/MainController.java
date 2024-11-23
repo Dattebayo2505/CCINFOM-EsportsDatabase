@@ -89,7 +89,7 @@ public class MainController implements ActionListener {
         Object[][] data;
         String[] columnNames;
         ResultSetMetaData metaData;
-        String query = gui.getQueryMainViewTxtField().getText();
+        String query = gui.getQueryMainViewTxtArea().getText();
         if (query.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Query cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -116,9 +116,7 @@ public class MainController implements ActionListener {
             data = new Object[rowCount][columnCount];
             columnNames = new String[columnCount];
 
-            for (i=0; i<columnCount; i++) {
-                columnNames[i] = metaData.getColumnName(i+1);
-            }
+            columnNames = FileReaderUtil.setColumnNames(columnCount, metaData);
 
             i=0;
             while (resultSet.next()) {

@@ -45,6 +45,14 @@ public class FileReaderUtil {
 
     }
 
+    public static String[] setColumnNames(int columnCount, ResultSetMetaData metaData) throws SQLException {
+        String[] columnNames = new String[columnCount];
+        for (int i=0; i<columnCount; i++) {
+            columnNames[i] = metaData.getColumnName(i+1);
+        }
+        return columnNames;
+    }
+
     public static Object[] setTableRecord(int columnCount, ResultSet rs, ResultSetMetaData metaData) throws SQLException {
         Object[] record = new Object[columnCount];
         for (int i=0; i<columnCount; i++) {

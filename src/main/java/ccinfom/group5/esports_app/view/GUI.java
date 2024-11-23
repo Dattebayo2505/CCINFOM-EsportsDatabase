@@ -5,9 +5,16 @@
 package ccinfom.group5.esports_app.view;
 
 import ccinfom.group5.esports_app.utils.GeneralUtil;
+import javax.swing.JButton;
 
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import java.awt.CardLayout;
+import java.awt.event.ActionListener;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
 
 /**
  *
@@ -107,7 +114,8 @@ public class GUI extends javax.swing.JFrame {
         mainViewMainMenuBtn = new javax.swing.JButton();
         tablesMainViewComboBox = new javax.swing.JComboBox<>();
         mainViewMakeTransacBtn = new javax.swing.JButton();
-        queryTxtField = new javax.swing.JTextField();
+        queryMainViewTxtField = new javax.swing.JTextField();
+        executeQueryMainViewBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ESports Tracker - Valorant");
@@ -174,11 +182,6 @@ public class GUI extends javax.swing.JFrame {
         mainViewBtn.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         mainViewBtn.setText("Main View");
         mainViewBtn.setPreferredSize(new java.awt.Dimension(135, 60));
-        mainViewBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mainViewBtnActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -266,13 +269,10 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.weighty = 0.9;
         mainPanel.add(lowerPanel, gridBagConstraints);
 
-        mainMainPanel.add(mainPanel, "card2");
+        mainMainPanel.add(mainPanel, "mainmenu");
         mainPanel.getAccessibleContext().setAccessibleParent(mainMainPanel);
 
-        mainViewPanel.setPreferredSize(getPreferredSize());
-        mainViewPanel.setLayout(new java.awt.GridBagLayout());
-
-        upperMainViewPanel.setPreferredSize(new java.awt.Dimension(1280, 500));
+        upperMainViewPanel.setPreferredSize(new java.awt.Dimension(1280, 400));
 
         jScrollPane1.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 470));
@@ -286,16 +286,23 @@ public class GUI extends javax.swing.JFrame {
         mainViewTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(mainViewTable);
 
-        upperMainViewPanel.add(jScrollPane1);
+        javax.swing.GroupLayout upperMainViewPanelLayout = new javax.swing.GroupLayout(upperMainViewPanel);
+        upperMainViewPanel.setLayout(upperMainViewPanelLayout);
+        upperMainViewPanelLayout.setHorizontalGroup(
+            upperMainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, upperMainViewPanelLayout.createSequentialGroup()
+                .addContainerGap(159, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(121, 121, 121))
+        );
+        upperMainViewPanelLayout.setVerticalGroup(
+            upperMainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, upperMainViewPanelLayout.createSequentialGroup()
+                .addGap(0, 68, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        mainViewPanel.add(upperMainViewPanel, gridBagConstraints);
-
-        lowerMainViewPanel.setLayout(new java.awt.GridBagLayout());
-
+        mainViewMainMenuBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mainViewMainMenuBtn.setText("Main Menu");
         mainViewMainMenuBtn.setPreferredSize(new java.awt.Dimension(89, 30));
         mainViewMainMenuBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -303,15 +310,6 @@ public class GUI extends javax.swing.JFrame {
                 mainViewMainMenuBtnActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipady = -7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(8, 2, 0, 0);
-        lowerMainViewPanel.add(mainViewMainMenuBtn, gridBagConstraints);
 
         tablesMainViewComBoxDefModel = new javax.swing.DefaultComboBoxModel<String>();
         for (String tableName : GeneralUtil.getArrayTableNames()) {
@@ -319,21 +317,8 @@ public class GUI extends javax.swing.JFrame {
         }
         tablesMainViewComboBox.setModel(tablesMainViewComBoxDefModel);
         tablesMainViewComboBox.setPreferredSize(new java.awt.Dimension(200, 35));
-        tablesMainViewComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tablesMainViewComboBoxActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = -128;
-        gridBagConstraints.ipady = -13;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(8, 12, 0, 0);
-        lowerMainViewPanel.add(tablesMainViewComboBox, gridBagConstraints);
 
+        mainViewMakeTransacBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         mainViewMakeTransacBtn.setText("<html><div style='text-align: center;'>Make<br>Transactions</div></html>");
         mainViewMakeTransacBtn.setToolTipText("");
         mainViewMakeTransacBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -341,49 +326,84 @@ public class GUI extends javax.swing.JFrame {
                 mainViewMakeTransacBtnActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.gridheight = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        lowerMainViewPanel.add(mainViewMakeTransacBtn, gridBagConstraints);
 
-        queryTxtField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        queryTxtField.setMinimumSize(new java.awt.Dimension(64, 28));
-        queryTxtField.setPreferredSize(new java.awt.Dimension(500, 100));
-        queryTxtField.addActionListener(new java.awt.event.ActionListener() {
+        queryMainViewTxtField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        queryMainViewTxtField.setMinimumSize(new java.awt.Dimension(64, 28));
+        queryMainViewTxtField.setPreferredSize(new java.awt.Dimension(500, 100));
+        queryMainViewTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                queryTxtFieldActionPerformed(evt);
+                queryMainViewTxtFieldActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = -436;
-        gridBagConstraints.ipady = -72;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 16, 0, 0);
-        lowerMainViewPanel.add(queryTxtField, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        mainViewPanel.add(lowerMainViewPanel, gridBagConstraints);
+        executeQueryMainViewBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        executeQueryMainViewBtn.setText("Execute Query");
+        executeQueryMainViewBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                executeQueryMainViewBtnActionPerformed(evt);
+            }
+        });
 
-        mainMainPanel.add(mainViewPanel, "card3");
+        javax.swing.GroupLayout lowerMainViewPanelLayout = new javax.swing.GroupLayout(lowerMainViewPanel);
+        lowerMainViewPanel.setLayout(lowerMainViewPanelLayout);
+        lowerMainViewPanelLayout.setHorizontalGroup(
+            lowerMainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
+                .addGap(157, 157, 157)
+                .addComponent(tablesMainViewComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(lowerMainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
+                        .addComponent(queryMainViewTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addGroup(lowerMainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(mainViewMainMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mainViewMakeTransacBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(executeQueryMainViewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(166, Short.MAX_VALUE))
+        );
+        lowerMainViewPanelLayout.setVerticalGroup(
+            lowerMainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(lowerMainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
+                        .addComponent(mainViewMainMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(mainViewMakeTransacBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47))
+                    .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
+                        .addGroup(lowerMainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(queryMainViewTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tablesMainViewComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(executeQueryMainViewBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
+        );
+
+        javax.swing.GroupLayout mainViewPanelLayout = new javax.swing.GroupLayout(mainViewPanel);
+        mainViewPanel.setLayout(mainViewPanelLayout);
+        mainViewPanelLayout.setHorizontalGroup(
+            mainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(upperMainViewPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(lowerMainViewPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        mainViewPanelLayout.setVerticalGroup(
+            mainViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainViewPanelLayout.createSequentialGroup()
+                .addComponent(upperMainViewPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lowerMainViewPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        mainMainPanel.add(mainViewPanel, "mainview");
 
         getContentPane().add(mainMainPanel);
         mainMainPanel.setBounds(0, 0, 1280, 720);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void mainViewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainViewBtnActionPerformed
-        java.awt.CardLayout cardLayout = (java.awt.CardLayout) mainMainPanel.getLayout();
-        cardLayout.show(mainMainPanel, "card3");
-    }//GEN-LAST:event_mainViewBtnActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         // TODO add your handling code here:
@@ -397,13 +417,9 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_makeTransacBtnActionPerformed
 
-    private void queryTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queryTxtFieldActionPerformed
+    private void queryMainViewTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queryMainViewTxtFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_queryTxtFieldActionPerformed
-
-    private void tablesMainViewComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tablesMainViewComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tablesMainViewComboBoxActionPerformed
+    }//GEN-LAST:event_queryMainViewTxtFieldActionPerformed
 
     private void mainViewMakeTransacBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainViewMakeTransacBtnActionPerformed
         // TODO add your handling code here:
@@ -413,10 +429,58 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_mainViewMainMenuBtnActionPerformed
 
+    private void executeQueryMainViewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeQueryMainViewBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_executeQueryMainViewBtnActionPerformed
+
+    public CardLayout getCardLayout() {
+        return (CardLayout) mainMainPanel.getLayout();
+    }
+    public JPanel getMainMainPanel() {
+        return mainMainPanel;
+    }
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+    public JPanel getMainViewPanel() {
+        return mainViewPanel;
+    }
+    
+
+    // Main Menu
+    public JButton getMainViewBtn() {
+        return mainViewBtn;
+    }
+    public JButton getMakeTransacBtn() {
+        return makeTransacBtn;
+    }
+    public JButton getGenReportsBtn() {
+        return genReportsBtn;
+    }
+    public JButton getExitBtn() {
+        return exitBtn;
+    }
+
+
+    public JButton getExecuteQueryMainViewBtn() {
+        return executeQueryMainViewBtn;
+    }
+    
+    public JComboBox getTablesMainViewComboBox() {
+        return tablesMainViewComboBox;
+    }
+    
+    public JTextField getQueryMainViewTxtField() {
+        return queryMainViewTxtField;
+    }
+    
+    public JButton getMainViewMainMenuBtn() {
+        return mainViewMainMenuBtn;
+    }
+    
     public JTable getMainViewTable() {
         return mainViewTable;
     }
-    
     public DefaultTableModel getMainViewTableModel() {
         return mainViewTableModel;
     }
@@ -424,6 +488,21 @@ public class GUI extends javax.swing.JFrame {
         this.mainViewTableModel = mainViewTableModel;  
     }
     
+
+    public void addClickListener(ActionListener e) {
+        this.mainViewBtn.addActionListener(e);
+        this.makeTransacBtn.addActionListener(e);
+        this.genReportsBtn.addActionListener(e);
+        this.exitBtn.addActionListener(e);
+
+        this.executeQueryMainViewBtn.addActionListener(e);
+        this.tablesMainViewComboBox.addActionListener(e);
+    }
+
+    
+    
+    
+
     /**
      * @param args the command line arguments
      */
@@ -461,6 +540,7 @@ public class GUI extends javax.swing.JFrame {
     private DefaultTableModel mainViewTableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bannerPanel;
+    private javax.swing.JButton executeQueryMainViewBtn;
     private javax.swing.JButton exitBtn;
     private javax.swing.JButton genReportsBtn;
     private javax.swing.JLabel jLabel1;
@@ -478,7 +558,7 @@ public class GUI extends javax.swing.JFrame {
     private static javax.swing.JTable mainViewTable;
     private javax.swing.JButton makeTransacBtn;
     private javax.swing.JLabel menuLbl;
-    private javax.swing.JTextField queryTxtField;
+    private javax.swing.JTextField queryMainViewTxtField;
     private javax.swing.JComboBox<String> tablesMainViewComboBox;
     private javax.swing.DefaultComboBoxModel<String> tablesMainViewComBoxDefModel;
     private javax.swing.JPanel upperMainViewPanel;

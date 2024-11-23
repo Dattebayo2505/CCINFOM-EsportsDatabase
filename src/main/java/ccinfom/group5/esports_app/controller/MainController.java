@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import javax.swing.JOptionPane;
@@ -32,15 +34,17 @@ public class MainController implements ActionListener {
         this.gui = gui;
         this.con = con;     
         
+        Transaction transaction = new Transaction(database);
+
         gui.addClickListener(this);
 
-        initializeTable();
-    }
+        gui.setPlayerNames(getIDs("players", "player_id"));
+        gui.setTeamNames(getIDs("teams", "team"));
+        gui.setSponsorNames(getIDs("companies", "company"));
 
-    public MainController(Database database, OldGUI oldGUI) {
-        this.database = database;
-        this.oldGUI = oldGUI;     
-        
+        gui.updatePlayersComboBoxModel();
+        gui.updateTeamsComboBoxModel();
+
         initializeTable();
     }
 
@@ -139,12 +143,12 @@ public class MainController implements ActionListener {
         if (source == gui.getMainViewBtn()) {
             gui.getCardLayout().show(gui.getMainMainPanel(), "mainview");
         }
-        // else if (source == gui.getMakeTransacBtn()) {
-        //     gui.getCardLayout().show(gui.getMainMainPanel(), "maketransac");
-        // }
-        // else if (source == gui.getGenReportsBtn()) {
-        //     gui.getCardLayout().show(gui.getMainMainPanel(), "genreports");
-        // }
+        else if (source == gui.getMakeTransacBtn()) {
+            gui.getCardLayout().show(gui.getMainMainPanel(), "maketransac");
+        }
+        else if (source == gui.getGenReportsBtn()) {
+            gui.getCardLayout().show(gui.getMainMainPanel(), "genreports");
+        }
         else if (source == gui.getExitBtn()) {
             System.exit(0);
         }
@@ -159,9 +163,18 @@ public class MainController implements ActionListener {
 
             initializeTable(selectedTable);
         }
+        else if (source == gui.getMakeTransacBtn()) {
+            gui.getCardLayout().show(gui.getMainMainPanel(), "maketransac");
+        }
         else if (source == gui.getMainViewMainMenuBtn()) {
             gui.getCardLayout().show(gui.getMainMainPanel(), "mainmenu");
         }
+
+        // Make Transaction Page
+
+
+        
+        // Generate Reports Page
 
 
 
@@ -179,6 +192,28 @@ public class MainController implements ActionListener {
             }
         }
         return false;
+    }
+
+    private ArrayList<String> getIDs(String table, String column) {
+        ArrayList<String> iD = new ArrayList<>();
+
+        try {
+            statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                                            ResultSet.CONCUR_READ_ONLY);
+
+            ResultSet resultSet = statement.executeQuery("SELECT " + column + " FROM " + table);
+
+            while (resultSet.next()) {
+                iD.add(resultSet.getString(column));
+            }
+
+            Collections.sort(iD);
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error executing query: \n" + e.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return iD;
     }
 
 }

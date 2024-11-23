@@ -12,7 +12,7 @@ import ccinfom.group5.esports_app.model.tables.TeamStats;
 public class Transaction {
     private Database database;
 
-    Transaction(Database database) {
+    public Transaction(Database database) {
         this.database = database;
     }
 

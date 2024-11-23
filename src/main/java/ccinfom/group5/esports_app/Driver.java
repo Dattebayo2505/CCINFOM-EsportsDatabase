@@ -44,8 +44,7 @@ public class Driver {
         GUI gui = new GUI();
         gui.setVisible(true);
         
-        new MainController(database, gui, database.getCon());         
-        // new MainController(database, oldGui);         
+        new MainController(database, gui, database.getCon());            
         
     }
 }

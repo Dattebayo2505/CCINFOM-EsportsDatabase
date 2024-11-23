@@ -5,6 +5,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -42,63 +44,42 @@ public class FileReaderUtil {
         }
 
     }
-    
 
-/* 
-    public static void loadPlayers(String filepath, Database database) {
-        int count = 0;
+    public static Object[] setTableRecord(int columnCount, ResultSet rs, ResultSetMetaData metaData) throws SQLException {
+        Object[] record = new Object[columnCount];
+        for (int i=0; i<columnCount; i++) {
+            String columnName = metaData.getColumnName(i+1);
+            String columnType = metaData.getColumnTypeName(i+1);
 
-        try (Scanner scanner = new Scanner(new File(filepath))) {   
-            boolean isFirstLine = true;
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] columns = line.split(",");
-        
-                if (isFirstLine) {
-                    for (String columnName : columns) { // Store column names
-                        database.getPlayerColumnNames().add(columnName.trim()); 
-                    }
-                    isFirstLine = false;
-                    continue; // Skip below code for first line of csv
-                }
-
-                String playerID;
-                String lastName;
-                String firstName;
-                int age;
-                String country;
-                String teamName;
-
-                playerID = columns[0].trim();
-                lastName = columns[1].trim();
-                firstName = columns[2].trim();
-                age = Integer.parseInt(columns[3].trim());
-                country = columns[4].trim();
-                teamName = columns[5].trim();
-                
-                Player player = new Player(playerID, lastName, firstName, age, country, teamName);
-
-                database.getAllPlayers().add(player);
-
-                ++count;
-            }
-            GeneralUtil.debugPrint(count + " players created successfully"); // DEBUGGING
-        } 
-        catch (FileNotFoundException e) {
-            GeneralUtil.debugPrint("File not found: " + filepath);
-            e.printStackTrace();
-        }
-    }
-
-    public static void printPlayerTable(Database database) {
-        if (Driver.terminalLogsEnabled) {
-            for (Player player : database.getAllPlayers()) {
-                System.out.println(player.getPlayerID() + " " + player.getLastName() + " " + player.getFirstName() 
-                                + " " + player.getAge() + " " + player.getCountry() + " " + player.getTeamName());
+            switch (columnType) {
+                case "INT":
+                    int num = rs.getInt(columnName);
+                    record[i] = num;
+                    break;
+                case "VARCHAR":
+                    String str = rs.getString(columnName);
+                    record[i] = str;
+                    break;
+                case "DATE":
+                    String date = rs.getString(columnName);
+                    record[i] = date;
+                    break;
+                case "DECIMAL":
+                    double dec = rs.getDouble(columnName);
+                    record[i] = dec;
+                    break;
+                case "NULL":
+                    record[i] = null;
+                    break;
+                default:
+                    System.out.println("Unknown type");
+                    break;
             }
         }
+
+        return record;
     }
-*/
+
     public static void readConfigAndSetConnection(String filepath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line, key, value;

@@ -81,39 +81,10 @@ public class Database {
                 columnNames = new String[columnCount];
                 while (resultSet.next()) {
                     tableRecord = new Object[columnCount];
-                    for (i=1; i<=columnCount; i++) {
-                        columnName = metaData.getColumnName(i);
-                        columnType = metaData.getColumnTypeName(i);
 
-                        columnNames[i-1] = columnName;
-
-                        switch (columnType) {
-                            case "INT":
-                                int num = resultSet.getInt(columnName);
-                                tableRecord[i-1] = num;
-                                break;
-                            case "VARCHAR":
-                                String str = resultSet.getString(columnName);
-                                tableRecord[i-1] = str;
-                                break;
-                            case "DATE":
-                                String date = resultSet.getString(columnName);
-                                tableRecord[i-1] = date;
-                                break;
-                            case "DECIMAL":
-                                double dec = resultSet.getDouble(columnName);
-                                tableRecord[i-1] = dec;
-                                break;
-                            case "NULL":
-                                tableRecord[i-1] = null;
-                                break;
-                            default:
-                                System.out.println("Unknown type");
-                                break;
-                        }
-
-                    }
+                    tableRecord = FileReaderUtil.setTableRecord(columnCount, resultSet, metaData);
                     tableRecords[j] = tableRecord;
+                    ++j;
 
                     switch (table) {
                         case "companies":
@@ -152,8 +123,8 @@ public class Database {
                             PlayerHistory playerHistory = new PlayerHistory(
                                 (int) tableRecord[0], //history_id
                                 tableRecord[1].toString(), //player_id
-                                tableRecord[2].toString(), //old_team
-                                tableRecord[3].toString(), //left_old_team
+                                tableRecord[2] != null ? tableRecord[2].toString() : null, // old_team
+                                tableRecord[3] != null ? tableRecord[3].toString() : null, // left_old_team
                                 tableRecord[4].toString(), //new_team
                                 tableRecord[5].toString() //joined_new_team
                             );
@@ -175,7 +146,7 @@ public class Database {
                                 (int) tableRecord[0], //history_id
                                 tableRecord[1].toString(), //team
                                 tableRecord[2].toString(), //creation_date
-                                tableRecord[3].toString() //disband_date
+                                tableRecord[3] != null ? tableRecord[3].toString() : null //disband_date
                             );
                             allTeamHistories.add(teamHistory);
                             break;
@@ -189,31 +160,9 @@ public class Database {
                             );
                             allTeamPerformanceHistories.add(teamPerformanceHistory);
                             break;
-                        case "teamstats":
-                            TeamStats teamStats = new TeamStats(
-                                tableRecord[0].toString(), //team
-                                (double) tableRecord[1], //total_winnings
-                                tableRecord[2].toString(), //favored_map
-                                (int) tableRecord[3], //wins
-                                (int) tableRecord[4] //losses
-                            );
-                            allTeamStats.add(teamStats);
-                            break;
-                        case "teamsponsor":
-                            TeamSponsor teamSponsor = new TeamSponsor(
-                                (int) tableRecord[1], //sponsor_id
-                                tableRecord[0].toString(), //team
-                                (double) tableRecord[2], //contract_amount
-                                tableRecord[3].toString(), //contract_start
-                                tableRecord[4].toString() //contract_end
-                            );
-                            allTeamSponsors.add(teamSponsor);
-                            break;
                     }
                     
                     // TODO: Add Object[][] here
-
-                    ++j;
                 }
                 tableDataMap.put(table, tableRecords);
                 tableColumnNameMap.put(table, columnNames);

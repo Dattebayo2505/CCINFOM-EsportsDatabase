@@ -16,8 +16,6 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JOptionPane;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 import ccinfom.group5.esports_app.model.*;
@@ -27,14 +25,12 @@ import ccinfom.group5.esports_app.view.GUI;
 
 public class MainController implements ActionListener {
     
-    private Database database;
     private GUI gui;
     private Connection con;
     private Statement statement;
 
 
     public MainController(Database database, GUI gui, Connection con) {
-        this.database = database;
         this.gui = gui;
         this.con = con;     
         
@@ -139,24 +135,7 @@ public class MainController implements ActionListener {
         return model;
     }
 
-    @Deprecated
-    private void initializeTable(String[] columnNames, Object[][] data) {
-        DefaultTableModel model = new DefaultTableModel(data, columnNames) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // All cells are non-editable
-            }
-        };
-
-        gui.getMainViewTable().setModel(model);
-
-    }
-
     private void doExecuteQuery() {
-        int rowCount, columnCount, i;
-        Object[][] data;
-        String[] columnNames;
-        ResultSetMetaData metaData;
         String query = gui.getQueryMainViewTxtArea().getText();
         if (query.trim().isEmpty()) {
             JOptionPane.showMessageDialog(gui.getMainViewPanel(), "Query cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
@@ -174,26 +153,7 @@ public class MainController implements ActionListener {
     
             if (isResultSet) {
                 ResultSet resultSet = statement.getResultSet();
-    
-                resultSet.last();
-                rowCount = resultSet.getRow();
-                resultSet.beforeFirst();
-    
-                metaData = resultSet.getMetaData();
-                columnCount = metaData.getColumnCount();
-    
-                data = new Object[rowCount][columnCount];
-                columnNames = new String[columnCount];
-    
-                columnNames = FileReaderUtil.setColumnNames(columnCount, metaData);
-    
-                i = 0;
-                while (resultSet.next()) {
-                    data[i] = FileReaderUtil.setTableRecord(columnCount, resultSet, metaData);
-                    ++i;
-                }
-    
-                // initializeTable(columnNames, data);
+                gui.getMainViewTable().setModel(initializeTable(resultSet));
             } else {
                 int updateCount = statement.getUpdateCount();
                 JOptionPane.showMessageDialog(gui.getMainViewPanel(), "Update count: " + updateCount, "Update Successful", JOptionPane.INFORMATION_MESSAGE);
@@ -202,7 +162,7 @@ public class MainController implements ActionListener {
             JOptionPane.showMessageDialog(null, "Error executing query: \n" + e.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+ 
     private void doTransferPlayer() throws SQLException {
         String playerID = (String) gui.getPlayerTransferPlayerComboBox().getSelectedItem();
         String newTeam = (String) gui.getTeamTransferPlayerTransacComboBox().getSelectedItem();
@@ -249,13 +209,14 @@ public class MainController implements ActionListener {
 
         // Main View Page
         if (source == gui.getExecuteQueryMainViewBtn()) {
-            String selectedTable = (String) gui.getTablesMainViewComboBox().getSelectedItem();
             doExecuteQuery();
-            gui.getMainViewTable().setModel(initializeTable(selectedTable));
+
+            JOptionPane.showMessageDialog(gui.getMainViewPanel(), "Query executed successfully.", 
+                            "Query Success", JOptionPane.INFORMATION_MESSAGE);
+            
         }
         else if (source == gui.getTablesMainViewComboBox()) {
-            String selectedTable = (String) gui.getTablesMainViewComboBox().getSelectedItem();
-            gui.getMainViewTable().setModel(initializeTable(selectedTable));
+            setMainViewTableView();
         }
 
         else if (source == gui.getInsertRecordMainViewBtn()) {
@@ -275,8 +236,6 @@ public class MainController implements ActionListener {
         }
         else if (source == gui.getUpdateRecordMainViewBtn()) {
             String table = (String) gui.getTablesMainViewComboBox().getSelectedItem();
-            List<String> columnNames = getColumnNames(table);
-            String columns = String.join(", ", columnNames);
             String query = "UPDATE " + table + "\nSET <> \nWHERE\n" +
                     "<> = <>"; 
     
@@ -381,43 +340,43 @@ public class MainController implements ActionListener {
                 
                 setMainViewTableView();
             }
-            
-            
         }       
-
         else if (source == gui.getTeamsUpdateStatsComboBox() || 
                  source == gui.getTeamsUpdateStatsComboBox2()) {
 
             updateComboBoxes();
         }
-        
         else if (source == gui.getFinalTeamsUpdateStatsBtn()) {
             dpUpdateTeamStats();
-
-
         }
 
         else if (source == gui.getMainMenuTransacBtn()) {
             gui.getCardLayout().show(gui.getMainMainPanel(), "mainmenu");
         }
 
-        // TODO ADD FOR YEAR ONLY
+        else if (source == gui.getGenReportsToggleBtn()) {
+            if (gui.getGenReportsToggleBtn().isSelected()) {
+                gui.getGenReportsToggleBtn().setText("<html><div style='text-align': center;'>MONTHS<br>ACTIVATED</div></html>");
+            } else {
+                gui.getGenReportsToggleBtn().setText("<html><div style='text-align': center;'>MONTHS<br>DEACTIVATED</div></html>");
+            }
+        }
         // Generate Reports Page
         else if (source == gui.getFinalGenReportsBtn()) {
             try {
                 int year = Integer.parseInt(gui.getYearGenReportsTxtField().getText());
-                
+                Integer month = gui.getGenReportsToggleBtn().isSelected() ? gui.getMonthGenReportsComboBox().getSelectedIndex() + 1 : null;
+        
                 if (gui.getTablesGenReportsComboBox().getSelectedIndex() == 0)
-                    viewTransferReport(year, gui.getMonthGenReportsComboBox().getSelectedIndex() + 1);
+                    viewTransferReport(year, month);
                 if (gui.getTablesGenReportsComboBox().getSelectedIndex() == 1)
-                    viewCreationDeletionReport(year, gui.getMonthGenReportsComboBox().getSelectedIndex() + 1);
+                    viewCreationDeletionReport(year, month);
                 if (gui.getTablesGenReportsComboBox().getSelectedIndex() == 2)
-                    viewSponsorshipSummaryReport(year, gui.getMonthGenReportsComboBox().getSelectedIndex() + 1);
+                    viewSponsorshipSummaryReport(year, month);
                 if (gui.getTablesGenReportsComboBox().getSelectedIndex() == 3)
-                    viewTeamPerformanceReport(year, gui.getMonthGenReportsComboBox().getSelectedIndex() + 1);
-
-            } 
-            catch (SQLException ex) {
+                    viewTeamPerformanceReport(year, month);
+        
+            } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         }
@@ -442,64 +401,76 @@ public class MainController implements ActionListener {
         return columnNames;
     }
 
-    // TODO REVISE TO ACCOMODATE ANOTEHER FOR YEAR ONLY ()
-    public void viewTransferReport(int year, int month) throws SQLException {
+    public void viewTransferReport(int year, Integer month) throws SQLException {
+        String preQuery = "SET @month = " + (month != null ? month : "NULL") + ";";
         String query = "SELECT " +
                     "COUNT(ph.history_id) AS total_transfers, " +
                     "COUNT(ph.history_id) / COUNT(DISTINCT ph.player_id) AS avg_transfers_per_player " +
                     "FROM playerhistory ph " +
                     "WHERE YEAR(ph.joined_new_team) = " + year + 
-                    " AND MONTH(ph.joined_new_team) = " + month +
-                    " GROUP BY YEAR(ph.joined_new_team), MONTH(ph.joined_new_team)";
+                    " AND (MONTH(ph.joined_new_team) = @month OR @month IS NULL)" +
+                    " GROUP BY MONTH(ph.joined_new_team)";
 
         ResultSet rs = null;
         try (Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
                                     ResultSet.CONCUR_READ_ONLY)) {
+            stmt.execute(preQuery);
             rs = stmt.executeQuery(query);
             while (rs.next()) {
                 int totalTransfers = rs.getInt("total_transfers");
                 double avgTransfersPerPlayer = rs.getDouble("avg_transfers_per_player");
+
+                GeneralUtil.debugPrint("Total Transfers: " + totalTransfers + "\n" +
+                "Average Transfers per Player: " + avgTransfersPerPlayer + "\n");
             }
-
+    
             gui.getGenReportsTable().setModel(initializeTable(rs));
-
+    
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void viewCreationDeletionReport(int year, int month) throws SQLException {
+    public void viewCreationDeletionReport(int year, Integer month) throws SQLException {
+        String preQuery = "SET @month = " + (month != null ? month : "NULL") + ";";
         String query = "SELECT " +
-                    "MONTH(th.creation_date) AS month, " +
-                    "COALESCE(COUNT(DISTINCT CASE WHEN YEAR(th.creation_date) = " + year + 
-                    " AND MONTH(th.creation_date) = " + month + 
-                    " THEN th.team END), 0) AS teams_created, " +
-                    "COALESCE(COUNT(DISTINCT CASE WHEN YEAR(th.disband_date) = " + year + 
-                    " AND MONTH(th.disband_date) = " + month + 
-                    " THEN th.team END), 0) AS teams_disbanded, " +
-                    "COALESCE(ROUND(AVG(CASE WHEN YEAR(th.creation_date) = " + year + 
-                    " AND MONTH(th.creation_date) = " + month + 
-                    " THEN 1 ELSE NULL END), 2), 0) AS avg_teams_created, " +
-                    "COALESCE(ROUND(AVG(CASE WHEN YEAR(th.disband_date) = " + year + 
-                    " AND MONTH(th.disband_date) = " + month + 
-                    " THEN 1 ELSE NULL END), 2), 0) AS avg_teams_disbanded, " +
-                    "COALESCE(COUNT(DISTINCT ph.player_id), 0) AS players_affected_by_disband " +
-                    "FROM teamhistory th " +
-                    "LEFT JOIN playerhistory ph ON th.team = ph.old_team " +
-                    "AND ph.left_old_team = th.disband_date " +
-                    "WHERE (YEAR(th.creation_date) = " + year + " AND MONTH(th.creation_date) = " + month + ") " +
-                    "OR (YEAR(th.disband_date) = " + year + " AND MONTH(th.disband_date) = " + month + ") " +
-                    "GROUP BY month";
-
+                "MONTH(th.creation_date) AS month, " +
+                "COALESCE(COUNT(DISTINCT CASE WHEN YEAR(th.creation_date) = " + year + 
+                " AND MONTH(th.creation_date) = @month " + 
+                " THEN th.team END), 0) AS teams_created, " +
+                "COALESCE(COUNT(DISTINCT CASE WHEN YEAR(th.disband_date) = " + year + 
+                " AND MONTH(th.disband_date) = @month " + 
+                " THEN th.team END), 0) AS teams_disbanded, " +
+                "COALESCE(ROUND(AVG(CASE WHEN YEAR(th.creation_date) = " + year + 
+                " AND MONTH(th.creation_date) = @month " + 
+                " THEN 1 ELSE NULL END), 2), 0) AS avg_teams_created, " +
+                "COALESCE(ROUND(AVG(CASE WHEN YEAR(th.disband_date) = " + year + 
+                " AND MONTH(th.disband_date) = @month " + 
+                " THEN 1 ELSE NULL END), 2), 0) AS avg_teams_disbanded, " +
+                "COALESCE(COUNT(DISTINCT ph.player_id), 0) AS players_affected_by_disband " +
+                "FROM teamhistory th " +
+                "LEFT JOIN playerhistory ph ON th.team = ph.old_team " +
+                "AND ph.left_old_team = th.disband_date " +
+                "WHERE (YEAR(th.creation_date) = " + year + " AND MONTH(th.creation_date) = @month) " +
+                "OR (YEAR(th.disband_date) = " + year + " AND MONTH(th.disband_date) = @month) " +
+                "GROUP BY month;";
+    
         try (Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
                                     ResultSet.CONCUR_READ_ONLY)) {
-        ResultSet rs = stmt.executeQuery(query);
-        while (rs.next()) {
-            int teamsCreated = rs.getInt("teams_created");
-            int teamsDisbanded = rs.getInt("teams_disbanded");
-            double avgTeamsCreated = rs.getDouble("avg_teams_created");
-            double avgTeamsDisbanded = rs.getDouble("avg_teams_disbanded");
-            int playersAffectedByDisband = rs.getInt("players_affected_by_disband");
+            stmt.execute(preQuery);
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                int teamsCreated = rs.getInt("teams_created");
+                int teamsDisbanded = rs.getInt("teams_disbanded");
+                double avgTeamsCreated = rs.getDouble("avg_teams_created");
+                double avgTeamsDisbanded = rs.getDouble("avg_teams_disbanded");
+                int playersAffectedByDisband = rs.getInt("players_affected_by_disband");
+
+                GeneralUtil.debugPrint("Teams Created: " + teamsCreated + "\n" +
+                "Teams Disbanded: " + teamsDisbanded + "\n" +
+                "Average Teams Created: " + avgTeamsCreated + "\n" +
+                "Average Teams Disbanded: " + avgTeamsDisbanded + "\n" +
+                "Players Affected by Disband: " + playersAffectedByDisband + "\n");
             }
             gui.getGenReportsTable().setModel(initializeTable(rs));
         } catch (SQLException e) {
@@ -507,54 +478,64 @@ public class MainController implements ActionListener {
         }
     }
 
-    public void viewSponsorshipSummaryReport(int year, int month) throws SQLException {
+    public void viewSponsorshipSummaryReport(int year, Integer month) throws SQLException {
+        String preQuery = "SET @month = " + (month != null ? month : "NULL") + ";";
         String query = "SELECT " +
-                "t.team, " +
-                "SUM( " +
-                    "CASE " +
-                        "WHEN YEAR(COALESCE(s.contract_start, h.contract_start)) = YEAR(CURRENT_DATE) " +
-                        "THEN s.contract_amount " +
-                        "ELSE h.contract_amount " +
-                    "END " +
-                ") AS total_sponsorship, " +
-                "AVG( " +
-                    "CASE " +
-                        "WHEN YEAR(COALESCE(s.contract_start, h.contract_start)) = YEAR(CURRENT_DATE) " +
-                        "THEN s.contract_amount " +
-                        "ELSE h.contract_amount " +
-                    "END " +
-                ") AS average_sponsorship, " +
-                "COUNT( " +
-                    "CASE " +
-                        "WHEN YEAR(COALESCE(s.contract_start, h.contract_start)) = YEAR(CURRENT_DATE) " +
-                        "THEN s.sponsor_id " +
-                        "ELSE h.sponsor_id " +
-                    "END " +
-                ") AS total_sponsors " +
-            "FROM " +
-                "teams t " +
-            "LEFT JOIN " +
-                "teamsponsor s ON t.team = s.team " +
-            "LEFT JOIN " +
-                "sponsorhistory h ON t.team = h.team " +
-                "AND YEAR(h.contract_start) < YEAR(CURRENT_DATE) " +
-            "WHERE " +
-                "YEAR(COALESCE(s.contract_start, h.contract_start)) = " + year + 
-                " AND MONTH(COALESCE(s.contract_start, h.contract_start)) = " + month +
-            " GROUP BY " +
-                "t.team, " +
-                "YEAR(COALESCE(s.contract_start, h.contract_start)), " +
-                "MONTH(COALESCE(s.contract_start, h.contract_start)) " +
-            "ORDER BY team";
+                       "MONTH(COALESCE(s.contract_start, h.contract_start)) AS sponsorship_month, " +
+                       "t.team, " +
+                       "SUM( " +
+                           "CASE " +
+                               "WHEN YEAR(COALESCE(s.contract_start, h.contract_start)) = YEAR(CURRENT_DATE) " +
+                               "THEN s.contract_amount " +
+                               "ELSE h.contract_amount " +
+                           "END " +
+                       ") AS total_sponsorship, " +
+                       "AVG( " +
+                           "CASE " +
+                               "WHEN YEAR(COALESCE(s.contract_start, h.contract_start)) = YEAR(CURRENT_DATE) " +
+                               "THEN s.contract_amount " +
+                               "ELSE h.contract_amount " +
+                           "END " +
+                       ") AS average_sponsorship, " +
+                       "COUNT( " +
+                           "CASE " +
+                               "WHEN YEAR(COALESCE(s.contract_start, h.contract_start)) = YEAR(CURRENT_DATE) " +
+                               "THEN s.sponsor_id " +
+                               "ELSE h.sponsor_id " +
+                           "END " +
+                       ") AS total_sponsors " +
+                   "FROM " +
+                       "teams t " +
+                   "LEFT JOIN " +
+                       "teamsponsor s ON t.team = s.team " +
+                   "LEFT JOIN " +
+                       "sponsorhistory h ON t.team = h.team " +
+                       "AND YEAR(h.contract_start) < YEAR(CURRENT_DATE) " +
+                   "WHERE " +
+                       "YEAR(COALESCE(s.contract_start, h.contract_start)) = " + year + " " +
+                       "AND (@month IS NULL OR MONTH(COALESCE(s.contract_start, h.contract_start)) = @month) " +
+                   "GROUP BY " +
+                       "t.team, " +
+                       "YEAR(COALESCE(s.contract_start, h.contract_start)), " +
+                       "MONTH(COALESCE(s.contract_start, h.contract_start)) " +
+                   "ORDER BY " +
+                       "sponsorship_month, " +
+                       "t.team;";
             
         try (Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
-                                    ResultSet.CONCUR_READ_ONLY)) {
+        ResultSet.CONCUR_READ_ONLY)) {
+            stmt.execute(preQuery);
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 String team = rs.getString("team");
                 double totalSponsorship = rs.getDouble("total_sponsorship");
                 double averageSponsorship = rs.getDouble("average_sponsorship");
                 int totalSponsors = rs.getInt("total_sponsors");
+
+                GeneralUtil.debugPrint("Team: " + team + "\n" +
+                "Total Sponsorship: " + totalSponsorship + "\n" +
+                "Average Sponsorship: " + averageSponsorship + "\n" +
+                "Total Sponsors: " + totalSponsors + "\n");
             }
             gui.getGenReportsTable().setModel(initializeTable(rs));
         } catch (SQLException e) {
@@ -562,18 +543,18 @@ public class MainController implements ActionListener {
         }
     }
 
-    // TODO WHILE LOOP MIGHT REMOVE rs.next() don't change yet
-    public void viewTeamPerformanceReport(int year, int month) {
-        String setMonthQuery = "SET @month = " + month;
+    public void viewTeamPerformanceReport(int year, Integer month) {
+        String setMonthQuery = "SET @month = " + (month != null ? month : "NULL");
         String selectQuery = "SELECT tph.team, " +
-                             "tph.winnings, " +
-                             "COUNT(CASE WHEN tph.result = 'win' THEN 1 END) AS total_wins " +
-                             "FROM teamperformancehistory tph " +
-                             "WHERE YEAR(tph.match_date) = " + year + " " +
-                             "AND (@month IS NULL OR MONTH(tph.match_date) = @month) " +
-                             "GROUP BY tph.team, YEAR(tph.match_date), MONTH(tph.match_date), tph.winnings " +
-                             "ORDER BY team DESC";
-    
+                "GROUP_CONCAT(DISTINCT MONTH(tph.match_date) ORDER BY MONTH(tph.match_date)) AS match_months, " +
+                "SUM(tph.winnings) AS total_winnings, " +
+                "COUNT(CASE WHEN tph.result = 'win' THEN 1 END) AS total_wins " +
+                "FROM teamperformancehistory tph " +
+                "WHERE YEAR(tph.match_date) = 2023 " +
+                "AND (@month IS NULL OR MONTH(tph.match_date) = @month) " +
+                "GROUP BY tph.team " +
+                "ORDER BY tph.team";
+                
         try (Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
                                     ResultSet.CONCUR_READ_ONLY)) {
             // Execute the SET query
@@ -583,8 +564,12 @@ public class MainController implements ActionListener {
             ResultSet rs = stmt.executeQuery(selectQuery);
             while (rs.next()) {
                 String team = rs.getString("team");
-                double winnings = rs.getDouble("winnings");
+                double totalWinnings = rs.getDouble("total_winnings");
                 int totalWins = rs.getInt("total_wins");
+
+                GeneralUtil.debugPrint("Team: " + team + "\n" +
+                "Total Winnings: " + totalWinnings + "\n" +
+                "Total Wins: " + totalWins + "\n");
             }
             gui.getGenReportsTable().setModel(initializeTable(rs));
         } catch (SQLException e) {

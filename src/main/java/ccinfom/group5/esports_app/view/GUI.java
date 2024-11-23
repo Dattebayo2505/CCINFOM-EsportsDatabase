@@ -21,9 +21,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,19 +29,16 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
-import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 import javax.swing.LayoutStyle;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -56,10 +50,6 @@ public class GUI extends javax.swing.JFrame {
      * Creates new form GUI
      */
     public GUI() {
-         
-
-
-        
         initComponents();
     }
 
@@ -500,11 +490,6 @@ public class GUI extends javax.swing.JFrame {
 
         playersComboBoxModel = new DefaultComboBoxModel<String>();
         playerTransferPlayerComboBox.setModel(playersComboBoxModel);
-        playerTransferPlayerComboBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                playerTransferPlayerComboBoxActionPerformed(evt);
-            }
-        });
         jScrollPane2.setViewportView(playerTransferPlayerComboBox);
 
         finalTransferPlayerBtn.setBackground(new Color(255, 0, 0));
@@ -835,7 +820,7 @@ public class GUI extends javax.swing.JFrame {
                                     .addComponent(finalAddSponsorTeamBtn, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
                                     .addComponent(addSponsorTeamSpinner, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
                                 .addGap(82, 82, 82)
-                                .addComponent(mainMenuTransacBtn, GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)))
+                                .addComponent(mainMenuTransacBtn, GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)))
                         .addGap(84, 84, 84))))
         );
         transferPlayerPanelLayout.setVerticalGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -988,7 +973,8 @@ public class GUI extends javax.swing.JFrame {
 
         tablesGenReportsComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "playerhistory", "teamhistory", "sponsorhistory", "teamperformancehistory " }));
 
-        genReportsToggleBtn.setText("<html>Activate<br>Month</html>");
+        genReportsToggleBtn.setFont(new Font("Segoe UI", 1, 12)); // NOI18N
+        genReportsToggleBtn.setText("<html><div style='text-align': center;'>MONTHS<br>DEACTIVATED</div></html>");
 
         finalGenReportsBtn.setBackground(new Color(255, 0, 51));
         finalGenReportsBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
@@ -1004,19 +990,19 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(GroupLayout.Alignment.TRAILING, genReportsPanelLayout.createSequentialGroup()
                 .addGroup(genReportsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(genReportsPanelLayout.createSequentialGroup()
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(genReportsToggleBtn, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(genReportsPanelLayout.createSequentialGroup()
                         .addGap(84, 84, 84)
                         .addGroup(genReportsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addComponent(finalGenReportsBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tablesGenReportsComboBox, GroupLayout.Alignment.TRAILING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(genReportsMainMenuBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(genReportsPanelLayout.createSequentialGroup()
-                                .addComponent(yearGenReportsTxtField, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(monthGenReportsComboBox, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(yearGenReportsTxtField, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(monthGenReportsComboBox, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(genReportsPanelLayout.createSequentialGroup()
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(genReportsToggleBtn, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, GroupLayout.PREFERRED_SIZE, 912, GroupLayout.PREFERRED_SIZE)
                 .addGap(86, 86, 86))
@@ -1044,7 +1030,7 @@ public class GUI extends javax.swing.JFrame {
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(genReportsMainMenuBtn, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(364, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
 
         mainMainPanel.add(genReportsPanel, "genreports");
@@ -1054,10 +1040,6 @@ public class GUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void playerTransferPlayerComboBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_playerTransferPlayerComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_playerTransferPlayerComboBoxActionPerformed
 
     public CardLayout getCardLayout() {
         return (CardLayout) mainMainPanel.getLayout();
@@ -1247,6 +1229,9 @@ public class GUI extends javax.swing.JFrame {
     public JComboBox<String> getMonthGenReportsComboBox(){
         return monthGenReportsComboBox;
     }
+    public JToggleButton getGenReportsToggleBtn() {
+        return genReportsToggleBtn;
+    }
     public JButton getFinalGenReportsBtn() {
         return finalGenReportsBtn;
     }
@@ -1335,8 +1320,6 @@ public class GUI extends javax.swing.JFrame {
         insertRecordMainViewBtn.addActionListener(e);
         updateRecordMainViewBtn.addActionListener(e);
         deleteRecordMainViewBtn.addActionListener(e);
-        //TODO: ADD HERE
-
 
         mainMenuTransacBtn.addActionListener(e);
         finalTransferPlayerBtn.addActionListener(e);
@@ -1354,6 +1337,7 @@ public class GUI extends javax.swing.JFrame {
 
         genReportsMainMenuBtn.addActionListener(e);
         monthGenReportsComboBox.addActionListener(e);
+        genReportsToggleBtn.addActionListener(e);
         finalGenReportsBtn.addActionListener(e);
     }
 
@@ -1517,5 +1501,4 @@ public class GUI extends javax.swing.JFrame {
     private JTextField yearTeamsUpdateStatsTxtField;
     private JTextField yearTransferPlayerTxtField;
     // End of variables declaration//GEN-END:variables
-    private DefaultComboBoxModel<String> playerTransferDefaultComboBoxModel;
 }

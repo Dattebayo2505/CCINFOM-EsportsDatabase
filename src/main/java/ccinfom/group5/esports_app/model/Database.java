@@ -26,8 +26,7 @@ public class Database {
 
     public void initiateModel(List<String> tables) {
         int i, columnCount, j, rowCount;
-        String query, columnName, columnType;
-        String[] columnNames = null;
+        String query;
         ResultSet resultSet = null;
         ResultSetMetaData metaData;
         Object[][] tableRecords;
@@ -50,7 +49,7 @@ public class Database {
 
                 j = 0;
                 tableRecords = new Object[rowCount][columnCount];
-                columnNames = new String[columnCount];
+                String[] columnNames = new String[columnCount];
 
                 columnNames = FileReaderUtil.setColumnNames(columnCount, metaData);
 

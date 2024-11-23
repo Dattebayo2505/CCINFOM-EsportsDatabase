@@ -72,6 +72,10 @@ public class FileReaderUtil {
                     String str = rs.getString(columnName);
                     record[i] = (str == null) ? "NULL" : str;
                     break;
+                case "LONGTEXT":
+                    String str2 = rs.getString(columnName);
+                    record[i] = (str2 == null) ? "NULL" : str2;
+                    break;
                 case "DATE":
                     String date = rs.getString(columnName);
                     record[i] = (date == null) ? "NULL" : date;

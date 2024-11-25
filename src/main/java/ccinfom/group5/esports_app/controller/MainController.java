@@ -3,6 +3,7 @@ package ccinfom.group5.esports_app.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -138,6 +139,7 @@ public class MainController implements ActionListener {
         return model;
     }
 
+    @Deprecated
     private void initializeTable(String[] columnNames, Object[][] data) {
         DefaultTableModel model = new DefaultTableModel(data, columnNames) {
             @Override
@@ -167,30 +169,35 @@ public class MainController implements ActionListener {
         }
     
         try {
-            statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                                            ResultSet.CONCUR_READ_ONLY);
-
-            ResultSet resultSet = statement.executeQuery(query);
-
-            resultSet.last(); 
-            rowCount = resultSet.getRow();
-            resultSet.beforeFirst();
-            
-            metaData = resultSet.getMetaData();
-            columnCount = metaData.getColumnCount();
-
-            data = new Object[rowCount][columnCount];
-            columnNames = new String[columnCount];
-
-            columnNames = FileReaderUtil.setColumnNames(columnCount, metaData);
-
-            i=0;
-            while (resultSet.next()) {
-                data[i] = FileReaderUtil.setTableRecord(columnCount, resultSet, metaData);
-                ++i;
+            statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            boolean isResultSet = statement.execute(query);
+    
+            if (isResultSet) {
+                ResultSet resultSet = statement.getResultSet();
+    
+                resultSet.last();
+                rowCount = resultSet.getRow();
+                resultSet.beforeFirst();
+    
+                metaData = resultSet.getMetaData();
+                columnCount = metaData.getColumnCount();
+    
+                data = new Object[rowCount][columnCount];
+                columnNames = new String[columnCount];
+    
+                columnNames = FileReaderUtil.setColumnNames(columnCount, metaData);
+    
+                i = 0;
+                while (resultSet.next()) {
+                    data[i] = FileReaderUtil.setTableRecord(columnCount, resultSet, metaData);
+                    ++i;
+                }
+    
+                // initializeTable(columnNames, data);
+            } else {
+                int updateCount = statement.getUpdateCount();
+                JOptionPane.showMessageDialog(gui.getMainViewPanel(), "Update count: " + updateCount, "Update Successful", JOptionPane.INFORMATION_MESSAGE);
             }
-
-            initializeTable(columnNames, data);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error executing query: \n" + e.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -242,15 +249,47 @@ public class MainController implements ActionListener {
 
         // Main View Page
         if (source == gui.getExecuteQueryMainViewBtn()) {
+            String selectedTable = (String) gui.getTablesMainViewComboBox().getSelectedItem();
             doExecuteQuery();
+            gui.getMainViewTable().setModel(initializeTable(selectedTable));
         }
         else if (source == gui.getTablesMainViewComboBox()) {
             String selectedTable = (String) gui.getTablesMainViewComboBox().getSelectedItem();
             gui.getMainViewTable().setModel(initializeTable(selectedTable));
         }
-        else if (source == gui.getMakeTransacBtn()) {
-            gui.getCardLayout().show(gui.getMainMainPanel(), "maketransac");
+
+        else if (source == gui.getInsertRecordMainViewBtn()) {
+            String table = (String) gui.getTablesMainViewComboBox().getSelectedItem();
+            List<String> columnNames = getColumnNames(table);
+            String columns = String.join(", ", columnNames);
+            StringBuilder placeholders = new StringBuilder();
+            for (int i = 0; i < columnNames.size(); i++) {
+                placeholders.append("<>");
+                if (i < columnNames.size() - 1) {
+                    placeholders.append(", ");
+                }
+            }
+            String query = "INSERT INTO " + table + "\n(" + columns + ") VALUES\n(" + placeholders.toString() + ")";
+    
+            gui.getQueryMainViewTxtArea().setText(query);
         }
+        else if (source == gui.getUpdateRecordMainViewBtn()) {
+            String table = (String) gui.getTablesMainViewComboBox().getSelectedItem();
+            List<String> columnNames = getColumnNames(table);
+            String columns = String.join(", ", columnNames);
+            String query = "UPDATE " + table + "\nSET <> \nWHERE\n" +
+                    "<> = <>"; 
+    
+            gui.getQueryMainViewTxtArea().setText(query);
+        }
+        else if (source == gui.getDeleteRecordMainViewBtn()) {
+            String table = (String) gui.getTablesMainViewComboBox().getSelectedItem();
+            String query = "DELETE FROM " + table + "\nWHERE\n" + 
+                    "<> = <>"; 
+    
+            gui.getQueryMainViewTxtArea().setText(query);
+        }
+
         else if (source == gui.getMainViewMainMenuBtn()) {
             gui.getCardLayout().show(gui.getMainMainPanel(), "mainmenu");
         }
@@ -355,10 +394,7 @@ public class MainController implements ActionListener {
         else if (source == gui.getFinalTeamsUpdateStatsBtn()) {
             dpUpdateTeamStats();
 
-            setMainViewTableView();
 
-            JOptionPane.showMessageDialog(gui.getMakeTransacPanel(), "Team stats updated successfully.", 
-                            "Update Success", JOptionPane.INFORMATION_MESSAGE);
         }
 
         else if (source == gui.getMainMenuTransacBtn()) {
@@ -390,6 +426,20 @@ public class MainController implements ActionListener {
             gui.getCardLayout().show(gui.getMainMainPanel(), "mainmenu");
         }
 
+    }
+
+    public List<String> getColumnNames(String tableName) {
+        List<String> columnNames = new ArrayList<>();
+        try {
+            DatabaseMetaData metaData = con.getMetaData();
+            ResultSet rs = metaData.getColumns(null, null, tableName, null);
+            while (rs.next()) {
+                columnNames.add(rs.getString("COLUMN_NAME"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return columnNames;
     }
 
     // TODO REVISE TO ACCOMODATE ANOTEHER FOR YEAR ONLY ()
@@ -723,6 +773,11 @@ public class MainController implements ActionListener {
             pstmt2.executeUpdate();
             pstmt3.executeUpdate();
             pstmt4.executeUpdate();
+
+            setMainViewTableView();
+
+            JOptionPane.showMessageDialog(gui.getMakeTransacPanel(), "Team stats updated successfully.", 
+                            "Update Success", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(gui.getMakeTransacPanel(), "Error executing query: \n" + 

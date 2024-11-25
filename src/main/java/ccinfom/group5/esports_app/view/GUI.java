@@ -37,6 +37,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 import javax.swing.LayoutStyle;
@@ -89,9 +90,16 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane1 = new JScrollPane();
         mainViewTableModel = new DefaultTableModel();
         mainViewTable = new JTable();
+        tablesMainViewComboBox = new JComboBox<>();
+        insertRecordMainViewBtn = new JButton();
+        jLabel25 = new JLabel();
+        deleteRecordMainViewBtn = new JButton();
+        updateRecordMainViewBtn = new JButton();
+        jComboBox1 = new JComboBox<>();
+        jComboBox2 = new JComboBox<>();
+        jLabel26 = new JLabel();
         lowerMainViewPanel = new JPanel();
         mainViewMainMenuBtn = new JButton();
-        tablesMainViewComboBox = new JComboBox<>();
         executeQueryMainViewBtn = new JButton();
         jScrollPane3 = new JScrollPane();
         queryMainViewTxtArea = new JTextArea();
@@ -175,8 +183,9 @@ public class GUI extends javax.swing.JFrame {
         monthGenReportsComboBox = new JComboBox<>();
         tablesGenReportsComboBox = new JComboBox<>();
         yearGenReportsTxtField = new JTextField();
-        jToggleButton1 = new JToggleButton();
+        genReportsToggleBtn = new JToggleButton();
         finalGenReportsBtn = new JButton();
+        jLabel13 = new JLabel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("ESports Tracker - Valorant");
@@ -289,10 +298,10 @@ public class GUI extends javax.swing.JFrame {
         GroupLayout lowerRightPanelLayout = new GroupLayout(lowerRightPanel);
         lowerRightPanel.setLayout(lowerRightPanelLayout);
         lowerRightPanelLayout.setHorizontalGroup(lowerRightPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 1102, Short.MAX_VALUE)
+            .addGap(0, 874, Short.MAX_VALUE)
         );
         lowerRightPanelLayout.setVerticalGroup(lowerRightPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 622, Short.MAX_VALUE)
+            .addGap(0, 744, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new GridBagConstraints();
@@ -334,19 +343,86 @@ public class GUI extends javax.swing.JFrame {
         mainViewTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(mainViewTable);
 
+        tablesMainViewComBoxDefModel = new DefaultComboBoxModel<String>();
+        for (String tableName : GeneralUtil.getArrayTableNames()) {
+            tablesMainViewComBoxDefModel.addElement(tableName);
+        }
+        tablesMainViewComboBox.setModel(tablesMainViewComBoxDefModel);
+        tablesMainViewComboBox.setSelectedItem("players");
+        tablesMainViewComboBox.setPreferredSize(new Dimension(200, 35));
+
+        insertRecordMainViewBtn.setText("INSERT NEW RECORD");
+
+        jLabel25.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel25.setForeground(new Color(255, 0, 0));
+        jLabel25.setText("EDIT THE <>");
+
+        deleteRecordMainViewBtn.setText("DELETE RECORD");
+
+        updateRecordMainViewBtn.setText("UPDATE RECORD");
+
+        jComboBox1.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox2.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel26.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel26.setForeground(new Color(255, 0, 0));
+        jLabel26.setText("LIMIT TO 1 QUERY ONLY");
+
         GroupLayout upperMainViewPanelLayout = new GroupLayout(upperMainViewPanel);
         upperMainViewPanel.setLayout(upperMainViewPanelLayout);
         upperMainViewPanelLayout.setHorizontalGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, upperMainViewPanelLayout.createSequentialGroup()
-                .addContainerGap(142, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(138, 138, 138))
+            .addGroup(upperMainViewPanelLayout.createSequentialGroup()
+                .addGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(upperMainViewPanelLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 759, GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(tablesMainViewComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addGroup(upperMainViewPanelLayout.createSequentialGroup()
+                                .addGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(deleteRecordMainViewBtn, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(updateRecordMainViewBtn, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(insertRecordMainViewBtn, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
+                                .addGap(65, 65, 65)
+                                .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGap(46, 46, 46)
+                                .addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(upperMainViewPanelLayout.createSequentialGroup()
+                        .addGap(219, 219, 219)
+                        .addComponent(jLabel25)))
+                .addContainerGap(54, Short.MAX_VALUE))
+            .addGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(upperMainViewPanelLayout.createSequentialGroup()
+                    .addGap(30, 30, 30)
+                    .addComponent(jLabel26)
+                    .addContainerGap(1087, Short.MAX_VALUE)))
         );
         upperMainViewPanelLayout.setVerticalGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(upperMainViewPanelLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 365, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(upperMainViewPanelLayout.createSequentialGroup()
+                        .addComponent(tablesMainViewComboBox, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(insertRecordMainViewBtn)
+                            .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(updateRecordMainViewBtn)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(deleteRecordMainViewBtn))
+                    .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 365, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jLabel25)
+                .addGap(15, 15, 15))
+            .addGroup(upperMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(GroupLayout.Alignment.TRAILING, upperMainViewPanelLayout.createSequentialGroup()
+                    .addContainerGap(410, Short.MAX_VALUE)
+                    .addComponent(jLabel26)
+                    .addGap(16, 16, 16)))
         );
 
         lowerMainViewPanel.setBackground(new Color(204, 255, 204));
@@ -356,46 +432,37 @@ public class GUI extends javax.swing.JFrame {
         mainViewMainMenuBtn.setText("Main Menu");
         mainViewMainMenuBtn.setPreferredSize(new Dimension(89, 30));
 
-        tablesMainViewComBoxDefModel = new DefaultComboBoxModel<String>();
-        for (String tableName : GeneralUtil.getArrayTableNames()) {
-            tablesMainViewComBoxDefModel.addElement(tableName);
-        }
-        tablesMainViewComboBox.setModel(tablesMainViewComBoxDefModel);
-        tablesMainViewComboBox.setSelectedItem("players");
-        tablesMainViewComboBox.setPreferredSize(new Dimension(200, 35));
-
         executeQueryMainViewBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         executeQueryMainViewBtn.setText("Execute Query");
 
         queryMainViewTxtArea.setColumns(20);
+        queryMainViewTxtArea.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
         queryMainViewTxtArea.setRows(5);
+        queryMainViewTxtArea.setWrapStyleWord(true);
         jScrollPane3.setViewportView(queryMainViewTxtArea);
 
         GroupLayout lowerMainViewPanelLayout = new GroupLayout(lowerMainViewPanel);
         lowerMainViewPanel.setLayout(lowerMainViewPanelLayout);
         lowerMainViewPanelLayout.setHorizontalGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
-                .addGap(169, 169, 169)
-                .addComponent(tablesMainViewComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGap(16, 16, 16)
+                .addGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                     .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 537, GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
+                        .addComponent(executeQueryMainViewBtn, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(mainViewMainMenuBtn, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE))
-                    .addComponent(executeQueryMainViewBtn, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 537, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         lowerMainViewPanelLayout.setVerticalGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(lowerMainViewPanelLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(mainViewMainMenuBtn, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tablesMainViewComboBox, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(executeQueryMainViewBtn, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addGroup(lowerMainViewPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addComponent(executeQueryMainViewBtn, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mainViewMainMenuBtn, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         GroupLayout mainViewPanelLayout = new GroupLayout(mainViewPanel);
@@ -768,7 +835,7 @@ public class GUI extends javax.swing.JFrame {
                                     .addComponent(finalAddSponsorTeamBtn, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
                                     .addComponent(addSponsorTeamSpinner, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
                                 .addGap(82, 82, 82)
-                                .addComponent(mainMenuTransacBtn, GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)))
+                                .addComponent(mainMenuTransacBtn, GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)))
                         .addGap(84, 84, 84))))
         );
         transferPlayerPanelLayout.setVerticalGroup(transferPlayerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -902,7 +969,7 @@ public class GUI extends javax.swing.JFrame {
         makeTransacPanelLayout.setVerticalGroup(makeTransacPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(makeTransacPanelLayout.createSequentialGroup()
                 .addComponent(rightMakeTransacPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 98, Short.MAX_VALUE))
+                .addGap(0, 235, Short.MAX_VALUE))
             .addComponent(leftMakeTransacPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -921,12 +988,15 @@ public class GUI extends javax.swing.JFrame {
 
         tablesGenReportsComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "playerhistory", "teamhistory", "sponsorhistory", "teamperformancehistory " }));
 
-        jToggleButton1.setText("<html>Activate<br>Month</html>");
+        genReportsToggleBtn.setText("<html>Activate<br>Month</html>");
 
         finalGenReportsBtn.setBackground(new Color(255, 0, 51));
         finalGenReportsBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         finalGenReportsBtn.setForeground(new Color(255, 255, 255));
         finalGenReportsBtn.setText("Finalize");
+
+        jLabel13.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel13.setText("Generate Reports");
 
         GroupLayout genReportsPanelLayout = new GroupLayout(genReportsPanel);
         genReportsPanel.setLayout(genReportsPanelLayout);
@@ -935,7 +1005,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(genReportsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(genReportsPanelLayout.createSequentialGroup()
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jToggleButton1, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(genReportsToggleBtn, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
                     .addGroup(genReportsPanelLayout.createSequentialGroup()
                         .addGap(84, 84, 84)
                         .addGroup(genReportsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -950,10 +1020,16 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, GroupLayout.PREFERRED_SIZE, 912, GroupLayout.PREFERRED_SIZE)
                 .addGap(86, 86, 86))
+            .addGroup(GroupLayout.Alignment.TRAILING, genReportsPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel13, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
+                .addGap(364, 364, 364))
         );
         genReportsPanelLayout.setVerticalGroup(genReportsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, genReportsPanelLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
+                .addGap(22, 22, 22)
+                .addComponent(jLabel13, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(genReportsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                     .addGroup(genReportsPanelLayout.createSequentialGroup()
                         .addComponent(tablesGenReportsComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -962,13 +1038,13 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(monthGenReportsComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addComponent(yearGenReportsTxtField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jToggleButton1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(genReportsToggleBtn, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(finalGenReportsBtn, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(genReportsMainMenuBtn, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addContainerGap(364, Short.MAX_VALUE))
         );
 
         mainMainPanel.add(genReportsPanel, "genreports");
@@ -1032,6 +1108,16 @@ public class GUI extends javax.swing.JFrame {
         return mainViewTable;
     }
     
+    public JButton getInsertRecordMainViewBtn() {
+        return insertRecordMainViewBtn;
+    }
+    public JButton getUpdateRecordMainViewBtn() {
+        return updateRecordMainViewBtn;
+    }
+    public JButton getDeleteRecordMainViewBtn() {
+        return deleteRecordMainViewBtn;
+    }
+
     // Transactions
     
     // TRANSFER PLAYER
@@ -1246,6 +1332,11 @@ public class GUI extends javax.swing.JFrame {
         executeQueryMainViewBtn.addActionListener(e);
         mainViewMainMenuBtn.addActionListener(e);
         tablesMainViewComboBox.addActionListener(e);
+        insertRecordMainViewBtn.addActionListener(e);
+        updateRecordMainViewBtn.addActionListener(e);
+        deleteRecordMainViewBtn.addActionListener(e);
+        //TODO: ADD HERE
+
 
         mainMenuTransacBtn.addActionListener(e);
         finalTransferPlayerBtn.addActionListener(e);
@@ -1312,6 +1403,7 @@ public class GUI extends javax.swing.JFrame {
     private JTextField daySponsorAddTxtField1;
     private JTextField dayTeamsUpdateStatsTxtField;
     private JTextField dayTransferPlayerTxtField;
+    private JButton deleteRecordMainViewBtn;
     private JButton executeQueryMainViewBtn;
     private JButton exitBtn;
     private JButton finalAddSponsorTeamBtn;
@@ -1324,11 +1416,16 @@ public class GUI extends javax.swing.JFrame {
     private JPanel genReportsPanel;
     private JTable genReportsTable;
     private DefaultTableModel genReportsTableModel;
+    private JToggleButton genReportsToggleBtn;
+    private JButton insertRecordMainViewBtn;
     private JCheckBox jCheckBox1;
+    private JComboBox<String> jComboBox1;
+    private JComboBox<String> jComboBox2;
     private JLabel jLabel1;
     private JLabel jLabel10;
     private JLabel jLabel11;
     private JLabel jLabel12;
+    private JLabel jLabel13;
     private JLabel jLabel14;
     private JLabel jLabel15;
     private JLabel jLabel16;
@@ -1341,6 +1438,8 @@ public class GUI extends javax.swing.JFrame {
     private JLabel jLabel22;
     private JLabel jLabel23;
     private JLabel jLabel24;
+    private JLabel jLabel25;
+    private JLabel jLabel26;
     private JLabel jLabel3;
     private JLabel jLabel39;
     private JLabel jLabel4;
@@ -1364,7 +1463,6 @@ public class GUI extends javax.swing.JFrame {
     private JScrollPane jScrollPane4;
     private JScrollPane jScrollPane5;
     private JScrollPane jScrollPane6;
-    private JToggleButton jToggleButton1;
     private JPanel leftMakeTransacPanel;
     private JPanel lowerLeftPanel;
     private JPanel lowerMainViewPanel;
@@ -1410,6 +1508,7 @@ public class GUI extends javax.swing.JFrame {
     private JComboBox<String> teamsWinnerUpdateStatsComboBox;
     private DefaultComboBoxModel<String> teamsWinnerUpdateStatsComboBoxModel;
     private JPanel transferPlayerPanel;
+    private JButton updateRecordMainViewBtn;
     private JPanel upperMainViewPanel;
     private JTextField yearDissolveTeamTxtField;
     private JTextField yearGenReportsTxtField;
